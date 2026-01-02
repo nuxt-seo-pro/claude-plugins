@@ -1,22 +1,21 @@
 ---
 name: Writing Foundations
-description: This skill should be used when the user asks to "write content", "improve writing", "fix AI slop", "review content quality", or needs general writing guidance. Provides shared writing principles that all specialized writing skills inherit. Automatically loaded alongside docs-writing and learn-writing skills.
-version: 0.1.0
+description: This skill should be used when the user asks to "improve writing", "fix AI slop", "review content quality", "check writing style", "edit for voice", or needs general writing guidance without a specific content type.
+version: 0.2.0
 ---
 
 # Writing Foundations
 
-Shared writing principles for all Nuxt SEO content. Reference this skill for voice, linking, and quality standards.
+Core writing principles for developer content. Use this skill for general writing guidance, or load alongside `docs-writing` or `learn-writing` for type-specific patterns.
 
 ## Voice
 
-Developer-to-developer, casual but accurate.
+Developer-to-developer. Casual but accurate.
 
 - First person plural for shared experience ("we")
 - Second person for instructions ("you")
-- Contractions allowed, exclamation marks rare
-- Be specific to Nuxt—avoid copy that fits any SEO tool
-- Say what NOT to do. Real experts know pitfalls.
+- Contractions allowed
+- Exclamation marks rare
 - Vary sentence length. Some short. Others longer when explaining.
 
 ### No Hedging
@@ -28,7 +27,7 @@ Developer-to-developer, casual but accurate.
 | This might potentially | This will |
 | Could possibly help | Helps |
 
-### Specificity
+### Be Specific
 
 | Instead of | Write |
 |------------|-------|
@@ -36,60 +35,35 @@ Developer-to-developer, casual but accurate.
 | Most sites have issues | 73% of sites fail Core Web Vitals |
 | It can improve performance | Reduces LCP by 40% |
 
+### State What NOT to Do
+
+Real experts know pitfalls. Include:
+- Common mistakes
+- When something is overkill
+- Anti-patterns
+
 ## Banned Content
 
-See `references/banned-words.md` for the full list.
+See `references/banned-words.md` for full list.
 
-**Words to avoid:** dive into, crucial, essential, vital, robust, seamless, leverage, utilize, ensure, comprehensive, harness, empower, elevate, unlock, game-changer, delve, realm, landscape
+**Banned words:** dive into, crucial, essential, vital, robust, seamless, leverage, utilize, ensure, comprehensive, harness, empower, elevate, unlock, game-changer, delve, realm, landscape, plethora, myriad
 
-**Phrases to avoid:** "it's important to note", "in today's [X]", "let's explore", "this is where X comes in", "at its core", "when it comes to"
+**Banned phrases:**
+- "it's important to note"
+- "in today's [X]"
+- "let's explore"
+- "this is where X comes in"
+- "at its core"
+- "when it comes to"
+- "by the end of this guide"
 
-**Patterns to avoid:**
-- Rhetorical questions
+**Banned patterns:**
+- Rhetorical questions ("Ever wondered how...?")
 - Three-adjective chains ("powerful, flexible, and robust")
-- Filler intros before getting to the point
+- Filler intros before the point
 - Superlatives without proof
 
-## Internal Linking
-
-Link aggressively. Every page should link to 2-5 related pages.
-
-### Two Methods
-
-1. **Inline links** — First mention of features/concepts
-2. **`relatedPages` frontmatter** — Rendered automatically at page end
-
-```yaml
-relatedPages:
-  - path: /docs/og-image/getting-started
-    title: OG Image Setup
-  - path: /learn/mastering-meta/descriptions
-    title: Meta Descriptions
-```
-
-### Link Text
-
-| Good | Bad |
-|------|-----|
-| Configure [robots.txt](/docs/robots) | [Click here](/docs/robots) for robots |
-| See [OG Image docs](/docs/og-image) | See the docs [here](/docs/og-image) |
-
-### Rules
-
-- Link first mention only, not every occurrence
-- Never use "click here" or "this page"
-- No "Related" or "See also" H2 sections—use frontmatter
-
-## Quality Tests
-
-See `references/quality-tests.md` for detailed guidance.
-
-1. **"So what?" test** — After every sentence, reader shouldn't think "so what?"
-2. **Read aloud test** — If it sounds like a press release, rewrite
-3. **Delete test** — If you can remove a sentence without losing meaning, remove it
-4. **Information density** — Every sentence adds new info. No filler.
-
-## Quick Fixes
+### Quick Fixes
 
 | Slop | Fix |
 |------|-----|
@@ -97,8 +71,111 @@ See `references/quality-tests.md` for detailed guidance.
 | This allows you to... | You can... |
 | In order to... | To... |
 | provides a way to | lets you |
-| is designed to / aims to | does |
+| is designed to | does |
 | is intended to return | returns |
+
+## Code Conventions
+
+### Languages
+
+- **TypeScript** for all JS examples (not JavaScript)
+- **Vue SFC** for component examples
+- **Bash** for terminal commands
+
+### Code Blocks
+
+````markdown
+```ts
+// TypeScript code
+useSeoMeta({ title: 'Page' })
+```
+
+```vue
+<script setup lang="ts">
+// Vue SFC
+</script>
+```
+
+```bash
+npx nuxi module add @nuxtjs/sitemap
+```
+````
+
+### Inline Code
+
+Use language tags for inline code:
+- Functions: `useSeoMeta()`{lang="ts"}
+- Components: `<OgImage>`{lang="vue"}
+- Files: `nuxt.config.ts`{lang="text"}
+- Config keys: `sitemap`{lang="yaml"}
+
+### Code Groups
+
+For multiple approaches:
+````markdown
+::code-group
+```ts [Recommended]
+useSeoMeta({ title: 'Page' })
+```
+
+```ts [Alternative]
+useHead({ title: 'Page' })
+```
+::
+````
+
+### Good/Bad Comparisons
+
+````markdown
+```ts [❌ Bad]
+// Avoid this pattern
+useHead({ meta: [{ name: 'description', content: 'x' }] })
+```
+
+```ts [✅ Good]
+// Use this instead
+useSeoMeta({ description: 'x' })
+```
+````
+
+## Internal Linking
+
+Every page should link to 2-5 related pages.
+
+### Methods
+
+1. **Inline links** — First mention of features/concepts
+2. **`relatedPages` frontmatter** — Rendered at page end
+
+```yaml
+relatedPages:
+  - path: /docs/module/feature
+    title: Feature Name
+  - path: /learn/topic/article
+    title: Article Title
+```
+
+### Link Text
+
+| Good | Bad |
+|------|-----|
+| Configure [robots.txt](/docs/robots) | [Click here](/docs/robots) |
+| See [OG Image docs](/docs/og-image) | See the docs [here](/docs/og-image) |
+
+### Rules
+
+- Link first mention only
+- Never "click here" or "this page"
+- No "Related" or "See also" H2 sections
+
+## Quality Tests
+
+See `references/quality-tests.md` for details.
+
+1. **"So what?" test** — Reader shouldn't think "so what?" after any sentence
+2. **Read aloud test** — If it sounds like a press release, rewrite
+3. **Delete test** — If removing a sentence loses no meaning, remove it
+4. **Information density** — Every sentence adds new info
 
 ## Endings
 
@@ -112,7 +189,7 @@ See `references/quality-tests.md` for detailed guidance.
 
 ## Gap Markers
 
-When drafting, mark gaps rather than hallucinating:
+Mark unknowns rather than hallucinating:
 
 ```markdown
 [STAT NEEDED: % of sites with X]
@@ -129,17 +206,17 @@ When drafting, mark gaps rather than hallucinating:
 - [ ] Parameters in tables, not prose
 
 **Links:**
-- [ ] `relatedPages` frontmatter with 2-3 related pages
-- [ ] Inline links on first mention of features/concepts
-- [ ] Descriptive link text (no "click here")
+- [ ] `relatedPages` frontmatter with 2-3 pages
+- [ ] Inline links on first mention
+- [ ] No "click here" link text
 
 **Content:**
-- [ ] States what NOT to do / when it's overkill
-- [ ] Includes verification method (how to test it works)
-- [ ] No banned words or phrases
+- [ ] States what NOT to do
+- [ ] Includes verification method
+- [ ] No banned words/phrases
+- [ ] Passes quality tests
 
-## Additional Resources
+## References
 
-### Reference Files
-- **`references/banned-words.md`** — Complete list of AI slop to avoid
-- **`references/quality-tests.md`** — Detailed quality testing guidance
+- `references/banned-words.md` — Complete AI slop list
+- `references/quality-tests.md` — Detailed testing guidance

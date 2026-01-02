@@ -1,76 +1,119 @@
 ---
 name: Content Research
-description: This skill should be used when the user asks to "research keywords", "find content gaps", "analyze topic for article", "keyword research for [topic]", "what should I write about", or needs to understand search demand before writing content. Provides keyword research workflow using Nuxt SEO Pro MCP tools.
-version: 0.1.0
+description: This skill should be used when the user asks to "research keywords", "find content gaps", "analyze topic for article", "keyword research for [topic]", "what should I write about", "SEO research", or needs to understand search demand before writing content.
+version: 0.2.0
 ---
 
 # Content Research
 
-Pre-writing research workflow for keyword discovery, content gap analysis, and competitive research. Assumes Nuxt SEO Pro MCP is available.
+Pre-writing research for keyword discovery, content gaps, and competitive analysis.
+
+## MCP Tools (Preferred)
+
+If Nuxt SEO Pro MCP is available, use these tools:
+
+| Tool | Purpose |
+|------|---------|
+| `mcp__nuxt-seo-pro__research_keywords` | Keyword suggestions with volume/difficulty |
+| `mcp__nuxt-seo-pro__analyze_serp` | Competition analysis, SERP features |
+| `mcp__nuxt-seo-pro__check_rankings` | Current rankings for a domain |
+| `mcp__nuxt-seo-pro__get_sitemap_urls` | Existing content inventory |
+| `mcp__nuxt-seo-pro__profile_site` | Site type, industry, audience |
+
+### Example MCP Workflow
+
+```
+1. mcp__nuxt-seo-pro__get_sitemap_urls → understand existing content
+2. mcp__nuxt-seo-pro__research_keywords with topic → find keyword opportunities
+3. mcp__nuxt-seo-pro__analyze_serp for top keywords → understand competition
+```
+
+## Fallback: WebSearch
+
+If MCP tools unavailable, use WebSearch:
+
+```
+1. Search "[topic] search volume" or use free tools like Ubersuggest
+2. Search "[topic]" and analyze top 10 results manually
+3. Search "site:[domain]" to see existing content
+```
 
 ## Workflow
 
-### 1. Get Context
+### 1. Gather Context
 
-Before researching, gather:
-
-| Context | How to Get |
-|---------|------------|
-| Sitemap URLs | Use `get_sitemap_urls` MCP tool |
-| Site profile | Use `profile_site` or `init_site` MCP tool |
-| Existing rankings | Use `check_rankings` MCP tool |
+| Context | MCP Tool | Fallback |
+|---------|----------|----------|
+| Existing pages | `get_sitemap_urls` | `site:[domain]` search |
+| Site type/audience | `profile_site` | Read homepage/about |
+| Current rankings | `check_rankings` | Search brand name |
 
 ### 2. Identify Content Pillars
 
-Content pillars are core topics the site owns. Identify from sitemap:
+Content pillars = core topics the site owns. Look for:
 
-1. Look at top-level `/docs/` sections
-2. Note `/learn/` category groupings
-3. Identify recurring themes across pages
+1. Top-level `/docs/` sections
+2. `/learn/` or `/blog/` category groupings
+3. Recurring themes across pages
 
-When researching, determine:
+Questions to answer:
 - Does this article support an existing pillar?
 - Is there a gap in pillar coverage?
-- Should this become a new pillar? (rare—needs 5+ articles to justify)
+- Should this become a new pillar? (needs 5+ articles to justify)
 
-See `references/content-pillars.md` for pillar analysis patterns.
+See `references/content-pillars.md` for patterns.
 
 ### 3. Keyword Research
 
-Use `research_keywords` MCP tool with target topic.
-
 **Selection criteria:**
-- Volume: 100-1000/month (long-tail sweet spot)
-- Difficulty: <40 (achievable ranking)
-- Higher CPC often indicates commercial intent
+| Metric | Target | Why |
+|--------|--------|-----|
+| Volume | 100-1000/month | Long-tail sweet spot |
+| Difficulty | <40 | Achievable ranking |
+| CPC | Higher = better | Indicates commercial intent |
 
 Pick 3-5 long-tail keywords with decent volume + low difficulty.
 
+**MCP example:**
+```
+mcp__nuxt-seo-pro__research_keywords
+  topic: "nuxt meta tags"
+  limit: 20
+```
+
 ### 4. Competition Analysis
 
-Use `analyze_serp` MCP tool to understand current rankings:
-- Who ranks in top 10?
+Understand what currently ranks:
+- Who's in top 10?
 - What SERP features exist (featured snippets, PAA)?
-- What content format dominates?
+- What content format dominates (tutorial, reference, list)?
 
-### 5. Content Gap Analysis
+**MCP example:**
+```
+mcp__nuxt-seo-pro__analyze_serp
+  keyword: "nuxt meta tags tutorial"
+```
 
-Compare existing sitemap URLs against keyword opportunities:
-- Which keywords have no matching content?
-- Which existing pages could target additional keywords?
-- What questions do users ask that aren't answered?
+### 5. Gap Analysis
 
-Track opportunities in `content/todo.md`:
+Compare existing content against opportunities:
+- Keywords with no matching content
+- Existing pages that could target additional keywords
+- User questions without answers
+
+Track opportunities:
 ```markdown
-- [ ] **Article Title** (`/path/to/article.md`)
-  - Target: "keyword" (volume/mo, difficulty)
-  - Cover: [what to include]
+## Content Opportunities
+
+- [ ] **[Article Title]** (`/path/to/article`)
+  - Target: "[keyword]" ([volume]/mo, difficulty [X])
+  - Cover: [topics to include]
   - Link from: [existing pages]
 ```
 
 ## Research Markers
 
-Use these markers for gaps during research:
+Use when drafting to mark unknowns:
 
 ```markdown
 [VERIFY: claim about X - check official docs]
@@ -82,55 +125,50 @@ Use these markers for gaps during research:
 
 ## Source Priority
 
-When verifying claims, prioritize sources in this order. See `references/source-priority.md` for details.
+See `references/source-priority.md` for full details.
 
 1. Official docs (Google Search Central, MDN, framework docs)
 2. Primary research (Google studies, industry reports)
 3. Notable ecosystem voices (core team, library authors)
 4. Authoritative blogs (web.dev, developers.google.com)
-5. Reputable tech sites (Moz, Ahrefs for SEO)
+5. Reputable tech sites (Moz, Ahrefs)
 
-**Avoid:** Generic tutorial sites, Medium posts without known authors, content older than 2 years for SEO topics.
-
-## MCP Tools Reference
-
-| Tool | Use For |
-|------|---------|
-| `research_keywords` | Keyword suggestions with volume/difficulty |
-| `analyze_serp` | Competition analysis, SERP features |
-| `check_rankings` | Current rankings for a domain |
-| `get_sitemap_urls` | Existing content inventory |
-| `profile_site` | Site type, industry, audience |
+**Avoid:** tutorialspoint, w3schools, Medium without known authors, content >2 years old for SEO.
 
 ## Output Format
-
-After researching, provide:
 
 ```markdown
 ## Research Summary
 
 **Topic:** [topic]
-**Researched:** [date]
+**Date:** [YYYY-MM-DD]
 
 ### Target Keywords
+
 | Keyword | Volume | Difficulty | Intent |
 |---------|--------|------------|--------|
-| ... | ... | ... | ... |
+| [primary] | [X] | [X] | [informational/transactional] |
+| [secondary] | [X] | [X] | [intent] |
 
 ### Competition
-- Top rankers: [domains]
-- SERP features: [features present]
-- Content format: [what works]
+
+- **Top rankers:** [domains]
+- **SERP features:** [featured snippet, PAA, etc.]
+- **Dominant format:** [tutorial/reference/list]
 
 ### Content Gaps
-- [gap] — opportunity because [reason]
 
-### Suggested Approach
-- [recommendation for content angle]
+- [gap 1] — opportunity because [reason]
+- [gap 2] — [reason]
+
+### Recommended Approach
+
+- Content type: [tutorial/reference/guide]
+- Angle: [unique perspective]
+- Target length: [word count estimate]
 ```
 
-## Additional Resources
+## References
 
-### Reference Files
-- **`references/source-priority.md`** — Detailed source hierarchy with examples
-- **`references/content-pillars.md`** — Pillar analysis patterns
+- `references/source-priority.md` — Source hierarchy with examples
+- `references/content-pillars.md` — Pillar analysis patterns
