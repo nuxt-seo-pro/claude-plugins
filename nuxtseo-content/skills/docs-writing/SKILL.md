@@ -11,10 +11,11 @@ Technical reference documentation. Model after Stripe, Anthropic, and Claude Cod
 ## Artifacts
 
 **Reads:**
+- `.claude/context/site-config.md` — Site URL, name for examples
 - `.claude/context/brand-voice.md` — Terminology, tone
 - `.claude/context/target-keywords.md` — Keywords for SEO
 
-**Before writing:** Check for artifacts. Use established terminology when it exists.
+**Before writing:** Check for site-config.md. If missing, ask user for site URL and name. Use `{site.url}` and `{site.name}` in examples, replaced with actual values.
 
 ## Core Principles
 
@@ -221,10 +222,10 @@ useSeoMeta({ description: 'x' })
 
 ### Real URLs
 
-Use real domains, not example.com:
+Use site config values, not example.com:
 ```ts
 useSeoMeta({
-  ogUrl: 'https://nuxtseo.com/docs/sitemap'
+  ogUrl: '{site.url}/docs/feature'  // e.g., https://superportrait.com/docs/feature
 })
 ```
 
@@ -285,10 +286,10 @@ Skip this unless you need per-route control. The defaults handle 90% of cases.
 
 ```yaml
 relatedPages:
-  - path: /docs/og-image/composables/define-og-image
-    title: defineOgImage
-  - path: /learn/mastering-meta/og-images
-    title: OG Image Guide
+  - path: /docs/api/related-feature
+    title: Related Feature API
+  - path: /learn/guides/feature-guide
+    title: Feature Guide
 ```
 
 ## Example: Complete Doc Page

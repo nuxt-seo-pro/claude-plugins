@@ -11,12 +11,13 @@ Pre-writing research for keyword discovery, content gaps, and competitive analys
 ## Artifacts
 
 **Reads:**
+- `.claude/context/site-config.md` — Site URL, name, industry for research context
 - `.claude/context/market-research.md` — Product context, existing keyword research
 
 **Generates:**
 - `.claude/context/target-keywords.md` — Keywords to target across content
 
-**Before running:** Check for market-research.md. Content research builds on product context.
+**Before running:** Check for site-config.md. If missing, ask user for site URL, name, and industry. Use `{site.*}` values in keyword research.
 
 ## MCP Tools
 
@@ -87,7 +88,7 @@ Pick 3-5 long-tail keywords with decent volume + low difficulty.
 **MCP example:**
 ```
 mcp__nuxt-seo-pro__research_keywords
-  topic: "nuxt meta tags"
+  topic: "{site.industry} booking software"
   limit: 20
 ```
 
@@ -101,7 +102,7 @@ Understand what currently ranks:
 **MCP example:**
 ```
 mcp__nuxt-seo-pro__analyze_serp
-  keyword: "nuxt meta tags tutorial"
+  keyword: "online booking for {site.industry}"
 ```
 
 ### 5. Gap Analysis

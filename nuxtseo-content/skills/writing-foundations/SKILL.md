@@ -11,7 +11,22 @@ Core writing principles for developer content. Use this skill for general writin
 ## Artifacts
 
 **Reads:**
+- `.claude/context/site-config.md` — Site URL, name, industry (required for examples)
 - `.claude/context/brand-voice.md` — Project-specific tone and terminology overrides
+
+**If site-config.md is missing:** Ask user for site URL and name before writing content. Store responses in `.claude/context/site-config.md` for future use.
+
+### Site Config Format
+
+```yaml
+# .claude/context/site-config.md
+url: https://example.com
+name: Site Name
+tagline: One-line description
+industry: saas | ecommerce | services | content | other
+author: Your Name
+authorRole: Founder | Developer | etc.
+```
 
 **Note:** This skill provides defaults. If brand-voice.md exists, its terminology and tone preferences take precedence over defaults here.
 
@@ -148,8 +163,11 @@ See `references/banned-words.md` for full list.
 
 ````markdown
 ```ts
-// TypeScript code
-useSeoMeta({ title: 'Page' })
+// TypeScript code - use site config values
+useSeoMeta({
+  title: 'Page Title',
+  ogUrl: '{site.url}/page'  // Replaced with actual site URL
+})
 ```
 
 ```vue
@@ -162,6 +180,8 @@ useSeoMeta({ title: 'Page' })
 npx nuxi module add @nuxtjs/sitemap
 ```
 ````
+
+**In examples:** Replace `{site.url}`, `{site.name}` with values from site-config.md.
 
 ### Inline Code
 

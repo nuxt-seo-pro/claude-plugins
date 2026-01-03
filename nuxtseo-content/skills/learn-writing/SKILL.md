@@ -11,12 +11,13 @@ Educational articles and tutorials optimized for search. Different from docs—m
 ## Artifacts
 
 **Reads:**
+- `.claude/context/site-config.md` — Site URL, name, industry for examples
 - `.claude/context/market-research.md` — Product context, audience
 - `.claude/context/brand-voice.md` — Tone, terminology
 - `.claude/context/target-keywords.md` — Keywords to incorporate
 - `.claude/context/product-positioning.md` — Value props for consistent messaging
 
-**Before writing:** Check for artifacts. Use established voice and target documented keywords when they exist.
+**Before writing:** Check for site-config.md. If missing, ask user for site URL and name. Use `{site.url}` and `{site.name}` in examples.
 
 ## Core Principles
 
@@ -84,22 +85,22 @@ Target long-tail keywords. "how to add meta tags nuxt 4" beats "meta tags".
 
 ### Example
 
-Search terms: `nuxt meta tags`, `useSeoMeta example`, `dynamic meta tags nuxt`
+Search terms: `online booking system`, `appointment scheduling software`, `how to take bookings online`
 
 ```markdown
-# How to Add Meta Tags in Nuxt
+# How to Set Up Online Booking for Your Business
 
-Most Nuxt sites ship with broken meta tags. Here's how to fix that in 2 minutes using `useSeoMeta()`.
+Most small businesses lose 20% of potential bookings to phone tag. Here's how to fix that in 10 minutes.
 
-## useSeoMeta for Static Pages
-
-[content]
-
-## Dynamic Meta Tags Per Route
+## Choosing a Booking System
 
 [content]
 
-### Why aren't my meta tags updating on navigation?
+## Setting Up Your Availability
+
+[content]
+
+### Why do customers abandon the booking process?
 
 [answer to common problem]
 ```
@@ -124,12 +125,11 @@ Structure content to win featured snippets (position zero).
 After each H2/H3 question, include a 40-60 word direct answer:
 
 ```markdown
-### How do you add meta tags in Nuxt?
+### How do you reduce no-shows for appointments?
 
-Use `useSeoMeta()` with title and description props. This composable handles
-all meta tags including Open Graph and Twitter cards. It supports reactive
-data for dynamic routes and provides full TypeScript autocompletion. No
-additional configuration required.
+Send automated reminders 24 hours and 1 hour before appointments. Include
+a one-click reschedule link. Studies show this reduces no-shows by 38%.
+For high-value appointments, add a small deposit requirement during booking.
 ```
 
 ### List Snippets
@@ -137,13 +137,13 @@ additional configuration required.
 Use ordered/unordered lists with 4-8 items for "how to" and "best" queries:
 
 ```markdown
-## How to Optimize Core Web Vitals in Nuxt
+## How to Improve Your Booking Conversion Rate
 
-1. Enable image optimization with `nuxt/image`
-2. Use `<NuxtLink>` for client-side navigation
-3. Defer non-critical JavaScript with `useHead`
-4. Implement font subsetting
-5. Add resource hints for critical assets
+1. Reduce form fields to essentials only
+2. Show real-time availability
+3. Add trust signals (reviews, guarantees)
+4. Enable guest checkout
+5. Send instant confirmation emails
 ```
 
 ### Definition Snippets
@@ -151,11 +151,11 @@ Use ordered/unordered lists with 4-8 items for "how to" and "best" queries:
 For "what is" queries, lead with a concise definition:
 
 ```markdown
-## What is useSeoMeta?
+## What is a booking widget?
 
-`useSeoMeta` is a Nuxt composable that sets meta tags using a flat object
-syntax. It replaces verbose `useHead` meta arrays with a type-safe,
-autocomplete-friendly API.
+A booking widget is an embeddable calendar that lets customers schedule
+appointments directly from your website. It syncs with your availability,
+sends confirmations automatically, and eliminates back-and-forth emails.
 ```
 
 ## Opening Patterns
@@ -165,18 +165,18 @@ Lead with problems/outcomes, not features.
 ### Problem + Solution
 
 **Bad:**
-> In today's digital landscape, SEO is important. This guide explores meta tags.
+> In today's digital landscape, online booking is important. This guide explores scheduling.
 
 **Good:**
-> Most Nuxt sites ship with broken meta tags. Here's how to fix that in 2 minutes.
+> 67% of customers prefer booking online. Here's how to set it up in 10 minutes.
 
 ### Surprising Fact + Implication
 
-> Google rewrites 70% of meta descriptions. Here's how to write ones they'll keep.
+> Businesses with online booking see 26% more appointments. Here's why phone-only is costing you.
 
 ### Common Mistake + Better Way
 
-> Template meta descriptions are lazy—and Google knows it. Dynamic descriptions take 30 seconds to set up.
+> Most booking pages ask for too much info upfront—and lose 40% of customers. Here's how to fix it.
 
 ## LLM Search Optimization
 
@@ -198,9 +198,9 @@ Google prioritizes Experience, Expertise, Authoritativeness, and Trustworthiness
 Show you've actually done the thing:
 
 ```markdown
-❌ "useSeoMeta is useful for setting meta tags."
+❌ "Online booking is useful for service businesses."
 
-✅ "When I migrated our docs site to Nuxt 3, useSeoMeta cut our meta tag code by 60%."
+✅ "When we switched from phone-only to online booking, no-shows dropped from 18% to 6%."
 ```
 
 Markers: "When I built...", "In production we found...", "After testing..."
@@ -245,21 +245,23 @@ Maintain trust with:
 
 ```markdown
 ---
-author: Harlan Wilton
-authorRole: Nuxt SEO maintainer
+author: {site.author}
+authorRole: {site.authorRole}
 lastUpdated: 2026-01-03
 ---
 
-# How to Add Meta Tags in Nuxt
+# How to Reduce Appointment No-Shows
 
-When I built [Nuxt SEO](https://nuxtseo.com), the most common issue users reported was
-incorrect meta tag setup. Here's the approach that works in production.
+After running {site.name} for 8 years, I've tested every reminder system.
+Here's what actually works to get customers to show up.
 
-## Using useSeoMeta
+## Automated Reminder Sequence
 
-According to the [official Nuxt docs](https://nuxt.com/docs/api/composables/use-seo-meta),
-`useSeoMeta` is the recommended way to set meta tags...
+According to [industry research](https://example.com/source), SMS reminders
+sent 24 hours before reduce no-shows by 38%...
 ```
+
+**Note:** Replace `{site.*}` placeholders with values from site-config.md.
 
 ## Time-Saving Framing
 
@@ -310,8 +312,8 @@ useSeoMeta({ title, description })
 Use realistic content, not lorem ipsum:
 ```ts
 useSeoMeta({
-  title: 'How to Add Meta Tags in Nuxt',
-  description: 'Set meta tags with useSeoMeta(). Full TypeScript support, zero config.'
+  title: 'Professional Portrait Photography in London',
+  description: 'Book your headshot session. 60 minutes, 10 edited photos included.'
 })
 ```
 
@@ -347,15 +349,15 @@ useSeoMeta({
 ## Internal Linking
 
 - 2-3 related pages in frontmatter
-- Inline link first mention of features/modules
+- Inline link first mention of features
 - Link to relevant docs for deep dives
 
 ```yaml
 relatedPages:
-  - path: /docs/seo-utils/api/use-seo-meta
-    title: useSeoMeta API
-  - path: /learn/mastering-meta/descriptions
-    title: Writing Meta Descriptions
+  - path: /docs/api/bookings
+    title: Booking API Reference
+  - path: /learn/scheduling/reducing-no-shows
+    title: Reducing No-Shows
 ```
 
 ## MCP Tools

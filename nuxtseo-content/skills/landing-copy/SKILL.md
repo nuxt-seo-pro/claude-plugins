@@ -11,6 +11,7 @@ Conversion-focused copy for developer tools and products. Different from docs or
 ## Artifacts
 
 **Reads:**
+- `.claude/context/site-config.md` — Site URL, name, industry for examples
 - `.claude/context/market-research.md` — Product context, positioning, keywords
 - `.claude/context/competitors.md` — Competitor weaknesses to exploit
 
@@ -18,7 +19,7 @@ Conversion-focused copy for developer tools and products. Different from docs or
 - `.claude/context/brand-voice.md` — Tone, terminology for other skills
 - `.claude/context/product-positioning.md` — Value props, messaging
 
-**Before writing:** Check for market-research.md. If missing, either run market-research skill first or ask user key questions about product/audience.
+**Before writing:** Check for site-config.md. If missing, ask user for site URL, name, and industry. Use `{site.*}` placeholders in examples, replaced with actual values.
 
 ## When to Use
 
@@ -56,21 +57,23 @@ Developers detect marketing BS instantly. Write like a dev, not a marketer:
 
 ### 4. Show, Then Tell
 
-Code speaks louder than copy:
+Code speaks louder than copy. Show the before/after:
 
 ```markdown
 Stop writing this:
 
 ​```ts
-import { ref, computed, onMounted } from 'vue'
-import { useHead } from '@vueuse/head'
-// ... 10 more imports
+// 15 lines of boilerplate
+const config = { ... }
+await initialize(config)
+await validate(config)
+// ... more setup
 ​```
 
 Just write this:
 
 ​```ts
-useSeoMeta({ title: 'My Page' })
+await start({ autoConfig: true })
 ​```
 ```
 
@@ -95,13 +98,13 @@ The first thing visitors see. Make it count.
 
 **Example:**
 ```markdown
-# AI-Powered Frontend Development
+# {site.tagline}
 
-MCP servers, cursor rules, and Claude skills for Vue, React, and Nuxt developers.
+{site.name} helps [target audience] [achieve outcome] without [pain point].
 
-[Get Started] [View on GitHub]
+[Get Started] [View Demo]
 
-Used by 5,000+ developers
+Trusted by 500+ customers
 ```
 
 ### Problem Section
@@ -117,12 +120,11 @@ Agitate the pain before offering the solution.
 
 **Example:**
 ```markdown
-## AI tools don't understand your framework
+## Scheduling shouldn't take 15 back-and-forth emails
 
-Generic coding assistants miss framework conventions.
-They suggest patterns that don't fit Vue.
-They ignore Nuxt's auto-imports.
-They waste your time fixing their mistakes.
+Phone tag wastes your time.
+Calendly-style tools look generic.
+Custom booking pages cost $5,000+.
 
 **There's a better way.**
 ```
@@ -146,14 +148,14 @@ List what the product does, framed as benefits.
 ```markdown
 ## What's Included
 
-### Framework-Aware Cursor Rules
-Pre-configured rules that understand Vue SFCs, Nuxt conventions, and your component library.
+### Smart Scheduling
+Syncs with your calendar, blocks buffer time, handles timezone conversion automatically.
 
-### MCP Servers for Your Stack
-Connect Claude to Nuxt UI, Pinia, VueUse—tools that understand your actual codebase.
+### Branded Booking Pages
+Your colors, your logo, your domain—not a generic booking link.
 
-### Ready-to-Use Claude Skills
-Drop-in skills for common tasks: component generation, test writing, refactoring.
+### Automated Reminders
+SMS and email reminders that reduce no-shows by 38%.
 ```
 
 ### How It Works
@@ -171,14 +173,14 @@ Reduce friction by showing simplicity.
 ```markdown
 ## Get Started in 60 Seconds
 
-1. **Install the MCP server**
-   `npx aifrontend add nuxt-ui`
+1. **Create your booking page**
+   Pick a template, add your services
 
-2. **Add to Claude Code**
-   One line in your config
+2. **Connect your calendar**
+   Google, Outlook, or Apple Calendar
 
-3. **Start building**
-   Claude now understands Nuxt UI components
+3. **Share your link**
+   Embed on your site or send directly to clients
 ```
 
 ### Social Proof
@@ -193,14 +195,12 @@ Borrow credibility from users.
 
 **Example:**
 ```markdown
-## Trusted by Vue Developers
+## Trusted by {site.industry} Professionals
 
-> "Finally, an AI that doesn't fight my framework."
-> — Sarah Chen, Senior Developer at Acme
+> "Cut our no-show rate from 18% to 4%."
+> — Sarah Chen, {site.industry} Business Owner
 
-[Vue Logo] [Nuxt Logo] [Tailwind Logo]
-
-⭐ 2,400 GitHub stars · 📦 50k downloads · 👥 1,200 Discord members
+⭐ 4.9/5 rating · 📅 50,000+ bookings · 👥 500+ businesses
 ```
 
 ### CTA Section
@@ -246,21 +246,21 @@ For teams shipping fast
 
 | Category | Pattern | Example |
 |----------|---------|---------|
-| **Benefit** | [Outcome] for [Audience] | "Better DX for Vue developers" |
-| | [Action] [Object] | "Ship components faster" |
-| | The [Adjective] Way to [X] | "The lazy way to add SEO" |
-| **Contrast** | [Old way] → [New way] | "From boilerplate to one-liner" |
-| | Stop [X]. Start [Y]. | "Stop configuring. Start shipping." |
-| | [X] Without [Y] | "Meta tags without the setup" |
-| **Specificity** | [Number] [Noun] in [Time] | "Add SEO in 2 minutes" |
-| | [X]% [Better/Faster/Less] | "50% less configuration" |
-| **Problem** | The [X] Problem Solved | "The meta tag problem, solved" |
-| | Why [X] Fails (And What Works) | "Why manual SEO fails" |
-| | [X] That Actually Works | "Framework AI that actually works" |
-| **Curiosity** | What [Audience] Know About [X] | "What senior devs know about DX" |
-| | The [X] Mistake Everyone Makes | "The SEO mistake costing you traffic" |
-| **Social** | Join [Number]+ [Audience] | "Join 5,000+ Vue developers" |
-| | [X] Teams Use This | "Why Nuxt teams use this" |
+| **Benefit** | [Outcome] for [Audience] | "Effortless scheduling for busy professionals" |
+| | [Action] [Object] | "Book more clients" |
+| | The [Adjective] Way to [X] | "The lazy way to fill your calendar" |
+| **Contrast** | [Old way] → [New way] | "From phone tag to one-click booking" |
+| | Stop [X]. Start [Y]. | "Stop chasing. Start booking." |
+| | [X] Without [Y] | "Online booking without the complexity" |
+| **Specificity** | [Number] [Noun] in [Time] | "Set up in 5 minutes" |
+| | [X]% [Better/Faster/Less] | "38% fewer no-shows" |
+| **Problem** | The [X] Problem Solved | "The scheduling problem, solved" |
+| | Why [X] Fails (And What Works) | "Why phone booking fails" |
+| | [X] That Actually Works | "Booking software that actually works" |
+| **Curiosity** | What [Audience] Know About [X] | "What top studios know about booking" |
+| | The [X] Mistake Everyone Makes | "The booking mistake costing you clients" |
+| **Social** | Join [Number]+ [Audience] | "Join 500+ {site.industry} businesses" |
+| | [X] Teams Use This | "Why top studios use this" |
 
 **Headline Tests:**
 
@@ -277,8 +277,8 @@ For teams shipping fast
 
 Support the headline. Add specificity:
 
-- **Headline:** "Stop Correcting Your AI"
-- **Subhead:** "MCP servers and cursor rules that understand Vue, Nuxt, and React conventions."
+- **Headline:** "Stop Playing Phone Tag"
+- **Subhead:** "Let clients book instantly. Sync with your calendar. Send automatic reminders."
 
 ### CTAs
 
@@ -291,8 +291,8 @@ Support the headline. Add specificity:
 
 Be specific about what happens:
 - "Get Started — Free"
-- "Add to Claude Code"
-- "Download Cursor Rules"
+- "Book a Demo"
+- "Start Your Free Trial"
 
 ### Avoid
 
@@ -336,8 +336,8 @@ Be specific about what happens:
 
 | Pattern | Example |
 |---------|---------|
-| [Product]: [Value Prop] | "AI Frontend: AI Tools for Vue & React Developers" |
-| [Action] [Object] with [Product] | "Build Faster with AI Frontend" |
+| [Product]: [Value Prop] | "{site.name}: Online Booking for {site.industry}" |
+| [Action] [Object] with [Product] | "Book More Clients with {site.name}" |
 
 ### Meta Descriptions
 
@@ -347,7 +347,7 @@ Be specific about what happens:
 - Key benefit
 
 **Example:**
-"MCP servers, cursor rules, and Claude skills for Vue and React developers. Ship faster with AI that understands your framework."
+"Online booking software for {site.industry} professionals. Let clients book 24/7, reduce no-shows by 38%, and sync with your calendar."
 
 ### H1 Strategy
 
@@ -361,6 +361,22 @@ One H1 per page = the headline. Make it count for SEO:
 
 See `examples/tool-landing.md` for a complete example.
 
+## Design System Integration
+
+When implementing landing pages, check for project design tokens:
+
+**Reads:**
+- `.claude/context/design-system.md` — Project-specific colors, typography, spacing
+
+**Key patterns to match:**
+- Color palette (accent color, backgrounds, text)
+- Typography scale (heading sizes, font weights)
+- Spacing rhythm (section padding, gaps)
+- Component patterns (buttons, cards, badges)
+- Interactive states (hover, focus, disabled)
+
+See `references/design-patterns.md` for common developer tool landing patterns.
+
 ## Quality Checklist
 
 - [ ] Hero communicates value in 5 seconds
@@ -371,3 +387,8 @@ See `examples/tool-landing.md` for a complete example.
 - [ ] No banned words/patterns
 - [ ] Mobile-friendly copy (short paragraphs)
 - [ ] Scannable with clear headings
+- [ ] Matches project design system (if defined)
+
+## References
+
+- `references/design-patterns.md` — Common landing page design patterns

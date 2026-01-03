@@ -10,14 +10,17 @@ Validate product ideas by analyzing search demand, competition, and market signa
 
 ## Artifacts
 
-This skill generates persistent context for other skills:
+**Reads:**
+- `.claude/context/site-config.md` — Site URL, name, industry for research context
+
+**Generates:**
 
 | Artifact | Purpose |
 |----------|---------|
 | `.claude/context/market-research.md` | Core product/market context |
 | `.claude/context/competitors.md` | Detailed competitor analysis |
 
-**Before running:** Check if artifacts exist. If updating, read existing first.
+**Before running:** Check for site-config.md. If missing, ask user for site details. Use `{site.*}` values in research.
 **After running:** Write/update artifacts so other skills can reference them.
 
 ## When to Use
@@ -433,21 +436,20 @@ mkdir -p .claude/context
 [Reasoning in 2-3 sentences]
 ```
 
-## Example: FrontendAI
+## Example: Online Booking SaaS
 
-Seed keywords to research:
-- "claude code mcp"
-- "ai coding assistant vue"
-- "nuxt ai tools"
-- "claude skills"
-- "mcp server [framework]"
-- "ai frontend development"
+Seed keywords to research based on `{site.industry}`:
+- "{site.industry} booking software"
+- "{site.industry} scheduling app"
+- "online booking for {site.industry}"
+- "{site.industry} appointment system"
+- "best booking software {site.industry}"
 
 Look for:
-- Are devs searching for AI-assisted frontend tooling?
-- What specific frameworks have demand?
-- Are there existing MCP/skill providers?
-- What problems do devs search for that AI could solve?
+- Are people searching for booking solutions in this industry?
+- What specific pain points have demand?
+- Are there dominant players or gaps?
+- What features do searchers mention?
 
 ## References
 
