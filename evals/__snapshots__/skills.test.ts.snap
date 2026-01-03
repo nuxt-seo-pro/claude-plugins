@@ -1,0 +1,140 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`comparison-writing > comparison structure 1`] = `
+"Here's a minimal comparison article structure:
+
+\`\`\`markdown
+# React vs Vue: Which Framework Should You Choose?
+
+## Overview
+
+## Key Differences
+
+### Learning Curve
+
+### Performance
+
+### Ecosystem
+
+### Community & Support
+
+## When to Choose React
+
+## When to Choose Vue
+
+## Conclusion
+\`\`\`"
+`;
+
+exports[`content-research > research output format 1`] = `
+"\`\`\`markdown
+---
+topic: nuxt og image
+primary_keyword: nuxt og image
+secondary_keywords:
+  - [keyword 2]
+  - [keyword 3]
+search_intent: [informational|transactional|navigational]
+difficulty: [1-100]
+volume: [monthly searches]
+---
+
+# Content Research: Nuxt OG Image
+
+## SERP Analysis
+
+| Position | Domain | Title | Type |
+|----------|--------|-------|------|
+| 1 | [domain] | [title] | [docs/blog/tool] |
+| 2 | [domain] | [title] | [docs/blog/tool] |
+| 3 | [domain] | [title] | [docs/blog/tool] |
+
+## Content Gaps
+
+- [gap 1]
+- [gap 2]
+
+## Questions to Answer
+
+- [PAA question 1]
+- [PAA question 2]
+
+## Recommended Angle
+
+[1-2 sentences on unique positioning]
+\`\`\`"
+`;
+
+exports[`docs-writing > doc structure matches expected format 1`] = `
+"\`\`\`markdown
+## \`useExample\`
+
+### Parameters
+
+| Name | Type | Description |
+|------|------|-------------|
+| \`name\` | \`string\` | — |
+| \`count\` | \`number\` | — |
+\`\`\`"
+`;
+
+exports[`landing-copy > landing copy structure 1`] = `
+"Here's a landing page structure for a developer tool:
+
+1. **Hero** - Value proposition headline + CTA
+2. **Problem** - Pain points the tool solves
+3. **Solution** - How the tool works (3-4 features)
+4. **Code Example** - Interactive demo or snippet
+5. **Integrations** - Compatible frameworks/tools
+6. **Testimonials** - Developer quotes + company logos
+7. **Pricing** - Tiers with feature comparison
+8. **FAQ** - Common technical questions
+9. **CTA** - Final call to action + quick start command"
+`;
+
+exports[`learn-writing > learn intro structure 1`] = `"Structured data tells search engines exactly what your content means—turning a generic page into a rich result with ratings, prices, and FAQs. Nuxt SEO makes adding Schema.org markup as simple as calling \`useSchemaOrg()\` in your component."`;
+
+exports[`market-research > market research structure 1`] = `
+"\`\`\`markdown
+# Market Research: AI Code Review Tool
+
+## Market Overview
+- **Market size**: $X.XB (2024)
+- **Growth rate**: XX% CAGR
+- **Key drivers**: [driver 1], [driver 2]
+
+## Target Audience
+| Segment | Pain Points | Buying Triggers |
+|---------|-------------|-----------------|
+| Enterprise DevOps | [pain] | [trigger] |
+| Startups | [pain] | [trigger] |
+| Individual devs | [pain] | [trigger] |
+
+## Competitor Analysis
+| Product | Pricing | Key Features | Weaknesses |
+|---------|---------|--------------|------------|
+| CodeRabbit | $XX/mo | [features] | [gaps] |
+| Codacy | $XX/mo | [features] | [gaps] |
+| SonarQube | $XX/mo | [features] | [gaps] |
+
+## Feature Gaps
+- [Unmet need 1]
+- [Unmet need 2]
+
+## Positioning Opportunities
+- [Angle 1]: [why underserved]
+- [Angle 2]: [why underserved]
+
+## Search Intent
+| Query | Volume | Difficulty | Intent |
+|-------|--------|------------|--------|
+| "ai code review" | X.Xk | XX | commercial |
+| "automated pr review" | X.Xk | XX | commercial |
+
+## Recommendations
+1. [Action item]
+2. [Action item]
+\`\`\`"
+`;
+
+exports[`writing-foundations > uses direct language without hedging 1`] = `"Add \`@nuxtjs/sitemap\` to your Nuxt modules and it auto-generates a sitemap from your pages and routes."`;

@@ -8,6 +8,16 @@ version: 0.2.0
 
 Educational articles and tutorials optimized for search. Different from docs—more narrative, problem-focused, teaches concepts.
 
+## Artifacts
+
+**Reads:**
+- `.claude/context/market-research.md` — Product context, audience
+- `.claude/context/brand-voice.md` — Tone, terminology
+- `.claude/context/target-keywords.md` — Keywords to incorporate
+- `.claude/context/product-positioning.md` — Value props for consistent messaging
+
+**Before writing:** Check for artifacts. Use established voice and target documented keywords when they exist.
+
 ## Core Principles
 
 - Lead with problems, not features
@@ -105,6 +115,49 @@ Most Nuxt sites ship with broken meta tags. Here's how to fix that in 2 minutes 
 - Force terms where they don't fit
 - Add framework name to every heading when context is obvious
 
+## Featured Snippet Targeting
+
+Structure content to win featured snippets (position zero).
+
+### Paragraph Snippets
+
+After each H2/H3 question, include a 40-60 word direct answer:
+
+```markdown
+### How do you add meta tags in Nuxt?
+
+Use `useSeoMeta()` with title and description props. This composable handles
+all meta tags including Open Graph and Twitter cards. It supports reactive
+data for dynamic routes and provides full TypeScript autocompletion. No
+additional configuration required.
+```
+
+### List Snippets
+
+Use ordered/unordered lists with 4-8 items for "how to" and "best" queries:
+
+```markdown
+## How to Optimize Core Web Vitals in Nuxt
+
+1. Enable image optimization with `nuxt/image`
+2. Use `<NuxtLink>` for client-side navigation
+3. Defer non-critical JavaScript with `useHead`
+4. Implement font subsetting
+5. Add resource hints for critical assets
+```
+
+### Definition Snippets
+
+For "what is" queries, lead with a concise definition:
+
+```markdown
+## What is useSeoMeta?
+
+`useSeoMeta` is a Nuxt composable that sets meta tags using a flat object
+syntax. It replaces verbose `useHead` meta arrays with a type-safe,
+autocomplete-friendly API.
+```
+
 ## Opening Patterns
 
 Lead with problems/outcomes, not features.
@@ -135,6 +188,78 @@ LLMs append year and use question-based queries. Light touches help:
 - "Recommended" when genuinely recommending
 
 Don't plaster "(2025)" everywhere or force question headings.
+
+## E-E-A-T Signals
+
+Google prioritizes Experience, Expertise, Authoritativeness, and Trustworthiness. Build these signals into content:
+
+### Experience (First-hand)
+
+Show you've actually done the thing:
+
+```markdown
+❌ "useSeoMeta is useful for setting meta tags."
+
+✅ "When I migrated our docs site to Nuxt 3, useSeoMeta cut our meta tag code by 60%."
+```
+
+Markers: "When I built...", "In production we found...", "After testing..."
+
+### Expertise
+
+Demonstrate deep knowledge:
+
+- Explain *why*, not just *how*
+- Acknowledge edge cases and limitations
+- Reference official sources accurately
+
+### Authoritativeness
+
+Build credibility through:
+
+- **Author bylines** with relevant credentials
+- **Citations** to official docs, not random blogs
+- **Internal links** to related authoritative content
+
+### Trustworthiness
+
+Maintain trust with:
+
+- **Last updated dates** on all content
+- **Version numbers** for framework-specific advice
+- **Corrections** when content becomes outdated
+
+### Citation Priority
+
+| Source Type | Example | Trust Level |
+|-------------|---------|-------------|
+| Official docs | Vue.js docs, Nuxt docs | Highest |
+| Framework team | Evan You's blog, Pooya Parsa's tweets | High |
+| Primary research | Google studies, State of JS survey | High |
+| Authoritative blogs | web.dev, developers.google.com | Medium-high |
+| Well-known devs | Specific named experts with track record | Medium |
+
+**Avoid citing:** tutorialspoint, w3schools, Medium posts without known authors, StackOverflow answers without verification, content >2 years old for rapidly changing topics.
+
+### Example with E-E-A-T
+
+```markdown
+---
+author: Harlan Wilton
+authorRole: Nuxt SEO maintainer
+lastUpdated: 2026-01-03
+---
+
+# How to Add Meta Tags in Nuxt
+
+When I built [Nuxt SEO](https://nuxtseo.com), the most common issue users reported was
+incorrect meta tag setup. Here's the approach that works in production.
+
+## Using useSeoMeta
+
+According to the [official Nuxt docs](https://nuxt.com/docs/api/composables/use-seo-meta),
+`useSeoMeta` is the recommended way to set meta tags...
+```
 
 ## Time-Saving Framing
 
@@ -235,12 +360,12 @@ relatedPages:
 
 ## MCP Tools
 
-Use Nuxt SEO Pro MCP for research and validation:
+| Tool | When | Requires init_site |
+|------|------|-------------------|
+| `mcp__nuxt-seo-pro__research_keywords` | Before writing—find target keywords | No |
+| `mcp__nuxt-seo-pro__analyze_content_page` | After writing—validate SEO | Yes |
 
-| Tool | When |
-|------|------|
-| `mcp__nuxt-seo-pro__research_keywords` | Before writing—find target keywords |
-| `mcp__nuxt-seo-pro__analyze_content_page` | After writing—validate SEO |
+**Note:** `analyze_content_page` requires site initialization. If not available, skip SEO validation step.
 
 ## Quality Checks
 

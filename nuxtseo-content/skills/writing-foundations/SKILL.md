@@ -8,6 +8,13 @@ version: 0.2.0
 
 Core writing principles for developer content. Use this skill for general writing guidance, or load alongside `docs-writing` or `learn-writing` for type-specific patterns.
 
+## Artifacts
+
+**Reads:**
+- `.claude/context/brand-voice.md` — Project-specific tone and terminology overrides
+
+**Note:** This skill provides defaults. If brand-voice.md exists, its terminology and tone preferences take precedence over defaults here.
+
 ## Voice
 
 Developer-to-developer. Casual but accurate.
@@ -34,6 +41,61 @@ Developer-to-developer. Casual but accurate.
 | Search engines may modify | Google rewrites 70% |
 | Most sites have issues | 73% of sites fail Core Web Vitals |
 | It can improve performance | Reduces LCP by 40% |
+
+## Persuasion Frameworks
+
+Use when structuring content that needs to convince.
+
+### PAS (Problem-Agitate-Solve)
+
+Best for: Feature announcements, tool landing pages, "why use this" sections.
+
+1. **Problem** — State the pain clearly
+2. **Agitate** — Make it worse, show consequences
+3. **Solve** — Present your solution
+
+```markdown
+**Problem:** Meta tags require 20+ lines of boilerplate.
+
+**Agitate:** Copy-paste the same code to every page. Miss one property,
+break your social previews. Update a title, forget to update the og:title.
+
+**Solve:** `useSeoMeta()` handles all of it in one line.
+```
+
+### AIDA (Attention-Interest-Desire-Action)
+
+Best for: Landing pages, email sequences, product announcements.
+
+1. **Attention** — Hook with surprising stat or bold claim
+2. **Interest** — Expand with relevant details
+3. **Desire** — Show benefits, social proof
+4. **Action** — Clear CTA
+
+```markdown
+**Attention:** Google rewrites 70% of meta descriptions.
+
+**Interest:** Most get rewritten because they're template-generated,
+too long, or don't match search intent.
+
+**Desire:** Dynamic descriptions that match page content stay intact.
+Sites using `useSeoMeta()` see 40% fewer rewrites.
+
+**Action:** [Add useSeoMeta to your Nuxt app →]
+```
+
+### 4 U's
+
+Best for: Headlines, email subjects, CTA buttons.
+
+| U | Meaning | Example |
+|---|---------|---------|
+| **Useful** | Solves a problem | "Fix broken meta tags" |
+| **Urgent** | Time pressure | "Before your next deploy" |
+| **Unique** | Different angle | "The lazy way to SEO" |
+| **Ultra-specific** | Concrete details | "Add SEO in 2 minutes" |
+
+Score headlines 1-4 on each U. Aim for 3+ total.
 
 ### State What NOT to Do
 

@@ -1,6 +1,6 @@
 ---
 name: Content Research
-description: This skill should be used when the user asks to "research keywords", "find content gaps", "analyze topic for article", "keyword research for [topic]", "what should I write about", "SEO research", or needs to understand search demand before writing content.
+description: Use for "keyword research", "content gaps", "content strategy", "content plan", "what should I write about", "SEO research", "topic research", or pre-writing research.
 version: 0.2.0
 ---
 
@@ -8,17 +8,27 @@ version: 0.2.0
 
 Pre-writing research for keyword discovery, content gaps, and competitive analysis.
 
-## MCP Tools (Preferred)
+## Artifacts
 
-If Nuxt SEO Pro MCP is available, use these tools:
+**Reads:**
+- `.claude/context/market-research.md` — Product context, existing keyword research
 
-| Tool | Purpose |
-|------|---------|
-| `mcp__nuxt-seo-pro__research_keywords` | Keyword suggestions with volume/difficulty |
-| `mcp__nuxt-seo-pro__analyze_serp` | Competition analysis, SERP features |
-| `mcp__nuxt-seo-pro__check_rankings` | Current rankings for a domain |
-| `mcp__nuxt-seo-pro__get_sitemap_urls` | Existing content inventory |
-| `mcp__nuxt-seo-pro__profile_site` | Site type, industry, audience |
+**Generates:**
+- `.claude/context/target-keywords.md` — Keywords to target across content
+
+**Before running:** Check for market-research.md. Content research builds on product context.
+
+## MCP Tools
+
+| Tool | Purpose | Requires init_site |
+|------|---------|-------------------|
+| `mcp__nuxt-seo-pro__research_keywords` | Keyword suggestions with volume/difficulty | No |
+| `mcp__nuxt-seo-pro__analyze_serp` | Competition analysis, SERP features | No |
+| `mcp__nuxt-seo-pro__check_rankings` | Current rankings for a domain | No |
+| `mcp__nuxt-seo-pro__get_sitemap_urls` | Existing content inventory | Yes |
+| `mcp__nuxt-seo-pro__profile_site` | Site type, industry, audience | Yes |
+
+**Site-specific tools:** If using `get_sitemap_urls` or `profile_site`, ensure user has run `init_site` first. If not initialized, skip these tools and proceed with keyword research.
 
 ### Example MCP Workflow
 

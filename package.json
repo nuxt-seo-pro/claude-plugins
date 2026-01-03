@@ -1,0 +1,11 @@
+{
+  "name": "nuxt-seo-claude-plugins",
+  "type": "module",
+  "scripts": {
+    "test": "vitest",
+    "test:update": "vitest -u"
+  },
+  "devDependencies": {
+    "vitest": "^3.0.0"
+  }
+}

@@ -8,6 +8,14 @@ version: 0.2.0
 
 Technical reference documentation. Model after Stripe, Anthropic, and Claude Code docs.
 
+## Artifacts
+
+**Reads:**
+- `.claude/context/brand-voice.md` — Terminology, tone
+- `.claude/context/target-keywords.md` — Keywords for SEO
+
+**Before writing:** Check for artifacts. Use established terminology when it exists.
+
 ## Core Principles
 
 - Task-oriented titles: "Create a sitemap" not "Understanding sitemaps"
