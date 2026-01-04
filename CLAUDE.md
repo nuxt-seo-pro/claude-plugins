@@ -23,13 +23,18 @@ nuxtseo-content/           # main plugin
 ├── .claude-plugin/
 │   └── plugin.json        # plugin manifest
 └── skills/
-    ├── writing-foundations/  # base writing rules (loaded with other skills)
-    ├── docs-writing/         # /docs/ reference documentation
-    ├── learn-writing/        # /learn/ educational articles
-    ├── content-research/     # keyword research
-    ├── market-research/      # competitor analysis
-    ├── comparison-writing/   # vs pages
-    └── landing-copy/         # landing pages
+    ├── site-setup/           # initialize site context
+    ├── content-writing/      # unified content creation
+    │   └── references/
+    │       ├── foundations.md    # base writing rules
+    │       └── types/            # docs, educational, landing, etc.
+    ├── research/             # keyword, market, competitor research
+    └── content-audit/        # review and improve content
+        └── references/
+            ├── linking.md        # internal linking
+            ├── seo.md            # SEO validation
+            ├── geo.md            # AI citation optimization
+            └── conversion.md     # sales page testing
 
 evals/                     # skill quality tests
 └── skills.test.ts         # runs prompts through claude CLI, checks for banned words
@@ -39,10 +44,15 @@ evals/                     # skill quality tests
 
 Each skill has:
 - `SKILL.md` — frontmatter (name, description, version) + instructions
-- `references/` — supporting docs (banned words, quality tests)
-- `examples/` — sample output
+- `references/` — supporting docs (patterns, rules)
+- `examples/` — sample output (optional)
 
-Skills use artifacts pattern: read from `.claude/context/` for project-specific overrides.
+Skills use artifacts pattern: read/write to `.claude/context/` for project-specific state.
+
+**Key artifacts:**
+- `site-config.md` — URL, name, industry, audience, competitors
+- `site-pages.md` — Available pages from llms.txt/sitemap
+- `writing-style.md` — Per-category voice, structure, terminology
 
 ## Testing
 
@@ -54,7 +64,7 @@ Timeout is 60s per test (LLM calls).
 
 ## Writing Rules
 
-From `writing-foundations`:
+From `content-writing/references/foundations.md`:
 - TypeScript only, never JavaScript
 - Tables for parameters, not prose
 - No banned words: dive into, crucial, robust, seamless, leverage, etc

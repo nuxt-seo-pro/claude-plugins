@@ -2,21 +2,59 @@
 
 Interactive components that improve documentation comprehension. Use sparingly.
 
+## Component Availability
+
+Before suggesting components, check what's available in the project.
+
+**Standard (Nuxt UI Pro):** Always available, all content types
+- `::tip`, `::note`, `::warning`, `::danger` — Callout variants
+- `::code-group` — Tabbed code blocks
+
+**Custom:** Blog/tutorial pages ONLY — never use in `/docs/`
+- `::key-takeaways` — Check `components/content/KeyTakeaways.vue`
+- `::quick-check` — Check `components/content/QuickCheck.vue`
+- `::checklist` — Check `components/content/Checklist.vue`
+
+**IMPORTANT:** Custom interactive/summary components are for educational content (`/learn/`, `/blog/`, `/tutorials/`) only. For `/docs/` pages, use standard callouts (`::tip`, `::warning`, etc.) and `::code-group` — but not key-takeaways, quick-checks, or checklists.
+
+### Installing Missing Components
+
+If a custom component doesn't exist:
+
+1. Read the template from `component-templates/{Component}.vue`
+2. Adapt for the project's codebase:
+   - Match existing component patterns (Composition API style, naming)
+   - Use project's icon library (replace `UIcon` if needed)
+   - Match CSS variable naming (`--ui-*` may differ)
+   - Check if `motion-v` is available, simplify animations if not
+3. Write to `components/content/{Component}.vue`
+4. Test that MDC syntax works: `::component-name`
+
+**Template locations:**
+- `component-templates/KeyTakeaways.vue`
+- `component-templates/QuickCheck.vue`
+- `component-templates/Checklist.vue`
+
 ## Component Types
 
 ### 1. Key Takeaways
 
 Summary box at article top. Scannable preview of main points.
 
+**Content types:** `/learn/`, `/blog/`, `/tutorials/` only
+
 **When to use:**
-- Every substantive article (not index/intro pages)
-- Articles with 3+ key concepts
-- Technical guides with actionable advice
+- Long educational articles (1500+ words) teaching concepts
+- Tutorial-style content with multiple steps
+- Articles where readers need quick reference after reading
 
 **When to skip:**
-- Index/hub pages
-- Very short articles (<500 words)
+- ALL `/docs/` pages — docs should be scannable without components
 - API reference pages
+- Index/hub pages
+- Short articles (<1000 words)
+- How-to guides (steps are the takeaways)
+- Pages that are already structured as lists
 
 **Example:**
 ```md
@@ -60,12 +98,15 @@ OG images require absolute URLs. Relative paths will break on social platforms.
 
 Interactive quiz at article end. Reinforces key concept through active recall.
 
+**Content types:** `/learn/`, `/blog/`, `/tutorials/` only
+
 **When to use:**
 - Articles teaching a specific concept
 - After explaining a common mistake
 - When there's a non-obvious answer
 
 **When to skip:**
+- ALL `/docs/` pages
 - Reference/API docs
 - Very short articles
 - When answer is too obvious
@@ -89,12 +130,15 @@ Interactive quiz at article end. Reinforces key concept through active recall.
 
 Persistent todo with localStorage. Progress saved across sessions.
 
+**Content types:** `/learn/`, `/blog/`, `/tutorials/` only
+
 **When to use:**
-- Launch/setup guides
-- Multi-step processes
-- Pre-flight checks
+- Launch/setup guides (in tutorials section)
+- Multi-step processes users track over time
+- Pre-flight checks before deployment
 
 **When to skip:**
+- ALL `/docs/` pages — use regular lists instead
 - Regular articles
 - Single-step instructions
 - Conceptual content
@@ -140,7 +184,7 @@ useSeoMeta({ title: 'Home' })
 
 ### 1. Scan Article Structure
 
-- Does it have a clear intro? → Consider `::key-takeaways`
+- Is it 1500+ words of educational content? → Consider `::key-takeaways`
 - Are there buried warnings? → Extract to `::warning`
 - Is there a non-obvious gotcha? → Add `::danger`
 - Could a quiz reinforce learning? → Add `::quick-check`
@@ -170,7 +214,7 @@ After adding components, verify:
 - Stack multiple callouts back-to-back
 - Use `::danger` for minor issues
 - Add quizzes with obvious answers
-- Put key takeaways on index pages
+- Add key takeaways to docs or short articles
 - Convert every list to a checklist
 
 ### Do
@@ -178,7 +222,7 @@ After adding components, verify:
 - Space components naturally through content
 - Reserve danger for genuinely critical issues
 - Make quizzes test understanding
-- Use key takeaways on substantive articles
+- Use key takeaways only for long educational content (1500+ words)
 - Use checklists only for actionable multi-step processes
 
 ## Output Format

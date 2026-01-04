@@ -12,6 +12,7 @@ Initialize site context for all writing skills. Run once per project.
 
 **Reads:**
 - `nuxt.config.ts` — Extract site URL, name from `site:` key
+- `components/content/` — Check available MDC components
 - Sample pages — For style analysis
 
 **Generates:**
@@ -157,7 +158,31 @@ AskUserQuestion:
 
 4. Generate per-category style config
 
-### 7. Generate Artifacts
+### 7. Detect Available Components
+
+Check which MDC components exist in the project:
+
+```
+Glob: components/content/*.vue
+```
+
+**Standard (always available with Nuxt UI Pro):**
+- `::tip`, `::note`, `::warning`, `::danger` — All content types
+- `::code-group` — All content types
+
+**Custom (blog/tutorial pages only):**
+
+| Component | File to Check | Use For |
+|-----------|---------------|---------|
+| `::key-takeaways` | `KeyTakeaways.vue` | Long educational articles only |
+| `::quick-check` | `QuickCheck.vue` | Tutorials teaching concepts |
+| `::checklist` | `Checklist.vue` | Setup guides, launch checklists |
+
+**IMPORTANT:** Custom interactive/summary components are for `/learn/`, `/blog/`, `/tutorials/` only. For `/docs/`, use standard callouts (`::tip`, `::warning`, etc.) and `::code-group` — but not key-takeaways, quick-checks, or checklists.
+
+Record available components in site-config.md so writing/audit skills know what's available.
+
+### 8. Generate Artifacts
 
 **site-config.md:**
 ```yaml
@@ -186,6 +211,19 @@ banned_phrases:
 
 # Reference
 style_guide: docs/CONTRIBUTING.md  # if found
+
+# Available components
+components:
+  standard:  # always available with Nuxt UI Pro
+    - tip
+    - note
+    - warning
+    - danger
+    - code-group
+  custom:  # for /learn/, /blog/, /tutorials/ only
+    - key-takeaways  # remove if not installed
+    - quick-check
+    - checklist
 ```
 
 **site-pages.md:**
@@ -317,7 +355,7 @@ categories:
       intro: context-first  # explain why this matters
       sections: concept-to-practice  # theory then examples
       depth: 2-3 levels
-      conclusion: key-takeaways
+      conclusion: summary  # brief wrap-up, key-takeaways only for 1500+ word articles
     code:
       language: typescript
       show_imports: true

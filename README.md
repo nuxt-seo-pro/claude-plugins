@@ -21,44 +21,62 @@ Set up https://mysite.com for SEO analysis
 
 ## Available Skills
 
-### content-research
-Keyword research and content gap analysis before writing.
+### site-setup
+Initialize site context for all writing skills. Extracts site config, fetches pages, analyzes existing content for style patterns.
 
-**Triggers:** "research keywords", "find content gaps", "analyze topic"
+**Triggers:** "setup site", "configure site", "initialize project"
 
-### market-research
-Validate product ideas by analyzing search demand, competition, and market signals.
+**Generates:**
+- `.claude/context/site-config.md` — URL, name, industry, audience, competitors
+- `.claude/context/site-pages.md` — Available pages from llms.txt/sitemap
+- `.claude/context/writing-style.md` — Per-category voice, structure, terminology
 
-**Triggers:** "research product idea", "validate demand", "analyze competitors", "check domain"
+### content-writing
+Unified content creation. Detects content type and loads appropriate patterns.
 
-### writing-foundations
-Shared writing principles: voice, banned AI slop, quality tests, internal linking.
+**Triggers:** "write docs", "write article", "landing page", "comparison post", "blog post", "tutorial"
 
-**Triggers:** "write content", "improve writing", "fix AI slop"
+**Content Types:**
+| Type | Trigger |
+|------|---------|
+| docs | "write docs", "API reference" |
+| educational | "write article", "blog post", "tutorial" |
+| landing | "landing page", "hero section" |
+| comparison | "X vs Y", "alternatives to" |
+| sales | "sales page", "pricing page" |
 
-### docs-writing
-Technical documentation patterns for `/docs/` pages.
+### research
+Unified research for keyword discovery, market validation, and competitive analysis.
 
-**Triggers:** "write docs", "document feature", "create API docs"
+**Triggers:** "keyword research", "market research", "competitor analysis", "validate product idea"
 
-### learn-writing
-Educational/blog content with SEO optimization for `/learn/` pages.
+**Research Types:**
+| Type | Trigger |
+|------|---------|
+| content | "what to write", "content gaps", "topic ideas" |
+| market | "is there demand", "validate idea", "should I build" |
+| competitor | "competitor analysis", "who ranks for" |
 
-**Triggers:** "write article", "create learn content", "blog post"
+### content-audit
+Content review and improvement. Detects content type and applies appropriate audit patterns.
 
-### comparison-writing
-Comparison articles for "X vs Y" and alternatives content.
+**Triggers:** "audit content", "fix links", "check SEO", "improve content", "test sales page"
 
-**Triggers:** "X vs Y", "compare tools", "alternatives to X", "switching guide"
-
-### landing-copy
-Conversion-focused copy for developer tools landing pages.
-
-**Triggers:** "landing page copy", "hero section", "marketing copy", "CTA copy"
+**Audit Types:**
+| Type | Trigger |
+|------|---------|
+| style | "check voice", "tone consistency" |
+| linking | "fix links", "internal linking" |
+| seo | "check SEO", "keyword optimization" |
+| geo | "AI optimization", "ChatGPT visibility" |
+| conversion | "test sales page", "objection handling" |
 
 ## Usage
 
 ```bash
+# First time setup
+"setup site"
+
 # Research before writing
 "research keywords for meta tags in nuxt"
 
@@ -76,6 +94,9 @@ Conversion-focused copy for developer tools landing pages.
 
 # Write landing page copy
 "write hero section for my SEO tool"
+
+# Audit existing content
+"audit /docs/getting-started for SEO"
 ```
 
 ## License
