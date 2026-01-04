@@ -1,7 +1,7 @@
 ---
 name: Content Audit
 description: Use for "audit content", "review page", "fix links", "test sales page", "add callouts", "check SEO", "improve content", or reviewing/improving existing content.
-version: 0.3.0
+version: 0.4.0
 ---
 
 # Content Audit
