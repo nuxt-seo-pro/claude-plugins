@@ -29,6 +29,24 @@ Developer-to-developer. Casual but accurate.
 | Most sites have issues | 73% of sites fail Core Web Vitals |
 | It can improve performance | Reduces LCP by 40% |
 
+### Stats Require Verification
+
+When writing or auditing stats, **always use WebSearch** to find current data:
+
+1. Search for `[topic] statistics [current-year]` (fallback to previous year if no results)
+2. Prefer authoritative sources: Semrush, Ahrefs, Google, W3Techs, HTTPArchive
+3. Include source and year in content: `"67.6% have duplicate content (Semrush, 2024)"`
+
+**Example workflow:**
+```
+Content mentions: "GPTBot is the most-blocked crawler"
+→ WebSearch: "most blocked crawler 2025" (or 2024 fallback)
+→ Find: "GPTBot blocked by 35.2% of sites (Originality.ai, 2024)"
+→ Write with citation
+```
+
+Never trust stats from training data - they go stale. Always verify.
+
 ## Banned Content
 
 ### Banned Words
@@ -303,3 +321,5 @@ Mark unknowns rather than hallucinating:
 [EXAMPLE NEEDED: real-world use case]
 [LINK: internal link to related page]
 ```
+
+**On `[STAT NEEDED]`:** Don't just mark it - immediately WebSearch for the stat. Search `[topic] statistics [year]`, find authoritative source, replace marker with cited stat.

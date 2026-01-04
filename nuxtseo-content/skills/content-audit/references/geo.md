@@ -58,13 +58,23 @@ Technical queries expect working code. AI engines cite pages with examples:
 
 ### 4. Quotable Facts
 
-AI cites specific, sourced statistics:
+AI cites specific, sourced statistics. **Always WebSearch to verify stats before writing/auditing:**
 
 | Good | Bad |
 |------|-----|
 | "67.6% of websites have duplicate content (Semrush, 2024)" | "Most sites have SEO issues" |
 | "Google rewrites 70% of meta descriptions" | "Search engines may modify descriptions" |
 | "Pages with schema.org are 40% more likely cited" | "Structured data helps SEO" |
+
+**Stat verification workflow:**
+```
+Found stat: "GPTBot is the most-blocked crawler"
+→ WebSearch: "most blocked AI crawler [current-year]"
+→ Fallback: search [current-year - 1] if no results
+→ Cite with source + year
+```
+
+Authoritative sources: Semrush, Ahrefs, W3Techs, HTTPArchive, Originality.ai, Cloudflare Radar
 
 ### 5. Authority Signals
 

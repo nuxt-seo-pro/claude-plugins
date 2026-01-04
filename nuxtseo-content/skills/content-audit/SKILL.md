@@ -28,7 +28,7 @@ Unified content review and improvement. Detects content type and applies appropr
 
 | Type | Trigger Phrases | Reference |
 |------|-----------------|-----------|
-| `style` | "check voice", "tone consistency", "terminology", "writing style" | uses `writing-style.md` |
+| `style` | "check voice", "tone consistency", "terminology", "writing style" | `../content-writing/references/foundations.md` + `writing-style.md` |
 | `linking` | "fix links", "internal linking", "broken links", "orphan pages" | `references/linking.md` |
 | `components` | "add callouts", "key takeaways", "improve readability", "add warnings" | `references/components.md` |
 | `seo` | "check SEO", "keyword optimization", "meta tags", "search ranking", "URL structure" | `references/seo.md` |
@@ -69,9 +69,10 @@ Load type-specific patterns from `../content-writing/references/types/`.
 
 Load appropriate references and analyze content:
 
-**Style audit:** (uses writing-style.md)
+**Style audit:**
 
-Match file path to category (e.g., `/docs/**` → `categories.docs`), then check:
+1. Load `../content-writing/references/foundations.md` and check all rules (slop, em dashes, inline code lang tags, etc)
+2. Match file path to category (e.g., `/docs/**` → `categories.docs`), then check against `writing-style.md`:
 - Voice consistency (formality, perspective, tone)
 - Avoided terminology used
 - Preferred terminology missing
@@ -154,6 +155,14 @@ Output prioritized fixes with:
 | Conversion blockers | [X] |
 ```
 
+## Applying Fixes
+
+When user asks to fix/apply audit recommendations:
+
+1. Load `../content-writing/references/foundations.md` - all edits must pass these rules
+2. Load type-specific patterns from `../content-writing/references/types/[type].md`
+3. Apply fixes following those patterns
+
 ## Quick Audits
 
 ### Style Check Only
@@ -162,7 +171,7 @@ Output prioritized fixes with:
 "check voice consistency on /docs/getting-started"
 ```
 
-Runs only style audit against writing-style.md category patterns.
+Runs style audit against foundations.md + writing-style.md category patterns.
 
 ### Link Check Only
 
@@ -190,6 +199,8 @@ Runs all audits appropriate for content type.
 
 ## References
 
+- `../content-writing/references/foundations.md` — Base writing rules (slop, em dashes, structure)
+- `../content-writing/references/types/*.md` — Type-specific patterns
 - `references/linking.md` — Internal linking rules and patterns
 - `references/components.md` — Callouts, quizzes, checklists
 - `references/seo.md` — SEO validation patterns (URL structure, meta, headings)
