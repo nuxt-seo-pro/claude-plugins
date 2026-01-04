@@ -1,31 +1,6 @@
----
-name: Comparison Writing
-description: Use for "X vs Y", "compare tools", "alternatives to X", "which is better", "switching guide", "migration comparison", or versus/comparison content.
-version: 0.1.0
----
+# Comparison Content Patterns
 
-# Comparison Writing
-
-Write comparison articles that rank for "X vs Y" and "X alternative" keywords. High commercial intent, bottom-of-funnel content.
-
-## Artifacts
-
-**Reads:**
-- `.claude/context/market-research.md` — Product positioning, differentiators
-- `.claude/context/competitors.md` — Competitor strengths/weaknesses
-- `.claude/context/brand-voice.md` — Tone and terminology
-- `.claude/context/target-keywords.md` — Comparison keywords to target
-- `.claude/context/product-positioning.md` — Value props to emphasize
-
-**Before writing:** Check for competitors.md. Comparison content is stronger when informed by prior competitor research.
-
-## When to Use
-
-- "X vs Y" comparison articles
-- "Best X alternatives" listicles
-- "X or Y: which should you use?" guides
-- Feature comparison tables
-- Migration guides (from X to Y)
+"X vs Y" and "X alternative" articles. High commercial intent, bottom-of-funnel content.
 
 ## Why Comparison Content Works
 
@@ -44,9 +19,6 @@ Users searching these are ready to decide. Content that helps them choose wins.
 
 Direct comparison of two specific tools.
 
-**Best for:** High-volume matchups, clear competitors.
-
-**Structure:**
 ```markdown
 # [Tool A] vs [Tool B]: [Deciding Factor]
 
@@ -95,9 +67,6 @@ Direct comparison of two specific tools.
 
 Multiple options for users leaving a tool.
 
-**Best for:** "[Tool] alternatives" keywords, dissatisfied users.
-
-**Structure:**
 ```markdown
 # [X] Best [Tool] Alternatives in [Year]
 
@@ -135,9 +104,6 @@ Multiple options for users leaving a tool.
 
 Compare across a category (3+ options).
 
-**Best for:** Category overviews, "best X for Y" content.
-
-**Structure:**
 ```markdown
 # Best [Category] for [Use Case]: [Year] Comparison
 
@@ -190,8 +156,6 @@ React developers should use the official Next.js rules.
 
 ### Use Specific Criteria
 
-Don't compare vaguely. Define what matters:
-
 | Criteria | Why It Matters |
 |----------|----------------|
 | Performance | Measurable (bundle size, build time) |
@@ -236,15 +200,6 @@ Comparison content gets stale. Always include:
 | X vs Y: [Deciding Factor] | "Nuxt vs Next: Which Framework in 2026?" |
 | X vs Y for [Audience] | "Vue vs React for Beginners" |
 | [N] Best X Alternatives | "7 Best Create React App Alternatives" |
-| X vs Y: [Specific Comparison] | "Tailwind vs CSS Modules: Performance Compared" |
-
-### Keyword Targeting
-
-Target multiple related terms:
-
-- Primary: "nuxt vs next"
-- Secondary: "nuxt or next", "next.js vs nuxt.js"
-- Long-tail: "nuxt vs next for blog", "nuxt vs next performance"
 
 ### Comparison Tables
 
@@ -263,55 +218,15 @@ Use ✅/❌ or specific values, not vague ratings.
 
 ### Featured Snippet Strategy
 
-Comparison content wins snippets with structured answers:
+**Table snippets:** Quick comparison tables dominate "X vs Y" SERPs.
 
-**Table snippets:** Quick comparison tables (shown above) dominate "X vs Y" SERPs.
+**Paragraph snippets:** After "When to Choose X" headings, include 40-60 word direct answers.
 
-**Paragraph snippets:** After "When to Choose X" headings, include 40-60 word direct answers:
-
-```markdown
-## When to Choose Nuxt
-
-Choose Nuxt if you're a Vue developer who wants batteries-included defaults,
-auto-imports without configuration, and a module ecosystem that handles common
-needs like SEO and authentication. Nuxt excels at content-heavy sites and
-benefits from Vue's gentler learning curve.
-```
-
-**List snippets:** Use for "best alternatives" content:
-
-```markdown
-## Best Create React App Alternatives
-
-1. **Vite** — Fastest dev server, framework-agnostic
-2. **Next.js** — Full-stack React with SSR
-3. **Remix** — Nested routing, progressive enhancement
-4. **Astro** — Content-first, partial hydration
-```
-
-### Schema Markup
-
-Add FAQPage schema for "People Also Ask" targeting:
-
-```json
-{
-  "@type": "FAQPage",
-  "mainEntity": [{
-    "@type": "Question",
-    "name": "Is Nuxt better than Next.js?",
-    "acceptedAnswer": {
-      "@type": "Answer",
-      "text": "For Vue developers, Nuxt is better. For React developers, Next.js is better. Both are production-ready meta-frameworks."
-    }
-  }]
-}
-```
+**List snippets:** Use for "best alternatives" content with numbered lists.
 
 ## Fairness & Credibility
 
 ### Disclose Bias
-
-If you prefer one tool or have a relationship:
 
 ```markdown
 **Disclosure:** We primarily use Nuxt, but we've built production apps with both frameworks.
@@ -319,8 +234,7 @@ If you prefer one tool or have a relationship:
 
 ### Test Both Tools
 
-Don't compare from docs alone. Actually use them:
-
+Don't compare from docs alone:
 - Build something small with each
 - Note real pain points
 - Capture actual metrics
@@ -334,30 +248,13 @@ Next.js has 78% satisfaction vs Nuxt's 82%.
 
 ## MCP Tools
 
-Research before writing:
-
 | Tool | When |
 |------|------|
 | `mcp__nuxt-seo-pro__research_keywords` | Find "X vs Y" keyword volume |
 | `mcp__nuxt-seo-pro__analyze_serp` | See what comparison content ranks |
 | `mcp__nuxt-seo-pro__check_rankings` | Analyze competitor comparison pages |
 
-### Example Research
-
-```
-mcp__nuxt-seo-pro__research_keywords
-  topic: "nuxt vs next"
-  limit: 20
-```
-
-Look for:
-- Volume on main "vs" term
-- Related comparison queries
-- Alternative keywords ("nuxt or next", "switch from next to nuxt")
-
 ## Quality Checklist
-
-Before publishing:
 
 - [ ] Clear verdict in first paragraph
 - [ ] Comparison table with specific values
@@ -366,9 +263,4 @@ Before publishing:
 - [ ] Trade-offs acknowledged
 - [ ] Last updated date included
 - [ ] Versions compared specified
-- [ ] No banned words (see writing-foundations)
 - [ ] Sources linked where relevant
-
-## Example
-
-See `examples/framework-comparison.md` for a complete example.

@@ -1,21 +1,6 @@
----
-name: Documentation Writing
-description: This skill should be used when the user asks to "write docs", "document feature", "create API docs", "technical documentation", "document this module", "write reference docs", "document composable", or needs to write reference documentation.
-version: 0.2.0
----
-
-# Documentation Writing
+# Documentation Patterns
 
 Technical reference documentation. Model after Stripe, Anthropic, and Claude Code docs.
-
-## Artifacts
-
-**Reads:**
-- `.claude/context/site-config.md` — Site URL, name for examples
-- `.claude/context/brand-voice.md` — Terminology, tone
-- `.claude/context/target-keywords.md` — Keywords for SEO
-
-**Before writing:** Check for site-config.md. If missing, ask user for site URL and name. Use `{site.url}` and `{site.name}` in examples, replaced with actual values.
 
 ## Core Principles
 
@@ -183,52 +168,6 @@ Always tables, never prose.
 **Bad:**
 > The enabled prop is a boolean that defaults to true and controls whether the sitemap is generated. The hostname prop is a string that specifies your site URL...
 
-## Code Examples
-
-### TypeScript Only
-
-```ts
-// Always TypeScript, never JavaScript
-useSeoMeta({ title: 'Page' })
-```
-
-### Code Groups for Alternatives
-
-````markdown
-::code-group
-```ts [Recommended]
-useSeoMeta({ title: 'Page' })
-```
-
-```ts [Alternative]
-useHead({ title: 'Page' })
-```
-::
-````
-
-### Good/Bad Comparisons
-
-````markdown
-```ts [❌ Bad]
-useHead({
-  meta: [{ name: 'description', content: 'x' }]
-})
-```
-
-```ts [✅ Good]
-useSeoMeta({ description: 'x' })
-```
-````
-
-### Real URLs
-
-Use site config values, not example.com:
-```ts
-useSeoMeta({
-  ogUrl: '{site.url}/docs/feature'  // e.g., https://superportrait.com/docs/feature
-})
-```
-
 ## What to Include
 
 ### Verification Section
@@ -263,35 +202,12 @@ Skip this unless you need per-route control. The defaults handle 90% of cases.
 - "Related" H2 sections—use frontmatter
 - Filler introductions
 
-## Voice
+## Quality Checklist
 
-- Developer-to-developer, casual but accurate
-- State opinions: "This is lazy", "Overkill for most sites"
-- No hedging: "Do X" not "You may want to consider X"
-- Be specific: "Google rewrites 70%" not "search engines may modify"
-
-## Banned Content
-
-**Words:** dive into, crucial, essential, robust, seamless, leverage, utilize, comprehensive, harness, empower, elevate, unlock, game-changer
-
-**Phrases:** "it's important to note", "in today's [X]", "let's explore", "this is where X comes in"
-
-**Patterns:** rhetorical questions, three-adjective chains, filler intros
-
-## Internal Linking
-
-- 2-3 related pages in frontmatter
-- Inline link first mention of features
-- Mix docs and learn content
-
-```yaml
-relatedPages:
-  - path: /docs/api/related-feature
-    title: Related Feature API
-  - path: /learn/guides/feature-guide
-    title: Feature Guide
-```
-
-## Example: Complete Doc Page
-
-See `examples/composable-doc.md` for a complete example.
+- [ ] Task-oriented title
+- [ ] Opener makes use case obvious
+- [ ] Code within first 3 scrolls
+- [ ] Parameters in tables, not prose
+- [ ] States what NOT to do
+- [ ] Includes verification method
+- [ ] 2-3 related pages in frontmatter

@@ -1,23 +1,6 @@
----
-name: Educational Content Writing
-description: This skill should be used when the user asks to "write article", "create learn content", "blog post about", "educational content", "write tutorial", "explain how to", "guide for", or needs to write educational/blog-style content with SEO optimization.
-version: 0.2.0
----
+# Educational Content Patterns
 
-# Educational Content Writing
-
-Educational articles and tutorials optimized for search. Different from docs—more narrative, problem-focused, teaches concepts.
-
-## Artifacts
-
-**Reads:**
-- `.claude/context/site-config.md` — Site URL, name, industry for examples
-- `.claude/context/market-research.md` — Product context, audience
-- `.claude/context/brand-voice.md` — Tone, terminology
-- `.claude/context/target-keywords.md` — Keywords to incorporate
-- `.claude/context/product-positioning.md` — Value props for consistent messaging
-
-**Before writing:** Check for site-config.md. If missing, ask user for site URL and name. Use `{site.url}` and `{site.name}` in examples.
+Blog posts, tutorials, and guides optimized for search. Different from docs—more narrative, problem-focused, teaches concepts.
 
 ## Core Principles
 
@@ -82,28 +65,6 @@ Target long-tail keywords. "how to add meta tags nuxt 4" beats "meta tags".
 | First paragraph | High | Primary term in first 100 words |
 | Meta description | Medium | Include term, focus on clicks |
 | H3+ headings | Lower | Questions users ask |
-
-### Example
-
-Search terms: `online booking system`, `appointment scheduling software`, `how to take bookings online`
-
-```markdown
-# How to Set Up Online Booking for Your Business
-
-Most small businesses lose 20% of potential bookings to phone tag. Here's how to fix that in 10 minutes.
-
-## Choosing a Booking System
-
-[content]
-
-## Setting Up Your Availability
-
-[content]
-
-### Why do customers abandon the booking process?
-
-[answer to common problem]
-```
 
 ### Natural Placement
 
@@ -178,20 +139,9 @@ Lead with problems/outcomes, not features.
 
 > Most booking pages ask for too much info upfront—and lose 40% of customers. Here's how to fix it.
 
-## LLM Search Optimization
-
-LLMs append year and use question-based queries. Light touches help:
-
-- Mention year once naturally (intro or where version matters)
-- Version numbers: "Nuxt 4", "Vue 3"
-- Some H2s as questions users ask
-- "Recommended" when genuinely recommending
-
-Don't plaster "(2025)" everywhere or force question headings.
-
 ## E-E-A-T Signals
 
-Google prioritizes Experience, Expertise, Authoritativeness, and Trustworthiness. Build these signals into content:
+Google prioritizes Experience, Expertise, Authoritativeness, and Trustworthiness.
 
 ### Experience (First-hand)
 
@@ -207,23 +157,17 @@ Markers: "When I built...", "In production we found...", "After testing..."
 
 ### Expertise
 
-Demonstrate deep knowledge:
-
 - Explain *why*, not just *how*
 - Acknowledge edge cases and limitations
 - Reference official sources accurately
 
 ### Authoritativeness
 
-Build credibility through:
-
 - **Author bylines** with relevant credentials
 - **Citations** to official docs, not random blogs
 - **Internal links** to related authoritative content
 
 ### Trustworthiness
-
-Maintain trust with:
 
 - **Last updated dates** on all content
 - **Version numbers** for framework-specific advice
@@ -241,28 +185,6 @@ Maintain trust with:
 
 **Avoid citing:** tutorialspoint, w3schools, Medium posts without known authors, StackOverflow answers without verification, content >2 years old for rapidly changing topics.
 
-### Example with E-E-A-T
-
-```markdown
----
-author: {site.author}
-authorRole: {site.authorRole}
-lastUpdated: 2026-01-03
----
-
-# How to Reduce Appointment No-Shows
-
-After running {site.name} for 8 years, I've tested every reminder system.
-Here's what actually works to get customers to show up.
-
-## Automated Reminder Sequence
-
-According to [industry research](https://example.com/source), SMS reminders
-sent 24 hours before reduce no-shows by 38%...
-```
-
-**Note:** Replace `{site.*}` placeholders with values from site-config.md.
-
 ## Time-Saving Framing
 
 Position around saving time:
@@ -274,91 +196,16 @@ Position around saving time:
 | "Catches X before it costs you traffic" | "helps detect issues" |
 | "One line replaces 10" | "convenient wrapper" |
 
-## Code Examples
+## LLM Search Optimization
 
-### TypeScript Only
+LLMs append year and use question-based queries. Light touches help:
 
-```ts
-useSeoMeta({
-  title: 'Page Title',
-  description: 'Description here'
-})
-```
+- Mention year once naturally (intro or where version matters)
+- Version numbers: "Nuxt 4", "Vue 3"
+- Some H2s as questions users ask
+- "Recommended" when genuinely recommending
 
-### Show the Problem First
-
-````markdown
-Most sites do this:
-
-```ts [❌ Common Pattern]
-useHead({
-  meta: [
-    { name: 'description', content: description },
-    { property: 'og:title', content: title },
-    // 10 more lines...
-  ]
-})
-```
-
-One line does the same thing:
-
-```ts [✅ Better]
-useSeoMeta({ title, description })
-```
-````
-
-### Real Examples
-
-Use realistic content, not lorem ipsum:
-```ts
-useSeoMeta({
-  title: 'Professional Portrait Photography in London',
-  description: 'Book your headshot session. 60 minutes, 10 edited photos included.'
-})
-```
-
-## Voice
-
-- Developer-to-developer, casual
-- Personal opinions welcome: "I'd recommend...", "This is lazy"
-- No hedging: "Do X" not "You may want to consider X"
-- Be specific: numbers over vague claims
-
-## Banned Content
-
-**Words:** dive into, crucial, essential, robust, seamless, leverage, utilize, comprehensive, harness, empower, elevate, unlock, game-changer
-
-**Phrases:** "it's important to note", "in today's [X]", "let's explore", "this is where X comes in", "by the end of this guide"
-
-**Patterns:**
-- Rhetorical questions ("Ever wondered...?")
-- Three-adjective chains ("powerful, flexible, and robust")
-- Filler intros before the point
-- "In conclusion" endings
-
-## Endings
-
-**Never:**
-- "Now you're ready to..."
-- "Happy coding!"
-- "And that's it!"
-- "In conclusion..."
-
-**Do:** Just stop. Or link to the logical next step.
-
-## Internal Linking
-
-- 2-3 related pages in frontmatter
-- Inline link first mention of features
-- Link to relevant docs for deep dives
-
-```yaml
-relatedPages:
-  - path: /docs/api/bookings
-    title: Booking API Reference
-  - path: /learn/scheduling/reducing-no-shows
-    title: Reducing No-Shows
-```
+Don't plaster "(2025)" everywhere or force question headings.
 
 ## MCP Tools
 
@@ -367,21 +214,12 @@ relatedPages:
 | `mcp__nuxt-seo-pro__research_keywords` | Before writing—find target keywords | No |
 | `mcp__nuxt-seo-pro__analyze_content_page` | After writing—validate SEO | Yes |
 
-**Note:** `analyze_content_page` requires site initialization. If not available, skip SEO validation step.
-
-## Quality Checks
-
-Before publishing:
+## Quality Checklist
 
 - [ ] Problem-first opening (not feature-first)
 - [ ] Code within first 3 scrolls
 - [ ] Primary keyword in H1 and first paragraph
 - [ ] H2s use variations naturally
 - [ ] States what NOT to do
-- [ ] No banned words/phrases
 - [ ] relatedPages frontmatter with 2-3 links
 - [ ] Verification method included
-
-## Example: Complete Article
-
-See `examples/learn-article.md` for a complete example.

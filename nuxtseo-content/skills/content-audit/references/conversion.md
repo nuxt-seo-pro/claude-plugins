@@ -1,34 +1,10 @@
----
-name: Sales Copy Testing
-description: Use for "test my sales page", "conversion optimization", "objection handling", "persona testing", "why won't users buy", "sales page review", or validating landing page copy.
-version: 0.1.0
----
+# Conversion Audit Patterns
 
-# Sales Copy Testing
-
-Persona-based testing for sales/landing pages. Identify objections, conversion blockers, and messaging gaps before launch.
-
-## Artifacts
-
-**Reads:**
-- `.claude/context/market-research.md` — Product context, target audience
-- `.claude/context/product-positioning.md` — Value props, pricing
-
-**Generates:**
-- `.claude/context/objection-analysis.md` — Objections by persona with fixes
-
-**Before running:** Read the actual sales page content. This skill analyzes existing copy, not creates it.
-
-## When to Use
-
-- Before launching a sales/pricing page
-- After writing landing page copy (with landing-copy skill)
-- When conversion rate is lower than expected
-- When collecting feedback patterns
+Persona-based testing for sales/landing pages. Identify objections and conversion blockers.
 
 ## Personas
 
-Test against 5 developer personas representing different experience levels and contexts:
+Test against 5 developer personas:
 
 | Persona | Experience | Context | Key Concern |
 |---------|------------|---------|-------------|
@@ -42,7 +18,12 @@ Test against 5 developer personas representing different experience levels and c
 
 ### 1. Read the Page
 
-Identify all claims, features, pricing, and CTAs.
+Identify:
+- All claims made
+- Features listed
+- Pricing tiers
+- CTAs
+- Social proof
 
 ### 2. Test Each Persona
 
@@ -56,15 +37,15 @@ Document:
 
 ### 3. Identify Universal Objections
 
-Look for patterns that appear across 3+ personas:
+Patterns that appear across 3+ personas:
 - Pricing confusion
 - Unclear deliverables
-- Trust issues (timeline, single maintainer, etc.)
-- Proof gaps (no metrics, fake demos)
+- Trust issues
+- Proof gaps
 
 ### 4. Recommend Fixes
 
-For each objection, provide:
+For each objection:
 - What to add/change
 - Specific copy suggestions
 - Where on page to place it
@@ -119,10 +100,49 @@ For each objection, provide:
 - "Wait If You..." section to disqualify wrong buyers
 - Clear timeline/availability messaging
 
+## Example Questions Per Persona
+
+### Junior Dev
+- "Do I understand what this actually does?"
+- "Is the price worth it at my skill level?"
+- "Will I need to learn a lot to use this?"
+
+### Mid-level Dev
+- "What's the ROI compared to building it myself?"
+- "Are these real solutions or surface-level?"
+- "Is the pricing honest or are there hidden costs?"
+
+### Senior Dev
+- "Is this technically sound?"
+- "Could our team build better custom solutions?"
+- "What's the lock-in risk?"
+
+### Tech Lead
+- "How do I justify this expense to management?"
+- "What are the support/SLA guarantees?"
+- "What if this is abandoned?"
+
+### Indie Dev
+- "Is this worth it with no revenue yet?"
+- "Are there free alternatives that are good enough?"
+- "What if my project fails?"
+
+## Psychology Shifts
+
+Common transformations:
+
+| From | To |
+|------|-----|
+| Artificial urgency ("LIMITED TIME!") | Real value ("3 modules ready now") |
+| Vague benefits ("Maximize SEO") | Quantified problems ("2-5% traffic lost") |
+| FOMO pressure ("Don't miss out!") | Informed decision ("If you want to wait...") |
+| Hidden risks | Transparent guarantees |
+| Universal appeal | Target qualification |
+
 ## Output Format
 
 ```markdown
-## Sales Copy Analysis
+## Conversion Audit
 
 **Page:** [URL or file path]
 **Date:** [YYYY-MM-DD]
@@ -170,47 +190,3 @@ For each objection, provide:
 |------------------|---------------|
 | "[vague/problematic copy]" | "[improved copy]" |
 ```
-
-## Psychology Shifts
-
-Common transformations for developer products:
-
-| From | To |
-|------|-----|
-| Artificial urgency ("LIMITED TIME!") | Real value ("3 modules ready now") |
-| Vague benefits ("Maximize SEO") | Quantified problems ("2-5% traffic lost") |
-| FOMO pressure ("Don't miss out!") | Informed decision ("If you want to wait...") |
-| Hidden risks | Transparent guarantees |
-| Universal appeal | Target qualification |
-
-## Example Questions Per Persona
-
-### Junior Dev
-- "Do I understand what this actually does?"
-- "Is the price worth it at my skill level?"
-- "Will I need to learn a lot to use this?"
-
-### Mid-level Dev
-- "What's the ROI compared to building it myself?"
-- "Are these real solutions or surface-level?"
-- "Is the pricing honest or are there hidden costs?"
-
-### Senior Dev
-- "Is this technically sound?"
-- "Could our team build better custom solutions?"
-- "What's the lock-in risk?"
-
-### Tech Lead
-- "How do I justify this expense to management?"
-- "What are the support/SLA guarantees?"
-- "What if this is abandoned?"
-
-### Indie Dev
-- "Is this worth it with no revenue yet?"
-- "Are there free alternatives that are good enough?"
-- "What if my project fails?"
-
-## References
-
-- `references/objection-patterns.md` — Common objections and fixes
-- `references/pricing-psychology.md` — Pricing presentation patterns

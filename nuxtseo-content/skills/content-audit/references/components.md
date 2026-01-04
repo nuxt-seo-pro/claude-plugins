@@ -1,28 +1,6 @@
----
-name: Documentation Components
-description: Use for "add callouts", "improve docs readability", "where to add warnings", "add key takeaways", "doc component audit", "interactive docs", or improving documentation with components.
-version: 0.1.0
----
+# Component Audit Patterns
 
-# Documentation Components
-
-Interactive components that improve documentation comprehension. Use sparingly—only when they genuinely help readers.
-
-## Artifacts
-
-**Reads:**
-- Documentation files to audit
-- `.claude/context/doc-components.md` — Project-specific component syntax
-
-**Generates:**
-- Component insertion recommendations with line numbers
-
-## When to Use
-
-- After writing documentation
-- When auditing existing docs for improvements
-- When docs feel like walls of text
-- When critical information gets buried
+Interactive components that improve documentation comprehension. Use sparingly.
 
 ## Component Types
 
@@ -57,7 +35,7 @@ Summary box at article top. Scannable preview of main points.
 
 ### 2. Callouts
 
-Contextual highlights that break the flow. Use sparingly—if everything is highlighted, nothing is.
+Contextual highlights that break the flow. Use sparingly.
 
 | Type | Use For |
 |------|---------|
@@ -144,17 +122,17 @@ Tabbed code examples for multiple contexts.
 **Example:**
 ```md
 ::code-group
-```ts [nuxt.config.ts]
+\`\`\`ts [nuxt.config.ts]
 export default defineNuxtConfig({
   app: { head: { title: 'My Site' } }
 })
-```
+\`\`\`
 
-```vue [pages/index.vue]
+\`\`\`vue [pages/index.vue]
 <script setup>
 useSeoMeta({ title: 'Home' })
 </script>
-```
+\`\`\`
 ::
 ```
 
@@ -185,11 +163,27 @@ After adding components, verify:
 - Flow still reads naturally
 - Critical info isn't lost in component overload
 
+## Anti-Patterns
+
+### Don't
+
+- Stack multiple callouts back-to-back
+- Use `::danger` for minor issues
+- Add quizzes with obvious answers
+- Put key takeaways on index pages
+- Convert every list to a checklist
+
+### Do
+
+- Space components naturally through content
+- Reserve danger for genuinely critical issues
+- Make quizzes test understanding
+- Use key takeaways on substantive articles
+- Use checklists only for actionable multi-step processes
+
 ## Output Format
 
 ```markdown
-## Component Audit: [filename]
-
 ### Add Key Takeaways
 **Location:** Line 10 (after frontmatter)
 **Content:**
@@ -209,25 +203,3 @@ After adding components, verify:
 - `[correct answer]` — Correct! [why]
 - `[wrong answer]` — [explanation]
 ```
-
-## Anti-Patterns
-
-### Don't
-
-- Stack multiple callouts back-to-back
-- Use `::danger` for minor issues
-- Add quizzes with obvious answers
-- Put key takeaways on index pages
-- Convert every list to a checklist
-
-### Do
-
-- Space components naturally through content
-- Reserve danger for genuinely critical issues
-- Make quizzes test understanding
-- Use key takeaways on substantive articles
-- Use checklists only for actionable multi-step processes
-
-## References
-
-- `references/component-syntax.md` — Project-specific component syntax

@@ -1,34 +1,6 @@
----
-name: Writing Foundations
-description: This skill should be used when the user asks to "improve writing", "fix AI slop", "review content quality", "check writing style", "edit for voice", or needs general writing guidance without a specific content type.
-version: 0.2.0
----
-
 # Writing Foundations
 
-Core writing principles for developer content. Use this skill for general writing guidance, or load alongside `docs-writing` or `learn-writing` for type-specific patterns.
-
-## Artifacts
-
-**Reads:**
-- `.claude/context/site-config.md` — Site URL, name, industry (required for examples)
-- `.claude/context/brand-voice.md` — Project-specific tone and terminology overrides
-
-**If site-config.md is missing:** Ask user for site URL and name before writing content. Store responses in `.claude/context/site-config.md` for future use.
-
-### Site Config Format
-
-```yaml
-# .claude/context/site-config.md
-url: https://example.com
-name: Site Name
-tagline: One-line description
-industry: saas | ecommerce | services | content | other
-author: Your Name
-authorRole: Founder | Developer | etc.
-```
-
-**Note:** This skill provides defaults. If brand-voice.md exists, its terminology and tone preferences take precedence over defaults here.
+Core writing principles for all content types.
 
 ## Voice
 
@@ -57,75 +29,14 @@ Developer-to-developer. Casual but accurate.
 | Most sites have issues | 73% of sites fail Core Web Vitals |
 | It can improve performance | Reduces LCP by 40% |
 
-## Persuasion Frameworks
-
-Use when structuring content that needs to convince.
-
-### PAS (Problem-Agitate-Solve)
-
-Best for: Feature announcements, tool landing pages, "why use this" sections.
-
-1. **Problem** — State the pain clearly
-2. **Agitate** — Make it worse, show consequences
-3. **Solve** — Present your solution
-
-```markdown
-**Problem:** Meta tags require 20+ lines of boilerplate.
-
-**Agitate:** Copy-paste the same code to every page. Miss one property,
-break your social previews. Update a title, forget to update the og:title.
-
-**Solve:** `useSeoMeta()` handles all of it in one line.
-```
-
-### AIDA (Attention-Interest-Desire-Action)
-
-Best for: Landing pages, email sequences, product announcements.
-
-1. **Attention** — Hook with surprising stat or bold claim
-2. **Interest** — Expand with relevant details
-3. **Desire** — Show benefits, social proof
-4. **Action** — Clear CTA
-
-```markdown
-**Attention:** Google rewrites 70% of meta descriptions.
-
-**Interest:** Most get rewritten because they're template-generated,
-too long, or don't match search intent.
-
-**Desire:** Dynamic descriptions that match page content stay intact.
-Sites using `useSeoMeta()` see 40% fewer rewrites.
-
-**Action:** [Add useSeoMeta to your Nuxt app →]
-```
-
-### 4 U's
-
-Best for: Headlines, email subjects, CTA buttons.
-
-| U | Meaning | Example |
-|---|---------|---------|
-| **Useful** | Solves a problem | "Fix broken meta tags" |
-| **Urgent** | Time pressure | "Before your next deploy" |
-| **Unique** | Different angle | "The lazy way to SEO" |
-| **Ultra-specific** | Concrete details | "Add SEO in 2 minutes" |
-
-Score headlines 1-4 on each U. Aim for 3+ total.
-
-### State What NOT to Do
-
-Real experts know pitfalls. Include:
-- Common mistakes
-- When something is overkill
-- Anti-patterns
-
 ## Banned Content
 
-See `references/banned-words.md` for full list.
+### Banned Words
 
-**Banned words:** dive into, crucial, essential, vital, robust, seamless, leverage, utilize, ensure, comprehensive, harness, empower, elevate, unlock, game-changer, delve, realm, landscape, plethora, myriad
+dive into, crucial, essential, vital, robust, seamless, leverage, utilize, ensure, comprehensive, harness, empower, elevate, unlock, game-changer, delve, realm, landscape, plethora, myriad
 
-**Banned phrases:**
+### Banned Phrases
+
 - "it's important to note"
 - "in today's [X]"
 - "let's explore"
@@ -134,7 +45,8 @@ See `references/banned-words.md` for full list.
 - "when it comes to"
 - "by the end of this guide"
 
-**Banned patterns:**
+### Banned Patterns
+
 - Rhetorical questions ("Ever wondered how...?")
 - Three-adjective chains ("powerful, flexible, and robust")
 - Filler intros before the point
@@ -151,6 +63,36 @@ See `references/banned-words.md` for full list.
 | is designed to | does |
 | is intended to return | returns |
 
+## Persuasion Frameworks
+
+Use when structuring content that needs to convince.
+
+### PAS (Problem-Agitate-Solve)
+
+Best for: Feature announcements, tool landing pages, "why use this" sections.
+
+1. **Problem** — State the pain clearly
+2. **Agitate** — Make it worse, show consequences
+3. **Solve** — Present your solution
+
+### AIDA (Attention-Interest-Desire-Action)
+
+Best for: Landing pages, email sequences, product announcements.
+
+1. **Attention** — Hook with surprising stat or bold claim
+2. **Interest** — Expand with relevant details
+3. **Desire** — Show benefits, social proof
+4. **Action** — Clear CTA
+
+### 4 U's (Headlines)
+
+| U | Meaning | Example |
+|---|---------|---------|
+| **Useful** | Solves a problem | "Fix broken meta tags" |
+| **Urgent** | Time pressure | "Before your next deploy" |
+| **Unique** | Different angle | "The lazy way to SEO" |
+| **Ultra-specific** | Concrete details | "Add SEO in 2 minutes" |
+
 ## Code Conventions
 
 ### Languages
@@ -166,7 +108,7 @@ See `references/banned-words.md` for full list.
 // TypeScript code - use site config values
 useSeoMeta({
   title: 'Page Title',
-  ogUrl: '{site.url}/page'  // Replaced with actual site URL
+  ogUrl: '{site.url}/page'
 })
 ```
 
@@ -185,7 +127,7 @@ npx nuxi module add @nuxtjs/sitemap
 
 ### Inline Code
 
-Use language tags for inline code:
+Use language tags:
 - Functions: `useSeoMeta()`{lang="ts"}
 - Components: `<OgImage>`{lang="vue"}
 - Files: `nuxt.config.ts`{lang="text"}
@@ -193,7 +135,6 @@ Use language tags for inline code:
 
 ### Code Groups
 
-For multiple approaches:
 ````markdown
 ::code-group
 ```ts [Recommended]
@@ -210,15 +151,89 @@ useHead({ title: 'Page' })
 
 ````markdown
 ```ts [❌ Bad]
-// Avoid this pattern
 useHead({ meta: [{ name: 'description', content: 'x' }] })
 ```
 
 ```ts [✅ Good]
-// Use this instead
 useSeoMeta({ description: 'x' })
 ```
 ````
+
+## Nuxt SEO Patterns
+
+### Meta Hierarchy
+
+Priority: page > layout > app. Set defaults in `app.vue`, override per-page:
+
+```ts
+// app.vue - defaults (uses template params from site config)
+useSeoMeta({
+  titleTemplate: '%s %separator %siteName',
+  ogSiteName: '{site.name}'
+})
+
+// pages/about.vue - overrides
+useSeoMeta({
+  title: 'About Us',
+  description: 'Who we are and what we do.'
+})
+```
+
+**Common separators:** `|` `-` `—` `•` `·`
+
+### Schema.org
+
+Use `useSchemaOrg()` for structured data. Auto-imported, no imports needed:
+
+```vue
+<script setup lang="ts">
+// Article pages
+useSchemaOrg([
+  defineArticle({
+    headline: 'How to Add Meta Tags in Nuxt',
+    description: 'Complete guide to managing meta tags.',
+    datePublished: '2025-01-15',
+    author: {
+      '@type': 'Person',
+      name: 'Author Name'
+    }
+  })
+])
+</script>
+```
+
+```vue
+<script setup lang="ts">
+// FAQ sections
+useSchemaOrg([
+  defineFAQPage({
+    mainEntity: [
+      {
+        '@type': 'Question',
+        name: 'How do I add meta tags in Nuxt?',
+        acceptedAnswer: {
+          '@type': 'Answer',
+          text: 'Use useSeoMeta() in any component—auto-imported and SSR-ready.'
+        }
+      }
+    ]
+  })
+])
+</script>
+```
+
+### Route Rules
+
+Configure rendering per-route in `nuxt.config.ts`:
+
+```ts
+export default defineNuxtConfig({
+  routeRules: {
+    '/blog/**': { prerender: true },  // SSG for blog
+    '/docs/**': { isr: 3600 }         // ISR with 1hr cache
+  }
+})
+```
 
 ## Internal Linking
 
@@ -226,7 +241,7 @@ Every page should link to 2-5 related pages.
 
 ### Methods
 
-1. **Inline links** — First mention of features/concepts
+1. **Inline links** — First mention of features/concepts (preferred)
 2. **`relatedPages` frontmatter** — Rendered at page end
 
 ```yaml
@@ -248,11 +263,11 @@ relatedPages:
 
 - Link first mention only
 - Never "click here" or "this page"
-- No "Related" or "See also" H2 sections
+- No "Related" or "See also" H2 sections (use frontmatter)
+- No arrow links (`→`, `->`, `>>`)
+- No link dumps at page end
 
 ## Quality Tests
-
-See `references/quality-tests.md` for details.
 
 1. **"So what?" test** — Reader shouldn't think "so what?" after any sentence
 2. **Read aloud test** — If it sounds like a press release, rewrite
@@ -279,26 +294,3 @@ Mark unknowns rather than hallucinating:
 [EXAMPLE NEEDED: real-world use case]
 [LINK: internal link to related page]
 ```
-
-## Pre-Publish Checklist
-
-**Structure:**
-- [ ] Opener makes use case obvious
-- [ ] Code within first 3 scrolls
-- [ ] Parameters in tables, not prose
-
-**Links:**
-- [ ] `relatedPages` frontmatter with 2-3 pages
-- [ ] Inline links on first mention
-- [ ] No "click here" link text
-
-**Content:**
-- [ ] States what NOT to do
-- [ ] Includes verification method
-- [ ] No banned words/phrases
-- [ ] Passes quality tests
-
-## References
-
-- `references/banned-words.md` — Complete AI slop list
-- `references/quality-tests.md` — Detailed testing guidance
