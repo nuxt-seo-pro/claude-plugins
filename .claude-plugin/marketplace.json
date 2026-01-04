@@ -1,0 +1,22 @@
+{
+  "$schema": "https://anthropic.com/claude-code/marketplace.schema.json",
+  "name": "nuxt-seo-claude-plugins",
+  "description": "Claude Code plugins for Nuxt SEO content creation and documentation",
+  "owner": {
+    "name": "Harlan Wilton",
+    "email": "harlan@harlanzw.com"
+  },
+  "plugins": [
+    {
+      "name": "nuxtseo-content",
+      "description": "Content writing skills for Nuxt SEO docs and articles",
+      "version": "0.1.0",
+      "author": {
+        "name": "Harlan Wilton",
+        "email": "harlan@harlanzw.com"
+      },
+      "source": "./nuxtseo-content",
+      "category": "content"
+    }
+  ]
+}
