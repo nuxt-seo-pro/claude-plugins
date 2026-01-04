@@ -2,7 +2,10 @@
   "name": "nuxtseo-content",
   "version": "0.1.0",
   "description": "Content writing skills for Nuxt SEO documentation and educational articles. Includes keyword research, docs writing, and blog/learn content patterns.",
-  "author": "Harlan Wilton",
+  "author": {
+    "name": "Harlan Wilton",
+    "email": "harlan@harlanzw.com"
+  },
   "license": "MIT",
   "keywords": ["seo", "content", "writing", "documentation", "nuxt"],
   "repository": "https://github.com/nuxtseo/claude-plugins"
