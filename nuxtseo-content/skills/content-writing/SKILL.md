@@ -13,7 +13,7 @@ Unified content creation skill. Detects content type and loads appropriate patte
 **Reads:**
 - `.claude/context/site-config.md` — Site URL, name, industry
 - `.claude/context/site-pages.md` — Available pages for internal linking
-- `.claude/context/brand-voice.md` — Tone, terminology overrides
+- `.claude/context/writing-style.md` — Per-category voice, structure, terminology
 - `.claude/context/target-keywords.md` — Keywords for SEO
 - `.claude/context/market-research.md` — Product context (for landing/sales)
 - `.claude/context/competitors.md` — Competitor info (for comparisons)
@@ -74,23 +74,54 @@ Read available artifacts:
 ```
 .claude/context/site-config.md
 .claude/context/site-pages.md
-.claude/context/brand-voice.md (if exists)
+.claude/context/writing-style.md
 ```
 
 If site-config.md missing, prompt user to run `site-setup` first.
 
-### 4. Write Content
+### 4. Match Category Style
+
+Determine which category from `writing-style.md` applies:
+
+| Content Type | Category Key |
+|--------------|--------------|
+| docs | `categories.docs` |
+| educational | `categories.learn` |
+| landing | `categories.landing` |
+| comparison | `categories.docs` or `categories.landing` (ask if unclear) |
+| sales | `categories.landing` |
+
+Apply category-specific patterns:
+- **Voice:** Use formality, perspective, tone from category
+- **Structure:** Follow intro style, section organization, conclusion pattern
+- **Code:** Use language, import visibility, snippet length from category
+- **Terminology:** Prefer/avoid terms as specified
+
+### 5. Write Content
 
 Follow patterns from loaded references:
 - Structure from type reference
-- Voice/style from foundations
+- Voice/style from writing-style.md category
 - Internal linking from site-pages.md
 - Examples using site-config values
 
-### 5. Quality Check
+Apply site-config.md context:
+- **audience** → Adjust jargon level (developers = more technical)
+- **level** → Beginner = more explanation, advanced = less hand-holding
+- **personality** → Professional = formal, Friendly = conversational
+- **differentiator** → Weave into value propositions (landing/sales)
+- **primary_cta** → Use for call-to-action buttons/links
+- **banned_phrases** → Never use these terms
+- **competitors** → Reference for comparison content
+
+### 6. Quality Check
 
 Before delivering:
 - [ ] No banned words (see foundations)
+- [ ] No site-specific banned phrases (see site-config.md)
+- [ ] No avoided terminology (see writing-style.md category)
+- [ ] Uses preferred terminology from category
+- [ ] Matches audience level (beginner/intermediate/advanced)
 - [ ] Code within first 3 scrolls (if technical)
 - [ ] Internal links on first mentions
 - [ ] relatedPages frontmatter (2-3 pages)

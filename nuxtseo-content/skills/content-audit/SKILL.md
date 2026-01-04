@@ -13,6 +13,7 @@ Unified content review and improvement. Detects content type and applies appropr
 **Reads:**
 - `.claude/context/site-config.md` — Site URL, name
 - `.claude/context/site-pages.md` — Available pages for linking opportunities
+- `.claude/context/writing-style.md` — Per-category voice, structure, terminology
 - `.claude/context/market-research.md` — Product context (for sales audits)
 - Content files to audit
 
@@ -27,6 +28,7 @@ Unified content review and improvement. Detects content type and applies appropr
 
 | Type | Trigger Phrases | Reference |
 |------|-----------------|-----------|
+| `style` | "check voice", "tone consistency", "terminology", "writing style" | uses `writing-style.md` |
 | `linking` | "fix links", "internal linking", "broken links", "orphan pages" | `references/linking.md` |
 | `components` | "add callouts", "key takeaways", "improve readability", "add warnings" | `references/components.md` |
 | `seo` | "check SEO", "keyword optimization", "meta tags", "search ranking", "URL structure" | `references/seo.md` |
@@ -66,6 +68,15 @@ Load type-specific patterns from `../content-writing/references/types/`.
 ### 3. Run Audits
 
 Load appropriate references and analyze content:
+
+**Style audit:** (uses writing-style.md)
+
+Match file path to category (e.g., `/docs/**` → `categories.docs`), then check:
+- Voice consistency (formality, perspective, tone)
+- Avoided terminology used
+- Preferred terminology missing
+- Structure matches category pattern
+- Code style matches (language, imports, length)
 
 **Linking audit:**
 - Broken links
@@ -134,6 +145,7 @@ Output prioritized fixes with:
 
 | Category | Count |
 |----------|-------|
+| Style issues | [X] |
 | Broken links | [X] |
 | Missing links | [X] |
 | Component opportunities | [X] |
@@ -143,6 +155,14 @@ Output prioritized fixes with:
 ```
 
 ## Quick Audits
+
+### Style Check Only
+
+```
+"check voice consistency on /docs/getting-started"
+```
+
+Runs only style audit against writing-style.md category patterns.
 
 ### Link Check Only
 
