@@ -102,12 +102,27 @@ GET {site.url}/llms.txt
 
 Parse as markdown, extract links with descriptions.
 
-**Fallback: sitemap.xml**
+**Fallback 1: sitemap.xml**
 ```
 GET {site.url}/sitemap.xml
 ```
 
 Parse `<loc>` elements for URLs.
+
+**Fallback 2: Scan project (if not deployed)**
+
+If both llms.txt and sitemap.xml fail (404/empty), scan local project:
+
+```
+Glob: pages/**/*.vue     → extract routes from file paths
+Glob: content/**/*.md    → extract routes from content paths
+```
+
+Convert file paths to routes:
+- `pages/index.vue` → `/`
+- `pages/docs/[...slug].vue` → `/docs/**` (dynamic)
+- `content/docs/getting-started.md` → `/docs/getting-started`
+- `content/1.learn/2.seo/meta-tags.md` → `/learn/seo/meta-tags` (strip numeric prefixes)
 
 ### 5. Categorize Pages
 
@@ -235,7 +250,7 @@ CRITICAL: Never drop URLs. Every page from source must be represented.
 ```markdown
 # Available Pages
 
-Source: llms.txt (or sitemap.xml)
+Source: llms.txt | sitemap.xml | project scan
 Fetched: YYYY-MM-DD
 Total: 45 pages
 
@@ -448,7 +463,7 @@ Run setup when:
     - writing-style.md (per-category + style guide ref)
 ```
 
-**New site (no content to analyze):**
+**New site (not deployed yet):**
 ```
 1. Read nuxt.config.ts → url missing
    Ask: "Site URL?" → "https://myapp.dev"
@@ -459,16 +474,18 @@ Run setup when:
    - Target Audience → "Developers"
    - Audience Level → "Beginner"
    - Brand Personality → "Friendly" (asked because no content)
-4. Fetch llms.txt → 404, try sitemap → 0 pages
-5. Ask: "What content types will you create?"
-   → Docs, Landing pages
+4. Fetch llms.txt → 404, try sitemap → 404
+   Scan project:
+   - pages/**/*.vue → 3 routes
+   - content/**/*.md → 12 pages
+5. Categorize scanned pages
 6. Conditional questions:
    - Primary CTA → "Sign Up"
    - Content Goal → "Drive conversions"
-7. Skip content analysis (nothing to analyze)
+7. Skip content analysis (nothing deployed to fetch)
 8. Write:
     - site-config.md (user-provided context)
-    - site-pages.md (empty, will populate later)
+    - site-pages.md (from project scan)
     - writing-style.md (defaults based on personality)
 ```
 

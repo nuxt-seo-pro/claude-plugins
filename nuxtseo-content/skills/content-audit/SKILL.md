@@ -37,6 +37,27 @@ Unified content review and improvement. Detects content type and applies appropr
 
 ## Workflow
 
+### 0. Check Prerequisites
+
+Before running any audit, check for required context:
+
+```
+Glob: .claude/context/site-config.md
+Glob: .claude/context/site-pages.md
+```
+
+**If missing:** Stop and prompt user:
+```
+Site context not configured. Run site-setup first to:
+- Set site URL and industry
+- Fetch available pages for linking
+- Analyze content style patterns
+
+This enables accurate audits (especially linking and style checks).
+```
+
+Do not proceed with audit until site-setup completes.
+
 ### 1. Detect Audit Type
 
 From user prompt:
