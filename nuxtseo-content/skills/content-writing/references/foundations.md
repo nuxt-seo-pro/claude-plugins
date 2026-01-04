@@ -51,6 +51,7 @@ dive into, crucial, essential, vital, robust, seamless, leverage, utilize, ensur
 - Three-adjective chains ("powerful, flexible, and robust")
 - Filler intros before the point
 - Superlatives without proof
+- Em dashes (—) - use hyphen (-) only for naturally hyphenated words
 
 ### Quick Fixes
 
@@ -94,6 +95,14 @@ Best for: Landing pages, email sequences, product announcements.
 | **Ultra-specific** | Concrete details | "Add SEO in 2 minutes" |
 
 ## Code Conventions
+
+### Dates
+
+Run `date +%Y-%m-%d` to get current date. When modifying content files:
+- Add `createdAt`/`updatedAt` if missing
+- Bump `updatedAt` to today if present
+- Frontmatter: `createdAt: YYYY-MM-DD`, `updatedAt: YYYY-MM-DD`
+- useSeoMeta: `articlePublishedTime`, `articleModifiedTime`
 
 ### Languages
 
