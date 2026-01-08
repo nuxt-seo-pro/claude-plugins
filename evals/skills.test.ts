@@ -1,23 +1,28 @@
-import { describe, it, expect } from 'vitest'
-import { execSync } from 'child_process'
-import { readFileSync } from 'fs'
-import { join } from 'path'
+import { execSync } from 'node:child_process'
+import { readFileSync } from 'node:fs'
+import { join } from 'node:path'
+import { describe, expect, it } from 'vitest'
 
 const PLUGIN_DIR = join(import.meta.dirname, '../nuxtseo-content')
 const SKILLS_DIR = join(PLUGIN_DIR, 'skills')
 
-// Parse banned words from markdown
-const bannedWordsFile = readFileSync(join(SKILLS_DIR, 'writing-foundations/references/banned-words.md'), 'utf-8')
-const BANNED_WORDS = bannedWordsFile
-  .split('\n')
-  .filter(line => line.startsWith('- '))
-  .map(line => line.slice(2).trim().toLowerCase())
-  .filter(word => word && !word.startsWith('"'))
+// Parse banned words from foundations.md
+const foundationsFile = readFileSync(join(SKILLS_DIR, 'content-writing/references/foundations.md'), 'utf-8')
 
-const BANNED_PHRASES = bannedWordsFile
-  .split('\n')
-  .filter(line => line.startsWith('- "'))
-  .map(line => line.slice(3, -1).toLowerCase())
+// Extract banned words section (single line of comma-separated words)
+const bannedWordsMatch = foundationsFile.match(/### Banned Words\n\n(.+)\n/)
+const BANNED_WORDS = bannedWordsMatch
+  ? bannedWordsMatch[1].split(', ').map(w => w.trim().toLowerCase())
+  : []
+
+// Extract banned phrases section (list items with quotes)
+const bannedPhrasesSection = foundationsFile.match(/### Banned Phrases\n\n([\s\S]*?)(?=\n### |$)/)
+const BANNED_PHRASES = bannedPhrasesSection
+  ? bannedPhrasesSection[1]
+      .split('\n')
+      .filter(line => line.startsWith('- "'))
+      .map(line => line.slice(3, -1).toLowerCase())
+  : []
 
 // Hedging phrases that indicate weak writing
 const HEDGING_PHRASES = [
@@ -32,10 +37,10 @@ const HEDGING_PHRASES = [
 ]
 
 function claude(prompt: string) {
-  const escaped = prompt.replace(/'/g, "'\\''")
+  const escaped = prompt.replace(/'/g, '\'\\\'\'')
   const output = execSync(
     `claude --plugin-dir '${PLUGIN_DIR}' --print '${escaped}'`,
-    { encoding: 'utf-8', timeout: 120000 }
+    { encoding: 'utf-8', timeout: 120000 },
   )
   return output.trim()
 }
@@ -61,7 +66,8 @@ function hasHeading(text: string, pattern: RegExp) {
 }
 
 function hasCodeBlock(text: string, lang?: string) {
-  if (lang) return new RegExp(`\`\`\`${lang}`).test(text)
+  if (lang)
+    return new RegExp(`\`\`\`${lang}`).test(text)
   return /```\w+/.test(text)
 }
 
@@ -145,7 +151,7 @@ describe('learn-writing', () => {
     const output = claude('Write one sentence about why meta descriptions matter for SEO')
 
     // Should have specificity (numbers, percentages, concrete details)
-    const hasSpecificity = /\d+%|\d+ percent|\d+\.\d+|\d+ (out of|in|of)/.test(output)
+    const hasSpecificity = /\d+%|\d+ percent|\d+\.\d+|\d+ (?:out of|in|of)/.test(output)
       || /google|search engine|click|ctr/i.test(output)
 
     expect(hasSpecificity, 'Should use specific claims').toBe(true)
@@ -246,7 +252,7 @@ describe('landing-copy', () => {
     expect(foundPhrases).toEqual([])
   })
 
-  it('CTAs are specific not generic', () => {
+  it('cTAs are specific not generic', () => {
     const output = claude('Write 3 CTA button texts for a developer tool landing page')
     const lower = output.toLowerCase()
 

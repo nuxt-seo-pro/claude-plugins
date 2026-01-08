@@ -4,11 +4,11 @@ Technical reference documentation. Model after Stripe, Anthropic, and Claude Cod
 
 ## Core Principles
 
-- Task-oriented titles: "Create a sitemap" not "Understanding sitemaps"
+- Task-oriented titles: "Add Authentication" not "Understanding Authentication"
 - Code within first 3 scrolls
 - Tables for parameters, not prose
 - State limitations clearly
-- Assume reader intelligence—skip obvious setup
+- Assume reader intelligence - skip obvious setup
 - Say what NOT to do and when it's overkill
 
 ## Page Structure
@@ -20,194 +20,80 @@ description: [What it does in one line]
 relatedPages:
   - path: /docs/related-module
     title: Related Feature
-  - path: /learn/topic
-    title: Related Guide
 ---
 
 [1-2 sentence opener: what it does + primary use case]
 
-[Code for the 80% case—no heading needed if single block]
-
-## Setup
-
-[Only if multiple steps required]
+[Code for the 80% case]
 
 ## Configuration
 
-[Options table]
+| Option | Type | Default | Description |
+|--------|------|---------|-------------|
 
 ## [Topic Sections]
 
-[Deeper content, edge cases, advanced usage]
+[Deeper content, edge cases]
 ```
 
 ## Title Patterns
 
 | Good | Bad |
 |------|-----|
-| Create a sitemap | Understanding sitemaps |
-| Configure robots.txt | Working with robots.txt |
-| Debug OG images | Troubleshooting OG image issues |
-| Generate dynamic meta tags | Meta tag generation guide |
+| Add Authentication | Understanding Authentication |
+| Configure Database | Working with Databases |
+| Debug API Routes | Troubleshooting API Issues |
 
 ## Opening Sentences
 
 Open with facts, not introductions.
 
-**Bad:**
-> Meta descriptions are an important part of SEO. In this guide, we'll explore how to configure them in Nuxt.
-
-**Good:**
-> Meta descriptions don't affect rankings. They affect clicks. Set them with `useSeoMeta()`.
-
-**Bad:**
-> The sitemap module provides a way to generate XML sitemaps for your Nuxt application.
-
-**Good:**
-> Generates `/sitemap.xml` automatically from your routes. Zero config required.
+**Bad:** "Authentication is an important part of web security. In this guide..."
+**Good:** "Authentication handles login, sessions, and protected routes. Add it with one module."
 
 ## Documentation Types
 
 ### Composable Docs
 
 ```markdown
----
-title: useSeoMeta
----
-
-Sets meta tags with full TypeScript support.
+Manages authentication state and session handling.
 
 \`\`\`ts
-useSeoMeta({
-  title: 'Page Title',
-  description: 'Page description'
-})
+const { user, loggedIn, login, logout } = useAuth()
 \`\`\`
 
 ## Parameters
 
 | Param | Type | Description |
-|-------|------|-------------|
-| `title` | `string` | Page title |
-| `description` | `string` | Meta description |
-
-## Reactivity
-
-Pass refs for reactive values:
-
-\`\`\`ts
-const title = ref('Initial')
-useSeoMeta({ title })
-\`\`\`
 ```
 
 ### Config Docs
 
 ```markdown
----
-title: Sitemap Configuration
----
-
-Configure sitemap generation in `nuxt.config.ts`.
+Configure database connection in `nuxt.config.ts`.
 
 \`\`\`ts
 export default defineNuxtConfig({
-  sitemap: {
-    // options
-  }
+  database: { /* options */ }
 })
 \`\`\`
 
 ## Options
 
 | Option | Type | Default | Description |
-|--------|------|---------|-------------|
-| `enabled` | `boolean` | `true` | Generate sitemap |
-| `urls` | `string[]` | `[]` | Additional URLs |
 ```
-
-### Component Docs
-
-```markdown
----
-title: OgImage Component
----
-
-Renders dynamic OG images at build time.
-
-\`\`\`vue
-<template>
-  <OgImage />
-</template>
-\`\`\`
-
-## Props
-
-| Prop | Type | Default | Description |
-|------|------|---------|-------------|
-| `title` | `string` | — | Image title |
-| `description` | `string` | — | Image description |
-
-## Slots
-
-| Slot | Description |
-|------|-------------|
-| `default` | Custom image content |
-```
-
-## Parameter Tables
-
-Always tables, never prose.
-
-**Good:**
-| Prop | Type | Default | Description |
-|------|------|---------|-------------|
-| `enabled` | `boolean` | `true` | Generate sitemap |
-| `hostname` | `string` | — | Site URL (required in production) |
-
-**Bad:**
-> The enabled prop is a boolean that defaults to true and controls whether the sitemap is generated. The hostname prop is a string that specifies your site URL...
 
 ## What to Include
 
-### Verification Section
-
-Show how to test it works:
-```markdown
-## Verify
-
-Check `http://localhost:3000/sitemap.xml` shows your pages.
-```
-
-### Limitations
-
-State limitations inline where relevant:
-```markdown
-Dynamic routes require `nitro.prerender.routes` or explicit `urls` config.
-```
-
-### When to Skip
-
-Tell readers when something is overkill:
-```markdown
-Skip this unless you need per-route control. The defaults handle 90% of cases.
-```
+- **Verification:** How to test it works
+- **Limitations:** State inline where relevant
+- **When to skip:** Tell readers when something is overkill
 
 ## What NOT to Include
 
 - "Best practices" sections
-- "✅ When to use" / "❌ When not to use" blocks
-- Dedicated "Decision" sections—opener makes use case clear
-- "Quick Setup"—just call it "Setup"
-- "Related" H2 sections—use frontmatter
+- "When to use" / "When not to use" blocks
+- Dedicated "Decision" sections
+- "Quick Setup" - just call it "Setup"
+- "Related" H2 sections - use frontmatter
 - Filler introductions
-
-## Quality Checklist
-
-- [ ] Task-oriented title
-- [ ] Opener makes use case obvious
-- [ ] Code within first 3 scrolls
-- [ ] Parameters in tables, not prose
-- [ ] States what NOT to do
-- [ ] Includes verification method
-- [ ] 2-3 related pages in frontmatter

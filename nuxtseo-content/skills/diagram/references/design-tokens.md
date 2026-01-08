@@ -14,8 +14,8 @@ export default {
   theme: {
     extend: {
       colors: {
-        primary: { 500: '#3b82f6', 600: '#2563eb' },  // → primary
-        gray: { 100: '#f3f4f6', 800: '#1f2937' },     // → neutral
+        primary: { 500: '#3b82f6', 600: '#2563eb' }, // → primary
+        gray: { 100: '#f3f4f6', 800: '#1f2937' }, // → neutral
       }
     }
   }
@@ -28,8 +28,8 @@ export default {
 // app.config.ts
 export default defineAppConfig({
   ui: {
-    primary: 'green',      // → map to tailwind green palette
-    gray: 'zinc',          // → map to tailwind zinc palette
+    primary: 'green', // → map to tailwind green palette
+    gray: 'zinc', // → map to tailwind zinc palette
     colors: ['primary', 'success', 'warning', 'error']
   }
 })
@@ -99,42 +99,42 @@ Write to `.claude/context/design-tokens.md`:
 Extracted: YYYY-MM-DD
 Source: tailwind.config.ts, app.config.ts
 
-## Colors
+# # Colors
 
 primary:
-  light: "#dbeafe"    # fill for highlighted nodes
-  base: "#3b82f6"     # stroke, accents
-  dark: "#1e3a8a"     # text on light bg
+  light: '#dbeafe' # fill for highlighted nodes
+  base: '#3b82f6' # stroke, accents
+  dark: '#1e3a8a' # text on light bg
 
 gray:
-  50: "#f9fafb"       # node backgrounds
-  200: "#e5e7eb"      # subtle borders
-  400: "#9ca3af"      # muted text, edges
-  700: "#374151"      # primary text
-  900: "#111827"      # headings
+  50: '#f9fafb' # node backgrounds
+  200: '#e5e7eb' # subtle borders
+  400: '#9ca3af' # muted text, edges
+  700: '#374151' # primary text
+  900: '#111827' # headings
 
 success:
-  light: "#dcfce7"
-  base: "#22c55e"
-  dark: "#14532d"
+  light: '#dcfce7'
+  base: '#22c55e'
+  dark: '#14532d'
 
 warning:
-  light: "#fef3c7"
-  base: "#f59e0b"
-  dark: "#78350f"
+  light: '#fef3c7'
+  base: '#f59e0b'
+  dark: '#78350f'
 
 error:
-  light: "#fee2e2"
-  base: "#ef4444"
-  dark: "#7f1d1d"
+  light: '#fee2e2'
+  base: '#ef4444'
+  dark: '#7f1d1d'
 
-## Typography
+# # Typography
 
-font_family: "Inter, system-ui, sans-serif"
+font_family: 'Inter, system-ui, sans-serif'
 font_size_base: 14
 font_size_heading: 16
 
-## Shape
+# # Shape
 
 border_radius: 8
 padding: 12
@@ -148,27 +148,27 @@ If site has dark mode, extract both palettes:
 ```yaml
 light:
   primary:
-    light: "#dbeafe"
-    base: "#3b82f6"
-    dark: "#1e3a8a"
+    light: '#dbeafe'
+    base: '#3b82f6'
+    dark: '#1e3a8a'
   gray:
-    50: "#f9fafb"
-    200: "#e5e7eb"
-    700: "#374151"
-    900: "#111827"
-  background: "#ffffff"
+    50: '#f9fafb'
+    200: '#e5e7eb'
+    700: '#374151'
+    900: '#111827'
+  background: '#ffffff'
 
 dark:
   primary:
-    light: "#1e3a8a"
-    base: "#60a5fa"
-    dark: "#dbeafe"
+    light: '#1e3a8a'
+    base: '#60a5fa'
+    dark: '#dbeafe'
   gray:
-    50: "#18181b"
-    200: "#3f3f46"
-    700: "#d4d4d8"
-    900: "#fafafa"
-  background: "#09090b"
+    50: '#18181b'
+    200: '#3f3f46'
+    700: '#d4d4d8'
+    900: '#fafafa'
+  background: '#09090b'
 ```
 
 For dark mode sites, generate two SVGs:
@@ -196,17 +196,17 @@ If no design tokens found, use defaults:
 
 ```yaml
 primary:
-  light: "#dbeafe"
-  base: "#3b82f6"
-  dark: "#1e3a8a"
+  light: '#dbeafe'
+  base: '#3b82f6'
+  dark: '#1e3a8a'
 
 gray:
-  50: "#f9fafb"
-  200: "#e5e7eb"
-  400: "#9ca3af"
-  700: "#374151"
-  900: "#111827"
+  50: '#f9fafb'
+  200: '#e5e7eb'
+  400: '#9ca3af'
+  700: '#374151'
+  900: '#111827'
 
 border_radius: 8
-font_family: "system-ui, sans-serif"
+font_family: 'system-ui, sans-serif'
 ```
