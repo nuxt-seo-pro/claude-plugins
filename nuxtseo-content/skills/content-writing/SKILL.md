@@ -1,7 +1,7 @@
 ---
 name: Content Writing
 description: Use for "write docs", "write article", "landing page", "comparison post", "sales copy", "blog post", "tutorial", "API docs", or any content creation task.
-version: 0.5.0
+version: 0.6.0
 ---
 
 # Content Writing

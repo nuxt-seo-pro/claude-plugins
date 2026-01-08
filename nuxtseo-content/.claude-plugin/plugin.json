@@ -1,12 +1,18 @@
 {
   "name": "nuxtseo-content",
-  "version": "0.5.0",
+  "version": "0.6.0",
   "description": "SEO content skills: write docs/articles/landing pages, audit existing content, keyword/market research. Integrates with Nuxt SEO Pro MCP for real keyword and SERP data.",
   "author": {
     "name": "Harlan Wilton",
     "email": "harlan@harlanzw.com"
   },
   "license": "MIT",
-  "keywords": ["seo", "content", "writing", "documentation", "nuxt"],
+  "keywords": [
+    "seo",
+    "content",
+    "writing",
+    "documentation",
+    "nuxt"
+  ],
   "repository": "https://github.com/nuxtseo/claude-plugins"
 }
