@@ -51,10 +51,23 @@ Claims requiring sources:
 
 ### Pro (nuxt-seo-pro)
 
+**Pre-deploy validation (static analysis):**
+
 | Tool | When |
 |------|------|
-| `mcp__nuxt-seo-pro__analyze_page` | SEO audit for `.vue` files |
-| `mcp__nuxt-seo-pro__analyze_content_page` | SEO audit for `.md` files |
+| `mcp__nuxt-seo-pro__analyze_page` | Pre-commit check for `.vue` files - frontmatter, structure, missing fields |
+| `mcp__nuxt-seo-pro__analyze_content_page` | Pre-commit check for `.md` files - frontmatter, headings, word count, links |
+
+These analyze source files only. They don't check rendered output, actual meta tags, or schema validity.
+
+**Live site audits (use URL-based free tools instead):**
+
+For deployed pages, prefer `check_meta_tags`, `validate_schema`, `debug_social_share` - they check what Google actually sees.
+
+**Research:**
+
+| Tool | When |
+|------|------|
 | `mcp__nuxt-seo-pro__research_keywords` | Find target keywords |
 | `mcp__nuxt-seo-pro__analyze_serp` | Check competition |
 
