@@ -64,11 +64,11 @@ Shared patterns for sales pages and conversion audits.
 
 ## CTA Patterns
 
-| Weak | Strong |
-|------|--------|
+| Generic | Specific |
+|---------|----------|
 | Submit | Get Started |
-| Click Here | View Pricing |
-| Learn More | See How It Works |
 | Sign Up | Start Free Trial |
 
 Be specific: "Get Started - Free", "Start Your Free Trial"
+
+For link text accessibility (Learn More, Click Here, etc.), see `accessibility.md`.

@@ -124,3 +124,4 @@ When user asks to apply fixes:
 1. Load `../content-writing/references/foundations.md`
 2. Load type-specific patterns from `../content-writing/references/types/[type].md`
 3. Apply fixes following those patterns
+4. Update `updatedAt` frontmatter to today's date (run `date +%Y-%m-%d`)
