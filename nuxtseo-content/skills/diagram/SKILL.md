@@ -1,7 +1,7 @@
 ---
 name: Diagram
 description: Use for "create diagram", "flowchart", "decision tree", "architecture diagram", "visualize", or when content needs visual explanation.
-version: 0.6.0
+version: 0.7.0
 ---
 
 # Diagram

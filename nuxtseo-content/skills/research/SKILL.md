@@ -1,7 +1,7 @@
 ---
 name: Research
 description: Use for "keyword research", "market research", "competitor analysis", "content gaps", "is there demand for", "what should I write about", "validate product idea", or any pre-work research.
-version: 0.6.0
+version: 0.7.0
 ---
 
 # Research

@@ -1,7 +1,7 @@
 ---
 name: Site Setup
 description: Use for "setup site", "configure site", "initialize project", or when site-config.md is missing. Required before using writing skills.
-version: 0.6.0
+version: 0.7.0
 ---
 
 # Site Setup
