@@ -1,0 +1,42 @@
+# Decision Tree: SSR vs SPA
+
+direction: down
+
+start: "Need SEO?" {
+  shape: diamond
+  style.fill: "#f3f4f6"
+}
+
+seo_yes: "Dynamic content?" {
+  shape: diamond
+  style.fill: "#f3f4f6"
+}
+
+seo_no: "SPA" {
+  style.fill: "#22c55e"
+  style.font-color: "#ffffff"
+}
+
+dynamic_yes: "SSR" {
+  style.fill: "#3b82f6"
+  style.font-color: "#ffffff"
+}
+
+dynamic_no: "SSG" {
+  style.fill: "#8b5cf6"
+  style.font-color: "#ffffff"
+}
+
+start -> seo_yes: "Yes" {
+  style.stroke: "#22c55e"
+}
+start -> seo_no: "No" {
+  style.stroke: "#ef4444"
+}
+
+seo_yes -> dynamic_yes: "Yes" {
+  style.stroke: "#22c55e"
+}
+seo_yes -> dynamic_no: "No" {
+  style.stroke: "#ef4444"
+}

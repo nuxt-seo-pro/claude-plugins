@@ -1,6 +1,6 @@
 ---
 name: Diagram
-description: Use for "create diagram", "flowchart", "decision tree", "architecture diagram", "visualize", or when content needs visual explanation.
+description: This skill should be used when the user asks to "create diagram", "flowchart", "decision tree", "architecture diagram", "data flow", "sequence diagram", "process flow", or when technical content needs visual explanation. Generates D2 diagrams with project design tokens.
 version: 0.7.0
 ---
 
@@ -25,7 +25,7 @@ Proactively offer diagrams for:
 - `<name>.d2` - D2 source
 - `public/<page-path>/<name>.svg` - Generated SVG
 
-**Requires:** d2 CLI (`brew install d2`)
+**Requires:** d2 CLI (`brew install d2` or `go install oss.terrastruct.com/d2`)
 
 ## Workflow
 
@@ -44,13 +44,15 @@ Derive from current page: `content/docs/guide/meta.md` → `public/docs/guide/me
 
 ### 3. Create Diagram
 
-Keep minimal: max 10-12 nodes, single concept, clear flow direction.
+Keep minimal: max 10-12 nodes, single concept, clear flow direction. See `references/d2-syntax.md` for patterns and `examples/` for working samples.
 
 Use design tokens for theming:
 - `primary` for decisions/key paths
 - `success` for recommended outcomes
 - `gray` for defaults
 - `border-radius: 8`, `shadow: true`
+
+If diagram needs 12+ nodes, split into multiple diagrams.
 
 ### 4. Generate SVG
 

@@ -76,4 +76,4 @@ For long articles (1500+ words), consider adding:
 - `::key-takeaways` - summary box at top
 - `::quick-check` - quiz at end
 
-Templates at `../../../.shared/component-templates/` if not in project.
+Check `components/content/` for existing components. If missing, create from standard patterns.

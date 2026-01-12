@@ -1,6 +1,6 @@
 ---
 name: Content Audit
-description: Use for "audit content", "review page", "fix links", "test sales page", "add callouts", "check SEO", "improve content", or reviewing/improving existing content.
+description: This skill should be used when the user asks to "audit content", "review page", "fix links", "check code examples", "test sales page", "add callouts", "check SEO", "check meta tags", "AI optimization", "GEO audit", "conversion testing", "improve content", or review/improve existing content quality.
 version: 0.7.0
 ---
 
@@ -41,8 +41,8 @@ Unified content review and improvement. Detects content type and applies appropr
 ### 1. Check Prerequisites
 
 ```
-Glob: .claude/context/site-config.md
-Glob: .claude/context/site-pages.md
+Read: .claude/context/site-config.md
+Read: .claude/context/site-pages.md
 ```
 
 **If missing:** Prompt user to run site-setup first.
@@ -71,11 +71,52 @@ Glob: .claude/context/site-pages.md
 
 ### 4. Run Audits
 
-Apply rules from loaded references only. Generate report with:
-- File path + line number
-- Issue description
-- Specific fix
-- Priority (high/medium/low)
+**For general audits ("audit this page", "improve content", "review"):** Run ALL audit types as separate passes. Do NOT skip any:
+
+| Pass | Check | Reference |
+|------|-------|-----------|
+| 1 | **Style** - banned words, hedging, voice consistency | `foundations.md` |
+| 2 | **Broken links** - validate all internal/external links resolve | `references/linking.md` |
+| 3 | **Missing internal links** - concepts mentioned without links to their docs | `references/linking.md` |
+| 4 | **SEO issues** - meta tags, URL structure, OG tags | `references/seo.md` |
+| 5 | **Missing citations** - stats/claims without sources, use WebSearch to find | `references/seo.md` |
+| 6 | **GEO optimization** - question headings, quotable facts, schema.org | `references/geo.md` |
+| 7 | **Code quality** - incomplete examples, missing error handling | `references/code-quality.md` |
+| 8 | **Components** - missing callouts, warnings, key takeaways | `references/components.md` |
+
+**For specific audits:** Only run the requested audit type.
+
+Generate `.claude/context/content-audit.md`:
+
+```yaml
+file: /content/docs/auth.md
+passes_completed:
+  - style: 2 issues
+  - broken-links: 1 issue
+  - internal-links: 0 issues
+  - seo: 1 issue
+  - citations: 0 issues (no uncited claims)
+  - geo: 1 issue
+  - code: 0 issues (no code blocks)
+  - components: 0 issues
+
+issues:
+  - line: 45
+    type: linking
+    priority: high
+    issue: Broken link to /docs/guide/sessions
+    fix: Update to /docs/auth/sessions
+
+  - line: 112
+    type: seo
+    priority: medium
+    issue: Stat "80% of users" has no citation
+    fix: Add source - WebSearch found "Source Name, 2024"
+```
+
+**Required fields:**
+- `passes_completed` - list ALL 7+ passes with issue count (proves each was run)
+- `issues` - file path, line number, type, priority, specific fix
 
 ## Applying Fixes
 

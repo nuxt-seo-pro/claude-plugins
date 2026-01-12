@@ -1,0 +1,38 @@
+# Data Flow: Request Lifecycle
+
+direction: right
+
+client: Client {
+  style.fill: "#dbeafe"
+  browser: Browser
+}
+
+server: Server {
+  style.fill: "#dcfce7"
+
+  middleware: Middleware
+  handler: Route Handler
+  renderer: Renderer
+}
+
+cache: Cache {
+  shape: cylinder
+  style.fill: "#fef3c7"
+}
+
+db: Database {
+  shape: cylinder
+  style.fill: "#fee2e2"
+}
+
+client.browser -> server.middleware: "1. Request"
+server.middleware -> cache: "2. Check cache"
+cache -> server.middleware: "3. Miss" {
+  style.stroke-dash: 3
+}
+server.middleware -> server.handler: "4. Process"
+server.handler -> db: "5. Query"
+db -> server.handler: "6. Data"
+server.handler -> cache: "7. Store"
+server.handler -> server.renderer: "8. Render"
+server.renderer -> client.browser: "9. Response"

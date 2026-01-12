@@ -1,6 +1,6 @@
 ---
 name: Content Writing
-description: Use for "write docs", "write article", "landing page", "comparison post", "sales copy", "blog post", "tutorial", "API docs", or any content creation task.
+description: This skill should be used when the user asks to "write docs", "write documentation", "API reference", "blog post", "tutorial", "guide", "how-to article", "landing page", "homepage copy", "product page", "sales page", "pricing page", "comparison post", "X vs Y", "alternatives to", or create written content for a website. Not for research-only tasks or content audits.
 version: 0.7.0
 ---
 
@@ -37,9 +37,9 @@ If unclear, ask user which type.
 ### 2. Check Context
 
 ```
-Glob: .claude/context/site-config.md
-Glob: .claude/context/site-pages.md
-Glob: .claude/context/writing-style.md
+Read: .claude/context/site-config.md
+Read: .claude/context/site-pages.md
+Read: .claude/context/writing-style.md
 ```
 
 If site-config.md missing, prompt user to run `site-setup` first.
@@ -55,6 +55,16 @@ If site-config.md missing, prompt user to run `site-setup` first.
 Apply: voice, structure, terminology, code style from category.
 
 ### 4. Write Content
+
+**Target length by type:**
+
+| Type | Words | Notes |
+|------|-------|-------|
+| docs | 300-800 | Concise, scannable |
+| educational | 1000-2000 | Room for examples |
+| landing | 500-1000 | Punchy, benefit-focused |
+| comparison | 1500-2500 | Thorough analysis |
+| sales | 800-1500 | Persuasive depth |
 
 Apply from site-config.md:
 - **audience** - Adjust jargon level

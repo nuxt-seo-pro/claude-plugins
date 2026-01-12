@@ -39,7 +39,7 @@ const HEDGING_PHRASES = [
 function claude(prompt: string) {
   const escaped = prompt.replace(/'/g, '\'\\\'\'')
   const output = execSync(
-    `claude --plugin-dir '${PLUGIN_DIR}' --print '${escaped}'`,
+    `claude --plugin-dir '${PLUGIN_DIR}' --model haiku --print '${escaped}'`,
     { encoding: 'utf-8', timeout: 120000 },
   )
   return output.trim()

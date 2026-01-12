@@ -15,7 +15,7 @@ Before suggesting, check what exists:
 - `::quick-check` - quiz
 - `::checklist` - persistent todo
 
-If missing, install from `../../.shared/component-templates/`.
+If missing, suggest user add them or skip these components.
 
 ## Content Type Rules
 

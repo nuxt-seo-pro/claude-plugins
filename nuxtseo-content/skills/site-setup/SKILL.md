@@ -1,6 +1,6 @@
 ---
 name: Site Setup
-description: Use for "setup site", "configure site", "initialize project", or when site-config.md is missing. Required before using writing skills.
+description: This skill should be used when the user says "setup site", "configure site", "initialize project", "new project", "start writing", "set up for writing", or when any writing skill reports site-config.md is missing. Creates site-config.md, site-pages.md, and writing-style.md in .claude/context/. Required before content-writing, content-audit, or research skills.
 version: 0.7.0
 ---
 
@@ -106,7 +106,7 @@ Ask: "Analyze existing content for style guidelines?"
 If yes, for each category with 3+ pages:
 1. Sample 3-5 pages (prefer recent, longer content)
 2. Fetch via WebFetch
-3. Extract patterns: voice, headings, code style, terminology
+3. Extract patterns per `references/style-analysis.md`: voice, structure, terminology
 
 ### 7. Detect Available Components
 
@@ -124,7 +124,7 @@ Glob: components/content/*.vue
 | `::quick-check` | `QuickCheck.vue` | /learn/, /blog/ only |
 | `::checklist` | `Checklist.vue` | /learn/, /blog/ only |
 
-If missing, install from `../.shared/component-templates/`.
+If missing, note which are unavailable in site-config.md.
 
 **Never use custom components in /docs/.**
 

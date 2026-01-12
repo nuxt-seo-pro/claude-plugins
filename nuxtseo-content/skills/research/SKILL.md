@@ -1,6 +1,6 @@
 ---
 name: Research
-description: Use for "keyword research", "market research", "competitor analysis", "content gaps", "is there demand for", "what should I write about", "validate product idea", or any pre-work research.
+description: This skill should be used when the user asks for "keyword research", "market research", "competitor analysis", "content gaps", "is there demand for", "what should I write about", "validate product idea", "who ranks for", "traffic estimate", or any pre-writing research task.
 version: 0.7.0
 ---
 
@@ -25,18 +25,7 @@ Unified research skill for keyword discovery, market validation, and competitive
 
 ## MCP Tools
 
-**First-time setup:** Run `mcp__nuxt-seo-pro__init_site` before other pro tools. Use `forceProfile: true` to refresh stale site profiles.
-
-| Tool | Purpose |
-|------|---------|
-| `mcp__nuxt-seo-pro__init_site` | Register site, profile type/industry/audience |
-| `mcp__nuxt-seo-pro__research_keywords` | Keyword suggestions with volume/difficulty. Use `verbose: true` for full data (trends, SERP features) |
-| `mcp__nuxt-seo-pro__analyze_serp` | Competition analysis, SERP features |
-| `mcp__nuxt-seo-pro__check_rankings` | Current rankings for a domain |
-| `mcp__nuxt-seo-pro__analyze_social_signals` | GitHub, Reddit, Twitter activity |
-| `mcp__nuxt-seo-pro__estimate_domain_traffic` | Competitor traffic estimates |
-| `mcp__nuxt-seo-pro__get_sitemap_urls` | Existing content inventory |
-| `mcp__nuxt-seo-pro__check_domain_availability` | Domain availability (batch up to 10) |
+When `nuxt-seo-pro` MCP available, use `init_site` first, then research/analysis tools. See `references/mcp-tools.md` for full API.
 
 ## Research Types
 
@@ -111,12 +100,14 @@ If MCP tools unavailable:
 2. Search "[topic]" and analyze top 10 results manually
 3. Search "site:[domain]" to see competitor content
 
-## Research Markers
+## Output Formats
 
-When drafting, mark unknowns:
+See `references/output-formats.md` for artifact templates (target-keywords.md, market-research.md, competitors.md).
 
-```markdown
-[VERIFY: claim about X]
-[STAT NEEDED: specific statistic]
-[SOURCE NEEDED: requires authoritative source]
-```
+## After Research
+
+| Research Type | Next Step |
+|---------------|-----------|
+| content | Write target-keywords.md, suggest content-writing skill |
+| market | Write market-research.md, summarize findings to user |
+| competitor | Write competitors.md, identify content gaps |

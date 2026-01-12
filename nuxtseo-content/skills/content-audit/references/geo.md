@@ -16,15 +16,17 @@ Generative Engine Optimization - making content citable by AI search (ChatGPT, P
 
 ### Heading Format
 
-AI matches headings to queries:
+AI matches headings to queries. Only suggest changes when they flow naturally:
 
-| Pattern | Example |
-|---------|---------|
-| Question format | `## How to Add Authentication in Nuxt` |
-| Specific method | `### Using useAuth()` |
-| Problem-solving | `### Troubleshooting Login Issues` |
+| Pattern | Example | When |
+|---------|---------|------|
+| Question format | `## How to Add Authentication in Nuxt` | Educational content, tutorials |
+| Specific method | `### Using useAuth()` | API docs, reference |
+| Problem-solving | `### Troubleshooting Login Issues` | Guides with common issues |
 
-**Avoid:** Vague headings like "Getting Started" or "Introduction"
+**Don't force question headings.** `## Configuration` is fine for docs - don't rewrite as `## How to Configure X?`
+
+**Only flag:** Vague headings like "Getting Started", "Introduction", "Overview" that could be more specific
 
 ### Quotable Facts
 
