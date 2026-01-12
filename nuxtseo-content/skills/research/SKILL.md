@@ -81,6 +81,14 @@ Validate product ideas before building.
 | `activityLevel: high` (100+) | Active community, validated demand |
 | `trend: growing` | Good timing |
 
+### Reddit Validation
+
+Use `analyze_social_signals` with `platforms: ["reddit"]` or WebSearch `site:reddit.com [topic]`:
+- Active subreddits = community exists
+- Recurring questions = pain points to address
+- Product complaints = opportunities to solve
+- "I wish there was..." posts = direct demand signals
+
 ### Domain Check
 
 Use `check_domain_availability` for up to 10 domains. Prefer `.com` for mass market, `.dev`/`.io` for developer tools.
