@@ -1,77 +1,29 @@
 # Writing Foundations
 
-Core writing principles for all content types.
-
 ## Voice
 
-Developer-to-developer. Casual but accurate.
+Developer-to-developer. Casual but accurate. Use "we" for shared experience, "you" for instructions. Vary sentence length.
 
-- First person plural for shared experience ("we")
-- Second person for instructions ("you")
-- Contractions allowed
-- Exclamation marks rare
-- Vary sentence length. Some short. Others longer when explaining.
+**No hedging:** "Do X" not "You may want to consider X"
+**Be specific:** "Google rewrites 70%" not "Search engines may modify"
 
-### No Hedging
+## Stats
 
-| Instead of | Write |
-|------------|-------|
-| You may want to consider | Do X |
-| It's recommended that | Do X |
-| This might potentially | This will |
-| Could possibly help | Helps |
+Always WebSearch to verify stats. Search `[topic] statistics [current-year]`. Cite with source + year: `"67.6% have duplicate content (Semrush, 2024)"`
 
-### Be Specific
+Sources: Semrush, Ahrefs, W3Techs, HTTPArchive, Google
 
-| Instead of | Write |
-|------------|-------|
-| Search engines may modify | Google rewrites 70% |
-| Most sites have issues | 73% of sites fail Core Web Vitals |
-| It can improve performance | Reduces LCP by 40% |
+## Banned
 
-### Stats Require Verification
+**Words:** dive into, crucial, essential, vital, robust, seamless, leverage, utilize, ensure, comprehensive, harness, empower, elevate, unlock, game-changer, delve, realm, landscape, plethora, myriad
 
-When writing or auditing stats, **always use WebSearch** to find current data:
+**Phrases:** "it's important to note", "in today's [X]", "let's explore", "this is where X comes in", "at its core", "when it comes to", "by the end of this guide"
 
-1. Search for `[topic] statistics [current-year]` (fallback to previous year if no results)
-2. Prefer authoritative sources: Semrush, Ahrefs, Google, W3Techs, HTTPArchive
-3. Include source and year in content: `"67.6% have duplicate content (Semrush, 2024)"`
+**Patterns:** Rhetorical questions, three-adjective chains, filler intros, superlatives without proof, em dashes (use hyphen only)
 
-**Example workflow:**
-```
-Content mentions: "GPTBot is the most-blocked crawler"
-→ WebSearch: "most blocked crawler 2025" (or 2024 fallback)
-→ Find: "GPTBot blocked by 35.2% of sites (Originality.ai, 2024)"
-→ Write with citation
-```
+**Endings:** Never "Now you're ready to...", "Happy coding!", "In conclusion..." - just stop or link to next action.
 
-Never trust stats from training data - they go stale. Always verify.
-
-## Banned Content
-
-### Banned Words
-
-dive into, crucial, essential, vital, robust, seamless, leverage, utilize, ensure, comprehensive, harness, empower, elevate, unlock, game-changer, delve, realm, landscape, plethora, myriad
-
-### Banned Phrases
-
-- "it's important to note"
-- "in today's [X]"
-- "let's explore"
-- "this is where X comes in"
-- "at its core"
-- "when it comes to"
-- "by the end of this guide"
-
-### Banned Patterns
-
-- Rhetorical questions ("Ever wondered how...?")
-- Three-adjective chains ("powerful, flexible, and robust")
-- Filler intros before the point
-- Superlatives without proof
-- Em dashes (—) - use hyphen (-) only for naturally hyphenated words
-
-### Quick Fixes
+## Quick Fixes
 
 | Slop | Fix |
 |------|-----|
@@ -80,83 +32,20 @@ dive into, crucial, essential, vital, robust, seamless, leverage, utilize, ensur
 | In order to... | To... |
 | provides a way to | lets you |
 | is designed to | does |
-| is intended to return | returns |
 
-## Persuasion Frameworks
+## Persuasion
 
-Use when structuring content that needs to convince.
+**PAS** (features, landing): Problem → Agitate → Solve
+**AIDA** (landing, emails): Attention → Interest → Desire → Action
+**4 U's** (headlines): Useful, Urgent, Unique, Ultra-specific
 
-### PAS (Problem-Agitate-Solve)
+## Code
 
-Best for: Feature announcements, tool landing pages, "why use this" sections.
-
-1. **Problem** — State the pain clearly
-2. **Agitate** — Make it worse, show consequences
-3. **Solve** — Present your solution
-
-### AIDA (Attention-Interest-Desire-Action)
-
-Best for: Landing pages, email sequences, product announcements.
-
-1. **Attention** — Hook with surprising stat or bold claim
-2. **Interest** — Expand with relevant details
-3. **Desire** — Show benefits, social proof
-4. **Action** — Clear CTA
-
-### 4 U's (Headlines)
-
-| U | Meaning | Example |
-|---|---------|---------|
-| **Useful** | Solves a problem | "Fix broken meta tags" |
-| **Urgent** | Time pressure | "Before your next deploy" |
-| **Unique** | Different angle | "The lazy way to SEO" |
-| **Ultra-specific** | Concrete details | "Add SEO in 2 minutes" |
-
-## Code Conventions
-
-### Dates
-
-Run `date +%Y-%m-%d` to get current date. When modifying content files:
-- Add `createdAt`/`updatedAt` if missing
-- Bump `updatedAt` to today if present
-- Frontmatter: `createdAt: YYYY-MM-DD`, `updatedAt: YYYY-MM-DD`
-
-### Languages
-
-- **TypeScript** for all JS examples (not JavaScript)
-- **Vue SFC** for component examples
-- **Bash** for terminal commands
-
-**In examples:** Replace `{site.url}`, `{site.name}` with values from site-config.md.
-
-For .md files: See `../../.shared/mdc-guidelines.md` for code blocks, code groups, inline code lang tags, and callouts.
-
-## Quality Tests
-
-1. **"So what?" test** — Reader shouldn't think "so what?" after any sentence
-2. **Read aloud test** — If it sounds like a press release, rewrite
-3. **Delete test** — If removing a sentence loses no meaning, remove it
-4. **Information density** — Every sentence adds new info
-
-## Endings
-
-**Never write:**
-- "Now you're ready to..."
-- "Happy coding!"
-- "And that's it!"
-- "In conclusion..."
-
-**Do:** Just stop. Or link to next logical action.
+- TypeScript only (not JavaScript)
+- Replace `{site.url}`, `{site.name}` with values from site-config.md
+- Run `date +%Y-%m-%d` for dates, update `updatedAt` frontmatter
 
 ## Gap Markers
 
-Mark unknowns rather than hallucinating:
-
-```markdown
-[STAT NEEDED: % of sites with X]
-[VERIFY: does this work in Nuxt 4?]
-[EXAMPLE NEEDED: real-world use case]
-[LINK: internal link to related page]
-```
-
-**On `[STAT NEEDED]`:** Don't just mark it - immediately WebSearch for the stat. Search `[topic] statistics [year]`, find authoritative source, replace marker with cited stat.
+Mark unknowns: `[STAT NEEDED: X]`, `[VERIFY: X]`, `[LINK: X]`
+Then immediately WebSearch to fill them.

@@ -25,9 +25,12 @@ Unified research skill for keyword discovery, market validation, and competitive
 
 ## MCP Tools
 
+**First-time setup:** Run `mcp__nuxt-seo-pro__init_site` before other pro tools. Use `forceProfile: true` to refresh stale site profiles.
+
 | Tool | Purpose |
 |------|---------|
-| `mcp__nuxt-seo-pro__research_keywords` | Keyword suggestions with volume/difficulty |
+| `mcp__nuxt-seo-pro__init_site` | Register site, profile type/industry/audience |
+| `mcp__nuxt-seo-pro__research_keywords` | Keyword suggestions with volume/difficulty. Use `verbose: true` for full data (trends, SERP features) |
 | `mcp__nuxt-seo-pro__analyze_serp` | Competition analysis, SERP features |
 | `mcp__nuxt-seo-pro__check_rankings` | Current rankings for a domain |
 | `mcp__nuxt-seo-pro__analyze_social_signals` | GitHub, Reddit, Twitter activity |

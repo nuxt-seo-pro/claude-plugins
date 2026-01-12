@@ -40,10 +40,31 @@ Claims requiring sources:
 
 ## MCP Tools
 
-If Nuxt SEO Pro MCP available:
+### Free (nuxt-seo)
 
 | Tool | When |
 |------|------|
-| `mcp__nuxt-seo-pro__analyze_content_page` | Validate markdown SEO |
+| `mcp__nuxt-seo__check_meta_tags` | Validate title, description, OG tags |
+| `mcp__nuxt-seo__debug_social_share` | Preview social cards, find missing tags |
+| `mcp__nuxt-seo__validate_schema` | Check JSON-LD/Microdata for errors |
+| `mcp__nuxt-seo__analyze_robots_txt` | Parse robots.txt rules |
+
+### Pro (nuxt-seo-pro)
+
+| Tool | When |
+|------|------|
+| `mcp__nuxt-seo-pro__analyze_page` | SEO audit for `.vue` files |
+| `mcp__nuxt-seo-pro__analyze_content_page` | SEO audit for `.md` files |
 | `mcp__nuxt-seo-pro__research_keywords` | Find target keywords |
-| `mcp__nuxt-seo-pro__analyze_serp` | Check what ranks |
+| `mcp__nuxt-seo-pro__analyze_serp` | Check competition |
+
+**Schema/OG generation** (requires nuxt-schema-org / nuxt-og-image modules):
+
+| Tool | When | Output |
+|------|------|--------|
+| `mcp__nuxt-seo-pro__generate_schema_org` | Missing structured data | `composable` for .vue, `frontmatter` for .md |
+| `mcp__nuxt-seo-pro__generate_og_image_template` | Missing/weak social preview | `composable` for .vue, `frontmatter` for .md |
+
+Schema types: Article, BlogPosting, Product, FAQPage, HowTo, Recipe, Event, LocalBusiness, SoftwareApplication
+
+**First-time setup:** Run `mcp__nuxt-seo-pro__init_site` before other pro tools.
