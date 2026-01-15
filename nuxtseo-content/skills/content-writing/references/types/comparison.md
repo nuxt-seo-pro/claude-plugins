@@ -85,3 +85,31 @@ See `../../../.shared/seo-patterns.md` for comparison tables and featured snippe
 - Disclose bias: "We primarily use Nuxt, but we've built with both"
 - Test both tools, don't compare from docs alone
 - Link to sources for claims
+
+## Parallel Exploration (Multiple Angles)
+
+For comparison content, generate 2-3 angle options before writing:
+
+### Ask User to Pick
+
+```md
+I can approach this comparison from different angles:
+
+1. **Developer Experience** - Focus on DX, tooling, learning curve
+2. **Performance** - Build times, bundle size, runtime metrics
+3. **Ecosystem** - Plugins, community, job market
+
+Which angle fits your audience best?
+```
+
+### When to Explore Parallel
+
+- User didn't specify angle
+- Both tools serve different primary use cases
+- High-stakes content (main landing page comparison)
+
+### When to Skip
+
+- User specified exact angle: "compare for enterprise teams"
+- Simple tool: clear winner for most cases
+- Quick content: blog post vs pillar page

@@ -1,6 +1,6 @@
 ---
 name: Research
-description: This skill should be used when the user asks for "keyword research", "market research", "competitor analysis", "content gaps", "is there demand for", "what should I write about", "validate product idea", "who ranks for", "traffic estimate", or any pre-writing research task.
+description: This skill should be used when the user asks for "keyword research", "market research", "competitor analysis", "content gaps", "is there demand for", "what should I write about", "validate product idea", "who ranks for", "traffic estimate", or any pre-writing research task. For best results, specify research type (content, market, competitor), target keyword/topic, and competitor domains if known.
 version: 0.7.0
 ---
 
@@ -111,3 +111,45 @@ See `references/output-formats.md` for artifact templates (target-keywords.md, m
 | content | Write target-keywords.md, suggest content-writing skill |
 | market | Write market-research.md, summarize findings to user |
 | competitor | Write competitors.md, identify content gaps |
+
+## Next Steps (Cross-Skill Handoff)
+
+After research, suggest relevant follow-up:
+
+| Situation | Suggest |
+|-----------|---------|
+| Keywords identified | "Start writing with `content-writing` skill?" |
+| Content gaps found | "Create content plan in `.claude/plans/content-calendar.md`?" |
+| Competitor analysis done | "Audit existing pages with `content-audit` to find improvements?" |
+| Market validated | "Write landing page with `content-writing` skill?" |
+
+## SEO Debug Mode
+
+When user asks "why isn't this ranking" or "why no traffic":
+
+### Hypothesis-Driven Investigation
+
+```md
+## Investigation: [URL] not ranking for [keyword]
+
+### Hypotheses
+1. [ ] Content doesn't match search intent
+2. [ ] Missing key subtopics competitors cover
+3. [ ] Technical SEO issues (meta, schema)
+4. [ ] Not enough backlinks/authority
+5. [ ] Keyword too competitive
+
+### Investigation Steps
+1. analyze_serp for [keyword] - what's ranking?
+2. Compare our content vs top 3 results
+3. Check our meta tags, schema
+4. estimate_domain_traffic - our authority vs theirs
+
+### Findings
+[Document evidence for each hypothesis]
+
+### Recommendation
+[Specific action based on findings]
+```
+
+Ask user before deep investigation: "Want me to investigate why [page] isn't ranking for [keyword]?"

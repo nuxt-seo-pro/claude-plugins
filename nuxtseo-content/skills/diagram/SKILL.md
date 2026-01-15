@@ -1,12 +1,24 @@
 ---
 name: Diagram
-description: This skill should be used when the user asks to "create diagram", "flowchart", "decision tree", "architecture diagram", "data flow", "sequence diagram", "process flow", or when technical content needs visual explanation. Generates D2 diagrams with project design tokens.
+description: This skill should be used when the user asks to "create diagram", "flowchart", "decision tree", "architecture diagram", "data flow", "sequence diagram", "process flow", or when technical content needs visual explanation. Supports Mermaid (inline markdown, zero deps) and D2 (styled SVGs with design tokens).
 version: 0.7.0
 ---
 
 # Diagram
 
-Generate D2 diagrams matching user's design system. Outputs SVG to public directory.
+Generate diagrams for technical content. Supports D2 (styled SVGs) and Mermaid (inline markdown).
+
+## Format Selection
+
+| Use Case | Format | Why |
+|----------|--------|-----|
+| Markdown docs (GitHub/GitLab) | Mermaid | Native rendering, no build step |
+| Web pages needing polish | D2 | Custom colors, design tokens |
+| Simple flowcharts | Mermaid | Less syntax, faster |
+| Complex architecture | D2 | Better layout control |
+| No CLI available | Mermaid | Zero dependencies |
+
+Ask user if unclear: "Mermaid (inline markdown) or D2 (styled SVG)?"
 
 ## When to Suggest
 
@@ -71,3 +83,39 @@ d2 --pad 24 --theme 0 <name>.d2 public/<path>/<name>.svg
 Write what the diagram concludes, not its structure:
 - Good: "Use SSR if content needs indexing; otherwise SPA"
 - Bad: "Flowchart showing SSR decision"
+
+## Mermaid Workflow
+
+For Mermaid diagrams (inline markdown):
+
+### 1. Choose Diagram Type
+
+| Content | Type |
+|---------|------|
+| Decision logic | `flowchart` |
+| API/component interaction | `sequenceDiagram` |
+| Lifecycle states | `stateDiagram-v2` |
+| Data models | `erDiagram` |
+| Git branching | `gitGraph` |
+
+### 2. Write Inline
+
+Insert directly in markdown:
+
+~~~md
+```mermaid
+flowchart LR
+    Request --> Auth --> Handler --> Response
+```
+~~~
+
+See `references/mermaid-syntax.md` for full syntax.
+
+### 3. Keep Simple
+
+- Max 8-10 nodes (simpler than D2)
+- Minimal styling - Mermaid's strength is clarity
+- Short labels (2-3 words)
+- Consistent direction (TD or LR)
+
+No build step needed - GitHub/GitLab/Nuxt Content render automatically.

@@ -1,6 +1,6 @@
 ---
 name: Content Audit
-description: This skill should be used when the user asks to "audit content", "review page", "fix links", "check code examples", "test sales page", "add callouts", "check SEO", "check meta tags", "AI optimization", "GEO audit", "conversion testing", "improve content", or review/improve existing content quality.
+description: This skill should be used when the user asks to "audit content", "review page", "fix links", "check code examples", "test sales page", "add callouts", "check SEO", "check meta tags", "AI optimization", "GEO audit", "conversion testing", "improve content", or review/improve existing content quality. For best results, specify which audit type (style, linking, seo, geo, code, components, conversion) and provide file paths.
 version: 0.7.0
 ---
 
@@ -125,3 +125,80 @@ When user asks to apply fixes:
 2. Load type-specific patterns from `../content-writing/references/types/[type].md`
 3. Apply fixes following those patterns
 4. Update `updatedAt` frontmatter to today's date (run `date +%Y-%m-%d`)
+
+## Long-Running Audits (Multiple Pages)
+
+For auditing many pages, use scratchpad tracking:
+
+### 1. Create Scratchpad
+
+Write `.claude/scratchpad.md`:
+
+```md
+## Goal
+Audit all pages in /docs/guide/
+
+## Pages
+- [ ] /docs/guide/installation.md
+- [ ] /docs/guide/configuration.md
+- [ ] /docs/guide/deployment.md
+
+## Current
+Working on: installation.md
+
+## Status
+In progress
+```
+
+### 2. Update As You Work
+
+Mark pages complete, track blockers:
+
+```md
+## Pages
+- [x] /docs/guide/installation.md (3 issues fixed)
+- [ ] /docs/guide/configuration.md (in progress)
+- [ ] /docs/guide/deployment.md
+
+## Blocked
+configuration.md: Need user input on deprecated API section
+```
+
+### 3. Mark Done
+
+When all pages complete:
+
+```md
+## Status
+DONE - Audited 3 pages, fixed 8 issues total
+```
+
+Stop hooks check for `DONE` to know when to stop iterating.
+
+## Success Criteria
+
+Audit passes when ALL are true:
+
+| Check | How to Verify |
+|-------|---------------|
+| Zero banned words | Grep content against foundations.md banned list |
+| All internal links resolve | Each link path exists in site-pages.md |
+| All external links live | WebFetch returns 200 (sample 3-5 if many) |
+| Code blocks have language | Every ``` has lang specified |
+| H2s under 60 chars | Check heading lengths |
+| No orphan pages | Page has 2+ incoming links from site-pages.md |
+| relatedPages populated | Frontmatter has 2-3 related pages |
+
+For specific audit types, only relevant criteria apply.
+
+## Next Steps (Cross-Skill Handoff)
+
+After audit, suggest relevant follow-up:
+
+| Situation | Suggest |
+|-----------|---------|
+| Many issues found | "Apply fixes now, or save audit to `.claude/context/content-audit.md`?" |
+| SEO issues found | "Run `research` skill to find better target keywords?" |
+| Missing content gaps | "Use `content-writing` skill to create missing pages?" |
+| Conversion issues | "Run `research` with market type to validate positioning?" |
+| Style inconsistent | "Re-run `site-setup` to refresh writing-style.md?" |

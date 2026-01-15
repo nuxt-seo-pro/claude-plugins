@@ -97,3 +97,34 @@ export default defineNuxtConfig({
 - "Quick Setup" - just call it "Setup"
 - "Related" H2 sections - use frontmatter
 - Filler introductions
+
+## When to Suggest Diagrams
+
+After writing docs, suggest `diagram` skill for:
+
+| Content | Diagram Type |
+|---------|--------------|
+| Authentication flows | Sequence diagram |
+| Data pipelines | Flowchart |
+| Component hierarchy | Tree diagram |
+| State machines | State diagram |
+| API request/response | Sequence diagram |
+| Build/deploy process | Flowchart |
+
+### Trigger Phrases in Content
+
+If docs mention these, suggest diagram:
+
+- "the flow is..." / "data flows from..."
+- "first X, then Y, then Z"
+- "components communicate via..."
+- "the lifecycle is..."
+- Multiple numbered steps (5+)
+
+### Inline Suggestion
+
+```md
+This doc explains [complex flow]. Generate architecture diagram with `diagram` skill?
+```
+
+Don't auto-generate - ask first. Diagrams add maintenance burden.

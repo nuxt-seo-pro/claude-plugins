@@ -59,3 +59,30 @@ relatedPages:
 - Linking every mention (first only)
 - "click here", "this page", "here"
 - Adding `## Related` H2 sections
+
+## Verify Fixes
+
+After applying link fixes, verify they work:
+
+### Internal Links
+Check each path exists in site-pages.md. If path not found, the link is broken.
+
+### External Links
+For external links, sample 3-5 and WebFetch to confirm 200 response:
+
+```
+WebFetch: https://example.com/linked-page
+Expected: 200 OK (page loads)
+Fail: 404, timeout, redirect to error page
+```
+
+### Verification Checklist
+
+| Check | Method | Pass |
+|-------|--------|------|
+| Internal paths | Exists in site-pages.md | All found |
+| External URLs | WebFetch sample | 200 response |
+| Anchors (#section) | Target heading exists | H2/H3 matches |
+| relatedPages paths | Exists in site-pages.md | All found |
+
+Don't mark linking audit complete until verification passes.

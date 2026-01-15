@@ -140,3 +140,34 @@ Write to `.claude/context/`:
 - Starting work on a new project
 - Any skill reports `site-config.md` missing
 - Site structure changed significantly (re-fetch pages)
+
+## When to Re-Run (Refresh Context)
+
+| Signal | Action |
+|--------|--------|
+| Added many new pages | Re-run to update site-pages.md |
+| Changed site URL/name | Re-run to update site-config.md |
+| Inconsistent voice in audits | Re-run with style analysis to refresh writing-style.md |
+| New content category added | Re-run to add category patterns |
+| 30+ days since last run | Consider refresh for accuracy |
+
+### Partial Refresh
+
+For targeted updates without full re-run:
+
+```
+"Just refresh site-pages.md" → Skip to step 4-5 only
+"Just refresh writing-style.md" → Skip to step 6 only
+"Add new category patterns" → Ask for category, analyze samples, append to writing-style.md
+```
+
+## Next Steps (Cross-Skill Handoff)
+
+After setup, suggest relevant follow-up:
+
+| Situation | Suggest |
+|-----------|---------|
+| Setup complete | "Ready to write content with `content-writing` skill?" |
+| Has existing content | "Audit existing pages with `content-audit`?" |
+| New project | "Run `research` to find target keywords first?" |
+| Many pages found | "Create content plan in `.claude/plans/`?" |
