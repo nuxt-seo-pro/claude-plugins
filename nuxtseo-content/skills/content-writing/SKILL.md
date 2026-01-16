@@ -1,7 +1,7 @@
 ---
 name: Content Writing
 description: This skill should be used when the user asks to "write docs", "write documentation", "API reference", "blog post", "tutorial", "guide", "how-to article", "landing page", "homepage copy", "product page", "sales page", "pricing page", "comparison post", "X vs Y", "alternatives to", or create written content for a website. Not for research-only tasks or content audits. For best results, include target keyword, audience level, and reference existing files when asking.
-version: 0.9.0
+version: 0.10.1
 ---
 
 # Content Writing
