@@ -81,3 +81,22 @@ For deployed pages, prefer `check_meta_tags`, `validate_schema`, `debug_social_s
 Schema types: Article, BlogPosting, Product, FAQPage, HowTo, Recipe, Event, LocalBusiness, SoftwareApplication
 
 **First-time setup:** Run `mcp__nuxt-seo-pro__init_site` before other pro tools.
+
+## GSC-Backed Audits (Pro)
+
+Real performance data from Google Search Console. Requires GSC connected in Pro dashboard.
+
+| Prompt | Use For |
+|--------|---------|
+| `seo_audit_site` | Full site audit: trends, opportunities, declining keywords, action plan |
+| `seo_audit_page` | Page-specific: all ranking keywords, cannibalization, optimization suggestions |
+
+These MCP prompts chain multiple GSC tools and return prioritized recommendations. Use directly instead of manual tool calls for comprehensive audits.
+
+**Quick access to GSC data:**
+
+| Tool | Returns |
+|------|---------|
+| `gsc_analysis({ preset: 'decay' })` | Pages losing rankings |
+| `gsc_analysis({ preset: 'striking-distance' })` | Keywords close to page 1 |
+| `gsc_page_details({ pageUrl: '...' })` | All keywords for a page |

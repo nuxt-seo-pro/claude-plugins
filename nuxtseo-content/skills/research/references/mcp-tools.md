@@ -91,6 +91,42 @@ Check if domains are available.
 |-----------|----------|-------------|
 | domains | yes | Array of domains (max 10) |
 
+## Google Search Console Tools
+
+Real performance data from GSC. Requires site connected in Pro dashboard.
+
+| Tool | Use For |
+|------|---------|
+| `gsc_status` | Check connection, sync status |
+| `gsc_pages` | Top pages with clicks, impressions, position |
+| `gsc_keywords` | Top keywords with metrics |
+| `gsc_analytics` | Daily time-series for trends |
+| `gsc_analysis` | Presets: striking-distance, opportunity, decay, declining |
+| `gsc_page_details` | All keywords ranking for a specific page |
+| `gsc_keyword_details` | All pages ranking for a specific keyword |
+
+### Analysis Presets
+
+Use `gsc_analysis({ preset: '...' })`:
+
+| Preset | Finds |
+|--------|-------|
+| `striking-distance` | Keywords in positions 4-20 (quick wins) |
+| `opportunity` | High impressions, low CTR |
+| `decay` | Declining performance over time |
+| `movers-rising` | Keywords gaining ranks |
+| `movers-declining` | Keywords losing ranks |
+
+### SEO Debug
+
+For "why isn't this ranking" investigations:
+
+```
+gsc_page_details({ pageUrl: 'https://...' })  // what keywords does it rank for?
+gsc_keyword_details({ keyword: '...' })        // keyword cannibalization?
+gsc_analysis({ preset: 'decay' })              // is it declining?
+```
+
 ## Fallback: WebSearch
 
 When MCP unavailable:
