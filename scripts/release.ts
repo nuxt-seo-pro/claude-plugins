@@ -31,6 +31,16 @@ plugin.version = newVersion
 writeFileSync(pluginPath, `${JSON.stringify(plugin, null, 2)}\n`)
 console.log(`  ✓ ${pluginPath}`)
 
+// Update marketplace.json
+const marketplacePath = '.claude-plugin/marketplace.json'
+const marketplace = JSON.parse(readFileSync(marketplacePath, 'utf-8'))
+const pluginEntry = marketplace.plugins.find((p: { name: string }) => p.name === 'nuxtseo-content')
+if (pluginEntry) {
+  pluginEntry.version = newVersion
+  writeFileSync(marketplacePath, `${JSON.stringify(marketplace, null, 2)}\n`)
+  console.log(`  ✓ ${marketplacePath}`)
+}
+
 // Update all SKILL.md files
 for await (const file of glob('**/SKILL.md')) {
   const content = readFileSync(file, 'utf-8')
