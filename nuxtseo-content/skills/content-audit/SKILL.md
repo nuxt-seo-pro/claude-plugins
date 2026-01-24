@@ -1,7 +1,7 @@
 ---
 name: Content Audit
 description: This skill should be used when the user asks to "audit content", "review page", "fix links", "check code examples", "test sales page", "add callouts", "check SEO", "check meta tags", "AI optimization", "GEO audit", "conversion testing", "improve content", or review/improve existing content quality. For best results, specify which audit type (style, linking, seo, geo, code, components, conversion) and provide file paths.
-version: 0.10.1
+version: 0.11.0
 ---
 
 # Content Audit

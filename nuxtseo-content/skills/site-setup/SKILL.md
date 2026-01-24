@@ -1,7 +1,7 @@
 ---
 name: Site Setup
 description: This skill should be used when the user says "setup site", "configure site", "initialize project", "new project", "start writing", "set up for writing", or when any writing skill reports site-config.md is missing. Creates site-config.md, site-pages.md, and writing-style.md in .claude/context/. Required before content-writing, content-audit, or research skills.
-version: 0.10.1
+version: 0.11.0
 ---
 
 # Site Setup
