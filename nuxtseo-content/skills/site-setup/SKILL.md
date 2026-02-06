@@ -1,6 +1,6 @@
 ---
 name: Site Setup
-description: This skill should be used when the user says "setup site", "configure site", "initialize project", "new project", "start writing", "set up for writing", or when any writing skill reports site-config.md is missing. Creates site-config.md, site-pages.md, and writing-style.md in .claude/context/. Required before content-writing, content-audit, or research skills.
+description: Use when user says "setup site", "configure site", "initialize project", "new project", "set up for writing", or when site-config.md is missing. Creates site-config.md, site-pages.md, writing-style.md in .claude/context/.
 version: 0.11.0
 ---
 
@@ -77,11 +77,13 @@ If found, ask: "Found [file]. Use this as style reference?"
 
 ### 4. Fetch Available Pages
 
-**Primary:** `GET {site.url}/llms.txt` - parse as markdown
+**Primary:** `GET {site.url}/llms-full.txt` - parse as markdown (full content inventory)
 
-**Fallback 1:** `GET {site.url}/sitemap.xml` - parse `<loc>` elements
+**Fallback 1:** `GET {site.url}/llms.txt` - parse as markdown (summary)
 
-**Fallback 2:** Scan project if not deployed:
+**Fallback 2:** `GET {site.url}/sitemap.xml` - parse `<loc>` elements
+
+**Fallback 3:** Scan project if not deployed:
 ```
 Glob: pages/**/*.vue → extract routes
 Glob: content/**/*.md → extract content paths
@@ -114,19 +116,15 @@ If yes, for each category with 3+ pages:
 Glob: components/content/*.vue
 ```
 
-**Standard (Nuxt UI Pro):** tip, note, warning, danger, code-group
+**Standard (always available):** tip, note, warning, danger, code-group
 
-**Custom (check if exist):**
+**Custom:** List all `.vue` files found in `components/content/`. Convert filenames to MDC syntax: `KeyTakeaways.vue` → `::key-takeaways`.
 
-| Component | File | Content Types |
-|-----------|------|---------------|
-| `::key-takeaways` | `KeyTakeaways.vue` | /learn/, /blog/ only |
-| `::quick-check` | `QuickCheck.vue` | /learn/, /blog/ only |
-| `::checklist` | `Checklist.vue` | /learn/, /blog/ only |
+**Templates available:** If custom components are missing but would be useful, the plugin ships templates at `skills/.shared/component-templates/` (KeyTakeaways.vue, QuickCheck.vue, Checklist.vue). Offer to copy them.
 
-If missing, note which are unavailable in site-config.md.
+Record all found components in site-config.md. Note which are custom (educational content only - `/learn/`, `/blog/`) vs standard (all content).
 
-**Never use custom components in /docs/.**
+**Never use custom interactive components in /docs/.**
 
 ### 8. Generate Artifacts
 

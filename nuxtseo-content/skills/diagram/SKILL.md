@@ -37,9 +37,17 @@ Proactively offer diagrams for:
 - `<name>.d2` - D2 source
 - `public/<page-path>/<name>.svg` - Generated SVG
 
-**Requires:** d2 CLI (`brew install d2` or `go install oss.terrastruct.com/d2`)
+**Requires:** d2 CLI for D2 diagrams (Mermaid needs nothing)
 
 ## Workflow
+
+### 0. Check Prerequisites (D2 only)
+
+```bash
+which d2
+```
+
+If d2 not found, suggest: `brew install d2` or `go install oss.terrastruct.com/d2`. If user can't install, fall back to Mermaid.
 
 ### 1. Extract Design Tokens (First Run)
 
@@ -83,6 +91,13 @@ d2 --pad 24 --theme 0 <name>.d2 public/<path>/<name>.svg
 Write what the diagram concludes, not its structure:
 - Good: "Use SSR if content needs indexing; otherwise SPA"
 - Bad: "Flowchart showing SSR decision"
+
+## Accessibility
+
+- Use shape + color together for meaning (not color alone)
+- Prefer high-contrast color pairs from design tokens
+- Add labels on edges, not just color-coded paths
+- Colorblind-safe: avoid red/green only distinctions - use blue/orange or add patterns
 
 ## Mermaid Workflow
 

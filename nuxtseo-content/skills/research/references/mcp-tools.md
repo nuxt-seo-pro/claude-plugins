@@ -2,77 +2,50 @@
 
 Nuxt SEO Pro MCP server tools for research. Falls back to WebSearch if unavailable.
 
-## Setup
-
-Run `mcp__nuxt-seo-pro__init_site` before other tools. Use `skipProfile: true` for faster init, `force: true` to refresh stale profiles.
-
 ## Tool Reference
 
-### init_site
+### keyword_research
 
-Register and profile a site. Required first step.
-
-| Parameter | Required | Description |
-|-----------|----------|-------------|
-| url | yes | Site URL (https://...) |
-| skipProfile | no | Skip auto-profiling |
-| force | no | Refresh existing profile |
-
-### research_keywords
-
-Keyword suggestions with metrics.
+Unified keyword research, SERP analysis, and ranking checks.
 
 | Parameter | Required | Default | Description |
 |-----------|----------|---------|-------------|
-| topic | yes | - | Seed keyword/topic |
-| minVolume | no | 10 | Minimum monthly volume |
-| maxVolume | no | 10000 | Maximum monthly volume |
-| maxDifficulty | no | 60 | Max difficulty (0-100) |
+| type | no | research | `research`, `serp`, or `rankings` |
+| topic | yes (research/serp) | - | Seed keyword/topic |
+| domain | yes (rankings) | - | Domain without https:// |
+| minVolume | no | 10 | Min monthly volume (research) |
+| maxVolume | no | 10000 | Max monthly volume (research) |
+| maxDifficulty | no | 60 | Max difficulty 0-100 (research) |
 | limit | no | 20 | Max results |
-| includeRelated | no | true | Include "related searches" |
+| includeRelated | no | true | Include related searches (research) |
+| depth | no | 10 | SERP results to analyze (serp, max 20) |
+| minPosition | no | 1 | Min rank position (rankings) |
+| maxPosition | no | 20 | Max rank position (rankings) |
 
-### analyze_serp
+**Type examples:**
+- `type: 'research'` — keyword suggestions with volume/difficulty
+- `type: 'serp'` — top results, SERP features, AI Overview detection
+- `type: 'rankings'` — keywords a domain ranks for (competitor analysis)
 
-SERP competition analysis.
+### domain_info
 
-| Parameter | Required | Default | Description |
-|-----------|----------|---------|-------------|
-| keyword | yes | - | Keyword to analyze |
-| depth | no | 10 | Results to analyze (max 20) |
-
-**Returns:** Top results with domain rank, SERP features (AI overview, PAA, featured snippets).
-
-### check_rankings
-
-Current rankings for a domain.
-
-| Parameter | Required | Default | Description |
-|-----------|----------|---------|-------------|
-| domain | yes | - | Domain without https:// |
-| minPosition | no | 1 | Min rank position |
-| maxPosition | no | 20 | Max rank position |
-| limit | no | 50 | Max keywords |
-
-### analyze_social_signals
-
-Community activity on GitHub, Reddit, Twitter.
-
-| Parameter | Required | Default | Description |
-|-----------|----------|---------|-------------|
-| topic | yes | - | Topic to research |
-| platforms | no | all | Filter: ["github", "reddit", "twitter"] |
-
-**Returns:** Activity level, trend direction, top repos/threads.
-
-### estimate_domain_traffic
-
-Competitor traffic estimates.
+Domain availability and traffic estimates.
 
 | Parameter | Required | Description |
 |-----------|----------|-------------|
-| domain | yes | Domain without https:// |
+| type | yes | `availability` or `traffic` |
+| domain | yes (traffic) | Domain without https:// |
+| domains | yes (availability) | Array of domains (max 10) |
 
-**Returns:** Monthly traffic, trend, top pages, geo distribution.
+### competitors
+
+Competitor tracking and auto-discovery.
+
+| Parameter | Required | Default | Description |
+|-----------|----------|---------|-------------|
+| type | no | get | `get` or `discover` |
+| siteUrl | no | verified site | Site URL |
+| includeSelf | no | false | Include own domain (get only) |
 
 ### get_sitemap_urls
 
@@ -83,49 +56,69 @@ Fetch site's content inventory.
 | siteUrl | no | verified site | Site to fetch |
 | limit | no | 15 | Max URLs (max 50) |
 
-### check_domain_availability
+### generate_seo
 
-Check if domains are available.
+Generate schema.org or OG image templates.
 
 | Parameter | Required | Description |
 |-----------|----------|-------------|
-| domains | yes | Array of domains (max 10) |
+| type | yes | `schema-org` or `og-image` |
+| schemaType | yes (schema-org) | Article, BlogPosting, Product, FAQPage, HowTo, etc. |
+| pageType | yes (og-image) | blog, product, landing, docs, tool, etc. |
+| outputFormat | no | `composable` (Vue) or `frontmatter` (markdown) |
+
+### analyze_page
+
+Analyze Vue SFCs or Nuxt Content markdown for SEO issues. Auto-detects file type from path.
+
+| Parameter | Required | Description |
+|-----------|----------|-------------|
+| filePath | yes | Path to .vue or .md file |
+| fileContent | yes | File contents |
+| nuxtConfig | no | nuxt.config.ts content (for module detection) |
 
 ## Google Search Console Tools
 
 Real performance data from GSC. Requires site connected in Pro dashboard.
 
-| Tool | Use For |
-|------|---------|
-| `gsc_status` | Check connection, sync status |
-| `gsc_pages` | Top pages with clicks, impressions, position |
-| `gsc_keywords` | Top keywords with metrics |
-| `gsc_analytics` | Daily time-series for trends |
-| `gsc_analysis` | Presets: striking-distance, opportunity, decay, declining |
-| `gsc_page_details` | All keywords ranking for a specific page |
-| `gsc_keyword_details` | All pages ranking for a specific keyword |
+### gsc_status
 
-### Analysis Presets
+Check connection and sync status.
 
-Use `gsc_analysis({ preset: '...' })`:
+### gsc_query
 
-| Preset | Finds |
-|--------|-------|
-| `striking-distance` | Keywords in positions 4-20 (quick wins) |
-| `opportunity` | High impressions, low CTR |
-| `decay` | Declining performance over time |
-| `movers-rising` | Keywords gaining ranks |
-| `movers-declining` | Keywords losing ranks |
+Unified GSC data query. Replaces all individual GSC query tools.
 
-### SEO Debug
+| Parameter | Required | Default | Description |
+|-----------|----------|---------|-------------|
+| type | yes | - | `pages`, `keywords`, `countries`, `devices`, `timeseries`, `page-detail`, `keyword-detail`, `analysis` |
+| period | no | 28d | `7d`, `28d`, `3m`, `6m`, `12m` |
+| limit | no | 25 | Max results (max 100) |
+| sort | no | clicks | `clicks`, `impressions`, `ctr`, `position` |
+| sortDir | no | desc | `asc` or `desc` |
+| search | no | - | Filter text |
+| pageUrl | yes (page-detail) | - | URL to analyze |
+| keyword | yes (keyword-detail) | - | Keyword to analyze |
+| preset | yes (analysis) | - | `striking-distance`, `opportunity`, `decay`, `movers-rising`, `movers-declining`, `zero-click` |
 
-For "why isn't this ranking" investigations:
-
+**Examples:**
 ```
-gsc_page_details({ pageUrl: 'https://...' })  // what keywords does it rank for?
-gsc_keyword_details({ keyword: '...' })        // keyword cannibalization?
-gsc_analysis({ preset: 'decay' })              // is it declining?
+gsc_query({ type: 'pages' })                                    // top pages
+gsc_query({ type: 'keywords', sort: 'impressions' })            // top keywords by impressions
+gsc_query({ type: 'analysis', preset: 'striking-distance' })    // quick wins
+gsc_query({ type: 'page-detail', pageUrl: 'https://...' })      // keywords for a page
+gsc_query({ type: 'keyword-detail', keyword: '...' })           // pages for a keyword
+gsc_query({ type: 'timeseries', period: '3m' })                 // daily trends
 ```
+
+### gsc_sitemaps
+
+Sitemap management.
+
+| Parameter | Required | Default | Description |
+|-----------|----------|---------|-------------|
+| action | no | list | `list`, `submit`, `delete`, `refresh` |
+| sitemapUrl | yes (submit/delete) | - | Sitemap URL |
 
 ## Fallback: WebSearch
 

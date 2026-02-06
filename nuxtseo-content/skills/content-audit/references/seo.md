@@ -55,10 +55,9 @@ Claims requiring sources:
 
 | Tool | When |
 |------|------|
-| `mcp__nuxt-seo-pro__analyze_page` | Pre-commit check for `.vue` files - frontmatter, structure, missing fields |
-| `mcp__nuxt-seo-pro__analyze_content_page` | Pre-commit check for `.md` files - frontmatter, headings, word count, links |
+| `mcp__nuxt-seo-pro__analyze_page` | Pre-commit check for `.vue` or `.md` files - auto-detects type from path |
 
-These analyze source files only. They don't check rendered output, actual meta tags, or schema validity.
+Analyzes source files only. Doesn't check rendered output, actual meta tags, or schema validity.
 
 **Live site audits (use URL-based free tools instead):**
 
@@ -68,19 +67,15 @@ For deployed pages, prefer `check_meta_tags`, `validate_schema`, `debug_social_s
 
 | Tool | When |
 |------|------|
-| `mcp__nuxt-seo-pro__research_keywords` | Find target keywords |
-| `mcp__nuxt-seo-pro__analyze_serp` | Check competition |
+| `mcp__nuxt-seo-pro__keyword_research` | Find target keywords (`type: 'research'`) or check competition (`type: 'serp'`) |
 
 **Schema/OG generation** (requires nuxt-schema-org / nuxt-og-image modules):
 
 | Tool | When | Output |
 |------|------|--------|
-| `mcp__nuxt-seo-pro__generate_schema_org` | Missing structured data | `composable` for .vue, `frontmatter` for .md |
-| `mcp__nuxt-seo-pro__generate_og_image_template` | Missing/weak social preview | `composable` for .vue, `frontmatter` for .md |
+| `mcp__nuxt-seo-pro__generate_seo` | Missing structured data (`type: 'schema-org'`) or social preview (`type: 'og-image'`) | `composable` for .vue, `frontmatter` for .md |
 
 Schema types: Article, BlogPosting, Product, FAQPage, HowTo, Recipe, Event, LocalBusiness, SoftwareApplication
-
-**First-time setup:** Run `mcp__nuxt-seo-pro__init_site` before other pro tools.
 
 ## GSC-Backed Audits (Pro)
 
@@ -97,6 +92,6 @@ These MCP prompts chain multiple GSC tools and return prioritized recommendation
 
 | Tool | Returns |
 |------|---------|
-| `gsc_analysis({ preset: 'decay' })` | Pages losing rankings |
-| `gsc_analysis({ preset: 'striking-distance' })` | Keywords close to page 1 |
-| `gsc_page_details({ pageUrl: '...' })` | All keywords for a page |
+| `gsc_query({ type: 'analysis', preset: 'decay' })` | Pages losing rankings |
+| `gsc_query({ type: 'analysis', preset: 'striking-distance' })` | Keywords close to page 1 |
+| `gsc_query({ type: 'page-detail', pageUrl: '...' })` | All keywords for a page |

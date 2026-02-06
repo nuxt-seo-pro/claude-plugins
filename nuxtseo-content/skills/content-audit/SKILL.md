@@ -29,6 +29,7 @@ Unified content review and improvement. Detects content type and applies appropr
 | Type | Trigger Phrases | Reference |
 |------|-----------------|-----------|
 | `style` | "check voice", "tone consistency", "terminology", "writing style" | `../content-writing/references/foundations.md` + `writing-style.md` |
+| `accessibility` | "check accessibility", "a11y", "screen reader", "alt text", "link text" | `../.shared/accessibility.md` |
 | `linking` | "fix links", "internal linking", "broken links", "orphan pages", "frontmatter links" | `references/linking.md` |
 | `components` | "add callouts", "key takeaways", "improve readability", "add warnings" | `references/components.md` |
 | `code` | "check code", "code quality", "code examples", "incomplete code", "code grouping" | `references/code-quality.md` |
@@ -52,6 +53,7 @@ Read: .claude/context/site-pages.md
 | Audit Type | Load Reference |
 |------------|----------------|
 | `style` | `../content-writing/references/foundations.md` + `writing-style.md` |
+| `accessibility` | `../.shared/accessibility.md` |
 | `linking` | `references/linking.md` |
 | `code` | `references/code-quality.md` |
 | `components` | `references/components.md` |
@@ -76,13 +78,18 @@ Read: .claude/context/site-pages.md
 | Pass | Check | Reference |
 |------|-------|-----------|
 | 1 | **Style** - banned words, hedging, voice consistency | `foundations.md` |
-| 2 | **Broken links** - validate all internal/external links resolve | `references/linking.md` |
-| 3 | **Missing internal links** - concepts mentioned without links to their docs | `references/linking.md` |
-| 4 | **SEO issues** - meta tags, URL structure, OG tags | `references/seo.md` |
-| 5 | **Missing citations** - stats/claims without sources, use WebSearch to find | `references/seo.md` |
-| 6 | **GEO optimization** - question headings, quotable facts, schema.org | `references/geo.md` |
-| 7 | **Code quality** - incomplete examples, missing error handling | `references/code-quality.md` |
-| 8 | **Components** - missing callouts, warnings, key takeaways | `references/components.md` |
+| 2 | **Accessibility** - link text, alt text, heading hierarchy | `../.shared/accessibility.md` |
+| 3 | **Broken links** - validate all internal/external links resolve | `references/linking.md` |
+| 4 | **Missing internal links** - concepts mentioned without links to their docs | `references/linking.md` |
+| 5 | **SEO issues** - meta tags, URL structure, OG tags | `references/seo.md` |
+| 6 | **Missing citations** - stats/claims without sources, use WebSearch to find | `references/seo.md` |
+| 7 | **GEO optimization** - question headings, quotable facts, schema.org | `references/geo.md` |
+| 8 | **Code quality** - incomplete examples, missing error handling | `references/code-quality.md` |
+| 9 | **Components** - missing callouts, warnings, key takeaways | `references/components.md` |
+
+**MCP tools:** For deployed pages, use `analyze_page` (auto-detects `.vue` or `.md`) from nuxt-seo-pro for automated pre-checks. For live site validation, prefer `check_meta_tags`, `validate_schema`, `debug_social_share`.
+
+**Fix priority:** style > broken links > accessibility > SEO > code > citations > GEO > components. Fix high-priority issues first.
 
 **For specific audits:** Only run the requested audit type.
 
@@ -92,6 +99,7 @@ Generate `.claude/context/content-audit.md`:
 file: /content/docs/auth.md
 passes_completed:
   - style: 2 issues
+  - accessibility: 0 issues
   - broken-links: 1 issue
   - internal-links: 0 issues
   - seo: 1 issue
@@ -115,7 +123,7 @@ issues:
 ```
 
 **Required fields:**
-- `passes_completed` - list ALL 7+ passes with issue count (proves each was run)
+- `passes_completed` - list ALL 9 passes with issue count (proves each was run)
 - `issues` - file path, line number, type, priority, specific fix
 
 ## Applying Fixes
@@ -175,6 +183,27 @@ DONE - Audited 3 pages, fixed 8 issues total
 
 Stop hooks check for `DONE` to know when to stop iterating.
 
+## GSC-Backed Audits
+
+When Google Search Console is connected, supplement audits with real data:
+
+| Tool | Audit Enhancement |
+|------|-------------------|
+| `gsc_query({ type: 'page-detail', pageUrl })` | Check actual keywords a page ranks for vs target keyword |
+| `gsc_query({ type: 'analysis', preset: 'decay' })` | Identify pages losing rankings (prioritize for audit) |
+| `gsc_query({ type: 'analysis', preset: 'striking-distance' })` | Find pages close to page 1 that need small improvements |
+
+Use GSC data to prioritize which pages to audit first - declining pages need attention most.
+
+## Error Recovery
+
+| Failure | Fallback |
+|---------|----------|
+| WebFetch fails on external link | Mark as "unverified" instead of "broken", note in audit |
+| MCP tools unavailable | Skip automated checks, rely on manual reference-based auditing |
+| site-pages.md outdated | Suggest re-running `site-setup` to refresh before continuing |
+| Too many pages to audit | Use scratchpad pattern, prioritize by traffic (GSC) or recency |
+
 ## Success Criteria
 
 Audit passes when ALL are true:
@@ -184,10 +213,14 @@ Audit passes when ALL are true:
 | Zero banned words | Grep content against foundations.md banned list |
 | All internal links resolve | Each link path exists in site-pages.md |
 | All external links live | WebFetch returns 200 (sample 3-5 if many) |
+| Accessible link text | No standalone "click here", "learn more", "here" |
+| Alt text on images | All images have descriptive alt (not "image of...") |
 | Code blocks have language | Every ``` has lang specified |
 | H2s under 60 chars | Check heading lengths |
+| No skipped heading levels | H2 → H3 → H4, never H2 → H4 |
 | No orphan pages | Page has 2+ incoming links from site-pages.md |
 | relatedPages populated | Frontmatter has 2-3 related pages |
+| Dates present | createdAt and updatedAt in frontmatter |
 
 For specific audit types, only relevant criteria apply.
 

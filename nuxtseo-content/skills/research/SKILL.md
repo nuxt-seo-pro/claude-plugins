@@ -25,15 +25,15 @@ Unified research skill for keyword discovery, market validation, and competitive
 
 ## MCP Tools
 
-When `nuxt-seo-pro` MCP available, use `init_site` first, then research/analysis tools. See `references/mcp-tools.md` for full API.
+When `nuxt-seo-pro` MCP available, use research/analysis tools directly. See `references/mcp-tools.md` for full API.
 
 ## Research Types
 
 | Type | Triggers | Flow |
 |------|----------|------|
-| `content` | "keyword research", "what to write", "content gaps" | get_sitemap_urls → research_keywords → analyze_serp |
-| `market` | "is there demand", "validate idea", "should I build" | research_keywords → analyze_serp → analyze_social_signals |
-| `competitor` | "competitor analysis", "who ranks for" | estimate_domain_traffic → check_rankings → analyze_serp |
+| `content` | "keyword research", "what to write", "content gaps" | get_sitemap_urls → keyword_research(type=research) → keyword_research(type=serp) |
+| `market` | "is there demand", "validate idea", "should I build" | keyword_research(type=research) → keyword_research(type=serp) → WebSearch site:reddit.com |
+| `competitor` | "competitor analysis", "who ranks for" | domain_info(type=traffic) → keyword_research(type=rankings) → keyword_research(type=serp) |
 
 ## Content Research
 
@@ -72,7 +72,7 @@ Validate product ideas before building.
 
 ### Reddit Validation
 
-Use `analyze_social_signals` with `platforms: ["reddit"]` or WebSearch `site:reddit.com [topic]`:
+Use WebSearch `site:reddit.com [topic]`:
 - Active subreddits = community exists
 - Recurring questions = pain points to address
 - Product complaints = opportunities to solve
@@ -80,7 +80,7 @@ Use `analyze_social_signals` with `platforms: ["reddit"]` or WebSearch `site:red
 
 ### Domain Check
 
-Use `check_domain_availability` for up to 10 domains. Prefer `.com` for mass market, `.dev`/`.io` for developer tools.
+Use `domain_info(type=availability)` for up to 10 domains. Prefer `.com` for mass market, `.dev`/`.io` for developer tools.
 
 ## Competitor Research
 
@@ -106,22 +106,41 @@ See `references/output-formats.md` for artifact templates (target-keywords.md, m
 
 ## After Research
 
-| Research Type | Next Step |
-|---------------|-----------|
-| content | Write target-keywords.md, suggest content-writing skill |
-| market | Write market-research.md, summarize findings to user |
-| competitor | Write competitors.md, identify content gaps |
+| Research Type | Output | Next Step |
+|---------------|--------|-----------|
+| content | `target-keywords.md` | "Start writing with `content-writing` skill?" |
+| market | `market-research.md` | "Write landing page with `content-writing` skill?" |
+| competitor | `competitors.md` | "Audit existing pages with `content-audit` to find improvements?" |
 
-## Next Steps (Cross-Skill Handoff)
+## GSC-Backed Research
 
-After research, suggest relevant follow-up:
+When Google Search Console is connected via `nuxt-seo-pro`, supplement keyword research with real data:
 
-| Situation | Suggest |
-|-----------|---------|
-| Keywords identified | "Start writing with `content-writing` skill?" |
-| Content gaps found | "Create content plan in `.claude/plans/content-calendar.md`?" |
-| Competitor analysis done | "Audit existing pages with `content-audit` to find improvements?" |
-| Market validated | "Write landing page with `content-writing` skill?" |
+| Tool | Use For |
+|------|---------|
+| `gsc_query({ type: 'keywords' })` | Discover keywords you already rank for |
+| `gsc_query({ type: 'analysis', preset: 'striking-distance' })` | Find quick-win keywords in positions 4-20 |
+| `gsc_query({ type: 'analysis', preset: 'opportunity' })` | High impressions, low CTR keywords to optimize |
+| `gsc_query({ type: 'page-detail', pageUrl: '...' })` | See all keywords a page ranks for |
+
+Combine GSC data with `keyword_research(type=research)` to find gaps between what you rank for and what's available.
+
+## Long-Running Research
+
+For multi-topic research, use scratchpad tracking:
+
+```md
+## Goal
+Research keywords for all /docs/ categories
+
+## Topics
+- [ ] authentication (in progress)
+- [ ] database
+- [ ] deployment
+
+## Status
+In progress
+```
 
 ## SEO Debug Mode
 
@@ -140,10 +159,11 @@ When user asks "why isn't this ranking" or "why no traffic":
 5. [ ] Keyword too competitive
 
 ### Investigation Steps
-1. analyze_serp for [keyword] - what's ranking?
+1. keyword_research(type=serp) for [keyword] - what's ranking?
 2. Compare our content vs top 3 results
 3. Check our meta tags, schema
-4. estimate_domain_traffic - our authority vs theirs
+4. domain_info(type=traffic) - our authority vs theirs
+5. gsc_query(type=page-detail) for real ranking data (if GSC connected)
 
 ### Findings
 [Document evidence for each hypothesis]
@@ -153,3 +173,11 @@ When user asks "why isn't this ranking" or "why no traffic":
 ```
 
 Ask user before deep investigation: "Want me to investigate why [page] isn't ranking for [keyword]?"
+
+## Error Recovery
+
+| Failure | Fallback |
+|---------|----------|
+| MCP tools unavailable | Use WebSearch (see Fallback section) |
+| WebSearch rate limited | Ask user to provide seed keywords manually |
+| No keyword data returned | Try broader seed terms (1-2 words), check spelling |

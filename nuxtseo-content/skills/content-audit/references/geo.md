@@ -54,7 +54,7 @@ Pages with schema.org are 40% more likely to be cited. Flag opportunities:
 
 **MCP tools:**
 - `mcp__nuxt-seo__validate_schema` - Check existing JSON-LD for errors
-- `mcp__nuxt-seo-pro__generate_schema_org` - Generate new schema (`composable` for .vue, `frontmatter` for .md)
+- `mcp__nuxt-seo-pro__generate_seo` - Generate new schema (`type: 'schema-org'`, `composable` for .vue, `frontmatter` for .md)
 
 Requires nuxt-schema-org module for generation.
 

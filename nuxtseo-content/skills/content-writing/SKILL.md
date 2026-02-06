@@ -29,8 +29,9 @@ Unified content creation skill. Detects content type and loads appropriate patte
 | `comparison` | "X vs Y", "alternatives to" | `references/types/comparison.md` |
 | `sales` | "sales page", "pricing page" | `references/types/sales.md` |
 
-**Always load:** `references/foundations.md`
+**Always load:** `references/foundations.md`, `../.shared/accessibility.md`
 **For .md files:** `../.shared/mdc-guidelines.md`
+**For landing/sales/comparison:** `../.shared/persuasion.md`
 
 If unclear, ask user which type.
 
@@ -50,7 +51,9 @@ If site-config.md missing, prompt user to run `site-setup` first.
 |--------------|------------------------------|
 | docs | `categories.docs` |
 | educational | `categories.learn` |
-| landing/sales | `categories.landing` |
+| landing | `categories.landing` |
+| sales | `categories.landing` |
+| comparison | `categories.learn` (analytical voice) |
 
 Apply: voice, structure, terminology, code style from category.
 
@@ -82,6 +85,8 @@ Before marking content complete, validate and iterate:
 3. Confirm code blocks have language tags → add if missing
 4. Check H2s under 60 chars → shorten if needed
 5. Verify relatedPages has 2-3 valid paths → add if missing
+6. Check link text accessibility → no "click here", "learn more" standalone
+7. Verify frontmatter has createdAt and updatedAt (run `date +%Y-%m-%d`)
 ```
 
 **Loop until all pass.** Don't deliver content with known issues.
@@ -98,7 +103,19 @@ Final verification (all must be true):
 | Code placement | Code within first 3 scrolls (if technical) |
 | Internal links | First mention of features linked |
 | Related pages | relatedPages frontmatter has 2-3 valid paths |
+| Dates | createdAt and updatedAt set in frontmatter |
+| Accessibility | Link text is descriptive, images have alt text |
 | Length | Within target word count for content type |
+
+## Error Recovery
+
+| Failure | Fallback |
+|---------|----------|
+| site-config.md missing | Prompt to run `site-setup` first |
+| site-pages.md missing | Write content without internal links, note gaps with `[LINK: topic]` |
+| writing-style.md missing | Use type-specific reference defaults |
+| WebSearch fails for stats | Mark with `[STAT NEEDED: topic]`, continue writing |
+| Internal link target not in site-pages.md | Mark with `[LINK: topic]`, verify later |
 
 ## Next Steps (Cross-Skill Handoff)
 

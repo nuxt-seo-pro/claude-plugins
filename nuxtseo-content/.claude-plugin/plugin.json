@@ -15,6 +15,7 @@
     "nuxt"
   ],
   "repository": "https://github.com/nuxtseo/claude-plugins",
+  "skills": "./skills/",
   "hooks": [
     {
       "event": "PreToolUse",

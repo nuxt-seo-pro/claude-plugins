@@ -1,19 +1,18 @@
 {
   "name": "nuxt-seo-claude-plugins",
   "type": "module",
-  "packageManager": "pnpm@10.27.0",
+  "packageManager": "pnpm@10.28.2",
   "scripts": {
     "test": "vitest",
     "test:update": "vitest -u",
-    "release": "npx tsx scripts/release.ts"
-  },
-  "dependencies": {
-    "@antfu/eslint-config": "^6.7.3",
-    "eslint": "^9.39.2"
+    "release": "npx tsx scripts/release.ts",
+    "lint": "eslint . --fix"
   },
   "devDependencies": {
-    "@types/node": "^25.0.3",
+    "@antfu/eslint-config": "^7.2.0",
+    "eslint": "^9.39.2",
+    "@types/node": "^25.2.1",
     "typescript": "^5.9.3",
-    "vitest": "^4.0.16"
+    "vitest": "^4.0.18"
   }
 }

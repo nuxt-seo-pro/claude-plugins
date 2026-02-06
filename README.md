@@ -13,11 +13,7 @@ Claude Code plugins for SEO content writing and documentation.
 
 Requires [Nuxt SEO Pro MCP](https://nuxtseo.com/docs/nuxt-seo-pro/mcp/installation) — API key starts with `nsp_`.
 
-Some skills use site-specific tools (`get_sitemap_urls`, `analyze_content_page`). Run `init_site` first:
-
-```
-Set up https://mysite.com for SEO analysis
-```
+Some skills use site-specific tools (`get_sitemap_urls`, `analyze_page`).
 
 ## Available Skills
 

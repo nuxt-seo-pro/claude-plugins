@@ -2,41 +2,20 @@
 name: SEO Write Guard
 event: PreToolUse
 matchTool: Write
-matchFileGlob: "**/*.md"
+matchFileGlob: "content/**/*.md"
 ---
 
 # SEO Content Validation
 
-Before writing this markdown file, verify:
+Before writing this markdown file, load and apply rules from `${CLAUDE_PLUGIN_ROOT}/skills/content-writing/references/foundations.md`.
 
-## Banned Words Check
-Scan your content for these AI slop words and remove them:
-- dive into, crucial, essential, vital, robust, seamless, leverage, utilize, ensure, comprehensive, harness, empower, elevate, unlock, game-changer, delve, realm, landscape, plethora, myriad
+Verify your content passes:
 
-## Banned Phrases
-- "it's important to note", "in today's [X]", "let's explore", "this is where X comes in", "at its core", "when it comes to", "by the end of this guide"
+1. **Zero banned words or phrases** from the Banned section
+2. **No banned patterns** - rhetorical questions, three-adjective chains, filler intros, superlatives without proof, em dashes
+3. **No banned endings** - "Now you're ready to...", "Happy coding!", "In conclusion..."
+4. **TypeScript only** - never JavaScript in code blocks
+5. **All code blocks have language tags**
+6. **Accessible link text** - no "click here", "learn more", "here" standalone
 
-## Banned Patterns
-- Rhetorical questions as intros
-- Three-adjective chains ("powerful, flexible, intuitive")
-- Filler intros before getting to the point
-- Superlatives without proof
-- Em dashes (use hyphen only)
-
-## Banned Endings
-Never: "Now you're ready to...", "Happy coding!", "In conclusion..."
-
-## Quick Fixes
-| Slop | Fix |
-|------|-----|
-| It's important to note that... | [just state it] |
-| This allows you to... | You can... |
-| In order to... | To... |
-| provides a way to | lets you |
-| is designed to | does |
-
-## Code Requirements
-- TypeScript only, never JavaScript
-- All code blocks need language tags
-
-If any violations found, fix them before writing.
+Apply quick fixes from foundations.md for any slop found. Fix all violations before writing.

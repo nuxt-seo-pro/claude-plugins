@@ -15,7 +15,7 @@ Before suggesting, check what exists:
 - `::quick-check` - quiz
 - `::checklist` - persistent todo
 
-If missing, suggest user add them or skip these components.
+If missing, offer to copy templates from `skills/.shared/component-templates/` (KeyTakeaways.vue, QuickCheck.vue, Checklist.vue) into the project's `components/content/` directory.
 
 ## Content Type Rules
 

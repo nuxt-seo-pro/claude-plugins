@@ -1,0 +1,13 @@
+sequenceDiagram
+    participant B as Browser
+    participant S as Server
+    participant A as Auth Provider
+
+    B->>S: GET /protected
+    S-->>B: 401 Redirect
+    B->>A: Login request
+    A-->>B: Token
+    B->>S: GET /protected + Token
+    S->>A: Verify token
+    A-->>S: Valid
+    S-->>B: 200 Protected content

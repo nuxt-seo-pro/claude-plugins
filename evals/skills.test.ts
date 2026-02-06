@@ -9,19 +9,16 @@ const SKILLS_DIR = join(PLUGIN_DIR, 'skills')
 // Parse banned words from foundations.md
 const foundationsFile = readFileSync(join(SKILLS_DIR, 'content-writing/references/foundations.md'), 'utf-8')
 
-// Extract banned words section (single line of comma-separated words)
-const bannedWordsMatch = foundationsFile.match(/### Banned Words\n\n(.+)\n/)
+// Extract banned words from "**Words:** word1, word2, ..." line
+const bannedWordsMatch = foundationsFile.match(/\*\*Words:\*\*\s*(.+)/)
 const BANNED_WORDS = bannedWordsMatch
   ? bannedWordsMatch[1].split(', ').map(w => w.trim().toLowerCase())
   : []
 
-// Extract banned phrases section (list items with quotes)
-const bannedPhrasesSection = foundationsFile.match(/### Banned Phrases\n\n([\s\S]*?)(?=\n### |$)/)
-const BANNED_PHRASES = bannedPhrasesSection
-  ? bannedPhrasesSection[1]
-      .split('\n')
-      .filter(line => line.startsWith('- "'))
-      .map(line => line.slice(3, -1).toLowerCase())
+// Extract banned phrases from "**Phrases:** "phrase1", "phrase2", ..." line
+const bannedPhrasesMatch = foundationsFile.match(/\*\*Phrases:\*\*\s*(.+)/)
+const BANNED_PHRASES = bannedPhrasesMatch
+  ? bannedPhrasesMatch[1].match(/"([^"]+)"/g)?.map(p => p.slice(1, -1).toLowerCase()) ?? []
   : []
 
 // Hedging phrases that indicate weak writing
