@@ -1,7 +1,7 @@
 ---
 name: Diagram
 description: This skill should be used when the user asks to "create diagram", "flowchart", "decision tree", "architecture diagram", "data flow", "sequence diagram", "process flow", or when technical content needs visual explanation. Supports Mermaid (inline markdown, zero deps) and D2 (styled SVGs with design tokens).
-version: 0.11.0
+version: 0.12.0
 ---
 
 # Diagram

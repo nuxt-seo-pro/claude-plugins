@@ -10,7 +10,7 @@
     {
       "name": "nuxtseo-content",
       "description": "SEO content skills: write docs/articles/landing pages, audit existing content, keyword/market research. Integrates with Nuxt SEO Pro MCP for real keyword and SERP data.",
-      "version": "0.11.0",
+      "version": "0.12.0",
       "author": {
         "name": "Harlan Wilton",
         "email": "harlan@harlanzw.com"

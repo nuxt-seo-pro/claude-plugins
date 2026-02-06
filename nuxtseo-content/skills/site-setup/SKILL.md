@@ -1,7 +1,7 @@
 ---
 name: Site Setup
 description: Use when user says "setup site", "configure site", "initialize project", "new project", "set up for writing", or when site-config.md is missing. Creates site-config.md, site-pages.md, writing-style.md in .claude/context/.
-version: 0.11.0
+version: 0.12.0
 ---
 
 # Site Setup
