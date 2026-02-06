@@ -87,7 +87,7 @@ Read: .claude/context/site-pages.md
 | 8 | **Code quality** - incomplete examples, missing error handling | `references/code-quality.md` |
 | 9 | **Components** - missing callouts, warnings, key takeaways | `references/components.md` |
 
-**MCP tools:** For deployed pages, use `analyze_page` (auto-detects `.vue` or `.md`) from nuxt-seo-pro for automated pre-checks. For live site validation, prefer `check_meta_tags`, `validate_schema`, `debug_social_share`.
+**MCP tools:** For source files, use `analyze_page` (auto-detects `.vue` or `.md`) from nuxt-seo-pro. For live site validation, prefer `check_meta_tags`, `validate_schema`, `debug_social_share`.
 
 **Fix priority:** style > broken links > accessibility > SEO > code > citations > GEO > components. Fix high-priority issues first.
 

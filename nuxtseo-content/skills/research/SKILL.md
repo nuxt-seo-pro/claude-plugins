@@ -1,7 +1,7 @@
 ---
 name: Research
 description: This skill should be used when the user asks for "keyword research", "market research", "competitor analysis", "content gaps", "is there demand for", "what should I write about", "validate product idea", "who ranks for", "traffic estimate", or any pre-writing research task. For best results, specify research type (content, market, competitor), target keyword/topic, and competitor domains if known.
-version: 0.11.0
+version: 0.12.0
 ---
 
 # Research
@@ -67,8 +67,6 @@ Validate product ideas before building.
 | High volume, low difficulty | Underserved demand |
 | Many related keywords | Broad market interest |
 | Question keywords | People need education/solutions |
-| `activityLevel: high` (100+) | Active community, validated demand |
-| `trend: growing` | Good timing |
 
 ### Reddit Validation
 

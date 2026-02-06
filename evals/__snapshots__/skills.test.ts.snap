@@ -1,140 +1,150 @@
 // Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
 
-exports[`comparison-writing > comparison structure 1`] = `
-"Here's a minimal comparison article structure:
-
-\`\`\`markdown
-# React vs Vue: Which Framework Should You Choose?
-
-## Overview
-
-## Key Differences
-
-### Learning Curve
-
-### Performance
-
-### Ecosystem
-
-### Community & Support
-
-## When to Choose React
-
-## When to Choose Vue
-
-## Conclusion
-\`\`\`"
-`;
+exports[`comparison-writing > comparison structure 1`] = `"Done. Created a minimal React vs Vue comparison structure with 9 main sections covering overview, technical differences, adoption factors, and decision criteria."`;
 
 exports[`content-research > research output format 1`] = `
-"\`\`\`markdown
----
-topic: nuxt og image
-primary_keyword: nuxt og image
-secondary_keywords:
-  - [keyword 2]
-  - [keyword 3]
-search_intent: [informational|transactional|navigational]
-difficulty: [1-100]
-volume: [monthly searches]
----
+"# Nuxt OG Image Content Research Template
 
-# Content Research: Nuxt OG Image
+\`\`\`markdown
+## Topic: Nuxt OG Image
 
-## SERP Analysis
+### Market Overview
+- **Search Volume**: [volume]
+- **Difficulty**: [0-100]
+- **CPC**: $[amount]
+- **Trend**: [rising/stable/declining]
 
-| Position | Domain | Title | Type |
-|----------|--------|-------|------|
-| 1 | [domain] | [title] | [docs/blog/tool] |
-| 2 | [domain] | [title] | [docs/blog/tool] |
-| 3 | [domain] | [title] | [docs/blog/tool] |
+### Target Audience
+- Primary: [persona]
+- Secondary: [persona]
+- Pain Points: [list]
 
-## Content Gaps
+### Competitor Analysis
+| Domain | Traffic | Backlinks | Content Type |
+|--------|---------|-----------|--------------|
+| [competitor] | [est.] | [count] | [type] |
 
-- [gap 1]
-- [gap 2]
+### Content Gap Opportunities
+- [Missing angle 1]
+- [Missing angle 2]
+- [Missing angle 3]
 
-## Questions to Answer
+### Related Keywords
+- [Keyword 1] - [volume] searches
+- [Keyword 2] - [volume] searches
+- [Keyword 3] - [volume] searches
 
-- [PAA question 1]
-- [PAA question 2]
+### Content Angles
+1. **[Angle]** - [Description]
+2. **[Angle]** - [Description]
+3. **[Angle]** - [Description]
 
-## Recommended Angle
+### Recommended Content Types
+- [ ] Tutorial/How-to
+- [ ] Reference/API docs
+- [ ] Comparison
+- [ ] Best practices
+- [ ] Troubleshooting
 
-[1-2 sentences on unique positioning]
-\`\`\`"
+### SEO Targets
+- **Primary Keyword**: [keyword]
+- **Secondary Keywords**: [keywords]
+- **Content Length**: [words]
+- **Backlink Strategy**: [approach]
+\`\`\`
+
+This template captures market research, audience, competitive landscape, keyword opportunities, and content strategy for the topic."
 `;
 
 exports[`docs-writing > doc structure matches expected format 1`] = `
 "\`\`\`markdown
-## \`useExample\`
+## API Reference
 
-### Parameters
+### \`useExample\`
 
-| Name | Type | Description |
-|------|------|-------------|
-| \`name\` | \`string\` | — |
-| \`count\` | \`number\` | — |
+A composable for managing example state.
+
+| Parameter | Type | Description |
+|-----------|------|-------------|
+| \`name\` | \`string\` | The name identifier |
+| \`count\` | \`number\` | The count value |
 \`\`\`"
 `;
 
 exports[`landing-copy > landing copy structure 1`] = `
-"Here's a landing page structure for a developer tool:
+"Done. This structure covers the typical flow for developer tools:
 
-1. **Hero** - Value proposition headline + CTA
-2. **Problem** - Pain points the tool solves
-3. **Solution** - How the tool works (3-4 features)
-4. **Code Example** - Interactive demo or snippet
-5. **Integrations** - Compatible frameworks/tools
-6. **Testimonials** - Developer quotes + company logos
-7. **Pricing** - Tiers with feature comparison
-8. **FAQ** - Common technical questions
-9. **CTA** - Final call to action + quick start command"
+1. **Hero** - Immediate value prop
+2. **Problems** - Establish pain points
+3. **Features** - What it does
+4. **How It Works** - Demystify it
+5. **Use Cases** - Concrete applications
+6. **Benefits** - Why it matters
+7. **Code Example** - Prove it works
+8. **Integration** - Ecosystem fit
+9. **Performance** - Build confidence
+10. **Testimonials** - Social proof
+11. **Comparison** - Position against alternatives
+12. **Pricing** - Commercial intent
+13. **CTA** - Drive action
+14. **FAQ** - Address objections
+15. **Community** - Build connection
+16. **Footer** - Navigation/legal
+
+Adjust based on your tool's positioning."
 `;
 
-exports[`learn-writing > learn intro structure 1`] = `"Structured data tells search engines exactly what your content means—turning a generic page into a rich result with ratings, prices, and FAQs. Nuxt SEO makes adding Schema.org markup as simple as calling \`useSchemaOrg()\` in your component."`;
+exports[`learn-writing > learn intro structure 1`] = `
+"Here are two options for a structured data hook:
+
+**Option 1 (Problem-focused):**
+Most Nuxt developers ignore structured data until they notice their search results look bare compared to competitors' rich snippets—by then they've already lost clicks to better SEO performance.
+
+**Option 2 (Opportunity-focused):**
+Structured data transforms your Nuxt site from invisible text in search results into rich, interactive snippets that Google actually understands—and it takes just minutes to implement with the right approach.
+
+Which direction resonates more with your audience?"
+`;
 
 exports[`market-research > market research structure 1`] = `
-"\`\`\`markdown
-# Market Research: AI Code Review Tool
+"# Market Research Template: AI Code Review Tool
 
 ## Market Overview
-- **Market size**: $X.XB (2024)
-- **Growth rate**: XX% CAGR
-- **Key drivers**: [driver 1], [driver 2]
+- **TAM (Total Addressable Market)**: $XX billion
+- **SAM (Serviceable Addressable Market)**: $X billion
+- **SOM (Serviceable Obtainable Market)**: $X million (Year 1)
 
 ## Target Audience
-| Segment | Pain Points | Buying Triggers |
-|---------|-------------|-----------------|
-| Enterprise DevOps | [pain] | [trigger] |
-| Startups | [pain] | [trigger] |
-| Individual devs | [pain] | [trigger] |
+- **Primary**: [e.g., Enterprise engineering teams, mid-market startups]
+- **Secondary**: [e.g., Individual developers, open-source projects]
+- **Pain Points**: [e.g., Code review bottleneck, inconsistent feedback, slow merge cycles]
 
-## Competitor Analysis
-| Product | Pricing | Key Features | Weaknesses |
-|---------|---------|--------------|------------|
-| CodeRabbit | $XX/mo | [features] | [gaps] |
-| Codacy | $XX/mo | [features] | [gaps] |
-| SonarQube | $XX/mo | [features] | [gaps] |
+## Competitive Landscape
+| Competitor | Positioning | Strengths | Weaknesses |
+|---|---|---|---|
+| [Name] | [e.g., GitHub Copilot] | [e.g., Native GH integration] | [e.g., Generic feedback] |
+| [Name] | [e.g., DeepSource] | [e.g., Automated fixes] | [e.g., Limited context] |
+| [Name] | [e.g., Custom solution] | [] | [] |
 
-## Feature Gaps
-- [Unmet need 1]
-- [Unmet need 2]
+## Key Differentiators
+- [e.g., Context-aware across entire codebase]
+- [e.g., Security-first review patterns]
+- [e.g., Team workflow integration]
 
-## Positioning Opportunities
-- [Angle 1]: [why underserved]
-- [Angle 2]: [why underserved]
+## Pricing Strategy
+- **Model**: [e.g., Per-seat, per-review, freemium]
+- **Entry Price**: $X/month
+- **Target ARPU**: $X/month
 
-## Search Intent
-| Query | Volume | Difficulty | Intent |
-|-------|--------|------------|--------|
-| "ai code review" | X.Xk | XX | commercial |
-| "automated pr review" | X.Xk | XX | commercial |
+## Go-to-Market
+- **Phase 1**: [e.g., Open-source early adopters]
+- **Phase 2**: [e.g., SMB outreach]
+- **Phase 3**: [e.g., Enterprise sales]
 
-## Recommendations
-1. [Action item]
-2. [Action item]
-\`\`\`"
+## Success Metrics
+- Adoption rate: [e.g., X% of target market by Year 2]
+- NPS: [e.g., 50+]
+- Churn: [e.g., <[X]% MRR]"
 `;
 
-exports[`writing-foundations > uses direct language without hedging 1`] = `"Add \`@nuxtjs/sitemap\` to your Nuxt modules and it auto-generates a sitemap from your pages and routes."`;
+exports[`writing-foundations > uses direct language without hedging 1`] = `"A sitemap in Nuxt is automatically generated by \`@nuxtjs/sitemap\` and submitted to search engines to help them discover and index all your pages."`;
