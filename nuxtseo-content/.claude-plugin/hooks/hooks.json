@@ -1,0 +1,25 @@
+{
+  "hooks": {
+    "PreToolUse": [
+      {
+        "matcher": "Write",
+        "hooks": [
+          {
+            "type": "prompt",
+            "prompt": "Before writing this markdown file, load and apply rules from ${CLAUDE_PLUGIN_ROOT}/skills/content-writing/references/foundations.md.\n\nVerify your content passes:\n\n1. Zero banned words or phrases from the Banned section\n2. No banned patterns - rhetorical questions, three-adjective chains, filler intros, superlatives without proof, em dashes\n3. No banned endings - \"Now you're ready to...\", \"Happy coding!\", \"In conclusion...\"\n4. TypeScript only - never JavaScript in code blocks\n5. All code blocks have language tags\n6. Accessible link text - no \"click here\", \"learn more\", \"here\" standalone\n\nApply quick fixes from foundations.md for any slop found. Fix all violations before writing."
+          }
+        ]
+      }
+    ],
+    "SessionStart": [
+      {
+        "hooks": [
+          {
+            "type": "prompt",
+            "prompt": "Check if `content/` directory exists (Nuxt Content project indicator).\n\nIf NO `content/` folder, skip - this plugin is not relevant.\n\nIf `content/` exists, check for `.claude/context/site-config.md`:\n\nMissing site-config.md: Report \"SEO Content Plugin: Nuxt Content project detected but no site-config.md. If writing content, audit SEO, or keyword research requested, suggest site-setup skill first.\"\n\nHas site-config.md: Report \"SEO Content Plugin: Site configured. Context in .claude/context/site-config.md\""
+          }
+        ]
+      }
+    ]
+  }
+}

@@ -16,16 +16,5 @@
   ],
   "repository": "https://github.com/nuxtseo/claude-plugins",
   "skills": "./skills/",
-  "hooks": [
-    {
-      "event": "PreToolUse",
-      "matchTool": "Write",
-      "matchFileGlob": "content/**/*.md",
-      "prompt": "${CLAUDE_PLUGIN_ROOT}/.claude-plugin/hooks/seo-write-guard.md"
-    },
-    {
-      "event": "SessionStart",
-      "prompt": "${CLAUDE_PLUGIN_ROOT}/.claude-plugin/hooks/site-config-check.md"
-    }
-  ]
+  "hooks": "./.claude-plugin/hooks/hooks.json"
 }
