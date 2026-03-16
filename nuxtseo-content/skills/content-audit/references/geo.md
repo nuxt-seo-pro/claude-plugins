@@ -53,8 +53,8 @@ Pages with schema.org are 40% more likely to be cited. Flag opportunities:
 - FAQ section → `defineFAQPage()`
 
 **MCP tools:**
-- `mcp__nuxt-seo__validate_schema` - Check existing JSON-LD for errors
-- `mcp__nuxt-seo-pro__generate_seo` - Generate new schema (`type: 'schema-org'`, `composable` for .vue, `frontmatter` for .md)
+- `validate_schema` - Check existing JSON-LD for errors
+- `generate_seo(type=schema-org)` - Generate new schema (`composable` for .vue, `frontmatter` for .md)
 
 Requires nuxt-schema-org module for generation.
 

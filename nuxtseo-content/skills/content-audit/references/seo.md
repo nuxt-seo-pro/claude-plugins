@@ -44,10 +44,10 @@ Claims requiring sources:
 
 | Tool | When |
 |------|------|
-| `mcp__nuxt-seo__check_meta_tags` | Validate title, description, OG tags |
-| `mcp__nuxt-seo__debug_social_share` | Preview social cards, find missing tags |
-| `mcp__nuxt-seo__validate_schema` | Check JSON-LD/Microdata for errors |
-| `mcp__nuxt-seo__analyze_robots_txt` | Parse robots.txt rules |
+| `check_meta_tags` | Validate title, description, OG tags |
+| `debug_social_share` | Preview social cards, find missing tags |
+| `validate_schema` | Check JSON-LD/Microdata for errors |
+| `analyze_robots_txt` | Parse robots.txt rules |
 
 ### Pro (nuxt-seo-pro)
 
@@ -55,7 +55,7 @@ Claims requiring sources:
 
 | Tool | When |
 |------|------|
-| `mcp__nuxt-seo-pro__analyze_page` | Pre-commit check for `.vue` or `.md` files - auto-detects type from path |
+| `analyze_page` | Pre-commit check for `.vue` or `.md` files - auto-detects type from path |
 
 Analyzes source files only. Doesn't check rendered output, actual meta tags, or schema validity.
 
@@ -67,13 +67,13 @@ For deployed pages, prefer `check_meta_tags`, `validate_schema`, `debug_social_s
 
 | Tool | When |
 |------|------|
-| `mcp__nuxt-seo-pro__keyword_research` | Find target keywords (`type: 'research'`) or check competition (`type: 'serp'`) |
+| `keyword_research(type=research\|serp)` | Find target keywords or check competition |
 
 **Schema/OG generation** (requires nuxt-schema-org / nuxt-og-image modules):
 
 | Tool | When | Output |
 |------|------|--------|
-| `mcp__nuxt-seo-pro__generate_seo` | Missing structured data (`type: 'schema-org'`) or social preview (`type: 'og-image'`) | `composable` for .vue, `frontmatter` for .md |
+| `generate_seo(type=schema-org\|og-image)` | Missing structured data or social preview | `composable` for .vue, `frontmatter` for .md |
 
 Schema types: Article, BlogPosting, Product, FAQPage, HowTo, Recipe, Event, LocalBusiness, SoftwareApplication
 

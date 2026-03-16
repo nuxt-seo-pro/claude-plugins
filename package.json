@@ -4,14 +4,15 @@
   "packageManager": "pnpm@10.28.2",
   "scripts": {
     "test": "vitest",
-    "test:update": "vitest -u",
+    "test:guard": "vitest run evals/write-guard.test.ts",
+    "test:evals": "vitest run evals/skills.test.ts",
     "release": "npx tsx scripts/release.ts",
     "lint": "eslint . --fix"
   },
   "devDependencies": {
     "@antfu/eslint-config": "^7.2.0",
-    "eslint": "^9.39.2",
     "@types/node": "^25.2.1",
+    "eslint": "^9.39.2",
     "typescript": "^5.9.3",
     "vitest": "^4.0.18"
   }

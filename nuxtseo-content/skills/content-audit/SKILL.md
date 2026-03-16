@@ -1,97 +1,59 @@
 ---
 name: Content Audit
-description: This skill should be used when the user asks to "audit content", "review page", "fix links", "check code examples", "test sales page", "add callouts", "check SEO", "check meta tags", "AI optimization", "GEO audit", "conversion testing", "improve content", or review/improve existing content quality. For best results, specify which audit type (style, linking, seo, geo, code, components, conversion) and provide file paths.
-version: 0.12.1
+description: Audit content quality — check writing style, broken links, SEO, accessibility, code examples, AI search optimization, or conversion. Specify audit type and file paths for focused results.
+argument-hint: "[audit-type] [file-path]"
+version: 0.13.0
 ---
 
 # Content Audit
 
-Unified content review and improvement. Detects content type and applies appropriate audit patterns.
+Review and improve existing content. Detects audit type from arguments or runs all passes for general audits.
 
-## Artifacts
-
-**Reads:**
-- `.claude/context/site-config.md` — Site URL, name
-- `.claude/context/site-pages.md` — Available pages for linking opportunities
-- `.claude/context/writing-style.md` — Per-category voice, structure, terminology
-- `.claude/context/market-research.md` — Product context (for sales audits)
-- Content files to audit
-
-**Generates:**
-- `.claude/context/content-audit.md` — Issues found with file paths and line numbers
-- `.claude/context/linking-opportunities.md` — Cross-linking recommendations
-- `.claude/context/objection-analysis.md` — Objections by persona (sales audits)
-
-**Requires:** Run `site-setup` first if site-pages.md is missing.
+**Arguments:** `$ARGUMENTS`
 
 ## Audit Types
 
-| Type | Trigger Phrases | Reference |
-|------|-----------------|-----------|
-| `style` | "check voice", "tone consistency", "terminology", "writing style" | `../content-writing/references/foundations.md` + `writing-style.md` |
-| `accessibility` | "check accessibility", "a11y", "screen reader", "alt text", "link text" | `../.shared/accessibility.md` |
-| `linking` | "fix links", "internal linking", "broken links", "orphan pages", "frontmatter links" | `references/linking.md` |
-| `components` | "add callouts", "key takeaways", "improve readability", "add warnings" | `references/components.md` |
-| `code` | "check code", "code quality", "code examples", "incomplete code", "code grouping" | `references/code-quality.md` |
-| `seo` | "check SEO", "keyword optimization", "meta tags", "search ranking", "URL structure" | `references/seo.md` |
-| `geo` | "AI optimization", "GEO", "AI citations", "ChatGPT visibility", "Perplexity" | `references/geo.md` |
-| `conversion` | "test sales page", "why won't users buy", "objection handling", "persona testing" | `references/conversion.md` |
+| Type | Triggers | Reference |
+|------|----------|-----------|
+| `style` | "check voice", "tone", "terminology" | `${CLAUDE_SKILL_DIR}/../content-writing/references/foundations.md` |
+| `accessibility` | "a11y", "alt text", "link text" | `${CLAUDE_SKILL_DIR}/../.shared/accessibility.md` |
+| `linking` | "fix links", "broken links", "internal linking" | `${CLAUDE_SKILL_DIR}/references/linking.md` |
+| `components` | "add callouts", "key takeaways" | `${CLAUDE_SKILL_DIR}/references/components.md` |
+| `code` | "check code", "code quality" | `${CLAUDE_SKILL_DIR}/references/code-quality.md` |
+| `seo` | "check SEO", "meta tags", "URL structure" | `${CLAUDE_SKILL_DIR}/references/seo.md` |
+| `geo` | "AI optimization", "GEO", "AI citations" | `${CLAUDE_SKILL_DIR}/references/geo.md` |
+| `conversion` | "test sales page", "objection handling" | `${CLAUDE_SKILL_DIR}/references/conversion.md` |
 
-## Workflow
+**Only load references for detected audit type.** For "audit this page" or unclear scope, load all and run all 9 passes.
 
-### 1. Check Prerequisites
+## Context
 
-```
-Read: .claude/context/site-config.md
-Read: .claude/context/site-pages.md
-```
+Read if they exist:
+- `.claude/context/site-config.md`
+- `.claude/context/site-pages.md`
+- `.claude/context/writing-style.md`
 
-**If missing:** Prompt user to run site-setup first.
+**MCP tools:** Use `analyze_page` (auto-detects `.vue`/`.md`), `check_meta_tags`, `validate_schema`, `debug_social_share` from nuxt-seo-pro when available.
 
-### 2. Detect Audit Type & Load References
+## General Audit (All 9 Passes)
 
-| Audit Type | Load Reference |
-|------------|----------------|
-| `style` | `../content-writing/references/foundations.md` + `writing-style.md` |
-| `accessibility` | `../.shared/accessibility.md` |
-| `linking` | `references/linking.md` |
-| `code` | `references/code-quality.md` |
-| `components` | `references/components.md` |
-| `seo` | `references/seo.md` |
-| `geo` | `references/geo.md` |
-| `conversion` | `references/conversion.md` |
+Run sequentially when no specific type requested:
 
-**Only load references for the detected audit type.** For "audit this page" or unclear scope, load all.
+| Pass | Check |
+|------|-------|
+| 1 | **Style** — banned words, hedging, voice consistency |
+| 2 | **Accessibility** — link text, alt text, heading hierarchy |
+| 3 | **Broken links** — validate internal/external links resolve |
+| 4 | **Missing internal links** — concepts mentioned without links |
+| 5 | **SEO** — meta tags, URL structure, OG tags |
+| 6 | **Citations** — stats/claims without sources |
+| 7 | **GEO** — question headings, quotable facts, schema.org |
+| 8 | **Code quality** — incomplete examples, missing lang tags |
+| 9 | **Components** — missing callouts, warnings, key takeaways |
 
-### 3. Detect Content Type
+**Fix priority:** style > broken links > accessibility > SEO > code > citations > GEO > components
 
-| Signal | Type | Load |
-|--------|------|------|
-| `/docs/` path | docs | `../content-writing/references/types/docs.md` |
-| `/learn/` or `/blog/` | educational | `../content-writing/references/types/educational.md` |
-| Has pricing/CTAs | sales/landing | `../content-writing/references/types/landing.md` |
-
-### 4. Run Audits
-
-**For general audits ("audit this page", "improve content", "review"):** Run ALL audit types as separate passes. Do NOT skip any:
-
-| Pass | Check | Reference |
-|------|-------|-----------|
-| 1 | **Style** - banned words, hedging, voice consistency | `foundations.md` |
-| 2 | **Accessibility** - link text, alt text, heading hierarchy | `../.shared/accessibility.md` |
-| 3 | **Broken links** - validate all internal/external links resolve | `references/linking.md` |
-| 4 | **Missing internal links** - concepts mentioned without links to their docs | `references/linking.md` |
-| 5 | **SEO issues** - meta tags, URL structure, OG tags | `references/seo.md` |
-| 6 | **Missing citations** - stats/claims without sources, use WebSearch to find | `references/seo.md` |
-| 7 | **GEO optimization** - question headings, quotable facts, schema.org | `references/geo.md` |
-| 8 | **Code quality** - incomplete examples, missing error handling | `references/code-quality.md` |
-| 9 | **Components** - missing callouts, warnings, key takeaways | `references/components.md` |
-
-**MCP tools:** For source files, use `analyze_page` (auto-detects `.vue` or `.md`) from nuxt-seo-pro. For live site validation, prefer `check_meta_tags`, `validate_schema`, `debug_social_share`.
-
-**Fix priority:** style > broken links > accessibility > SEO > code > citations > GEO > components. Fix high-priority issues first.
-
-**For specific audits:** Only run the requested audit type.
+## Output Format
 
 Generate `.claude/context/content-audit.md`:
 
@@ -101,12 +63,7 @@ passes_completed:
   - style: 2 issues
   - accessibility: 0 issues
   - broken-links: 1 issue
-  - internal-links: 0 issues
-  - seo: 1 issue
-  - citations: 0 issues (no uncited claims)
-  - geo: 1 issue
-  - code: 0 issues (no code blocks)
-  - components: 0 issues
+  # ... all 9 passes listed
 
 issues:
   - line: 45
@@ -114,124 +71,35 @@ issues:
     priority: high
     issue: Broken link to /docs/guide/sessions
     fix: Update to /docs/auth/sessions
-
-  - line: 112
-    type: seo
-    priority: medium
-    issue: Stat "80% of users" has no citation
-    fix: Add source - WebSearch found "Source Name, 2024"
 ```
 
-**Required fields:**
-- `passes_completed` - list ALL 9 passes with issue count (proves each was run)
-- `issues` - file path, line number, type, priority, specific fix
+**Required:** `passes_completed` lists ALL passes with counts. `issues` has file path, line, type, priority, specific fix.
 
 ## Applying Fixes
 
-When user asks to apply fixes:
-1. Load `../content-writing/references/foundations.md`
-2. Load type-specific patterns from `../content-writing/references/types/[type].md`
-3. Apply fixes following those patterns
-4. Update `updatedAt` frontmatter to today's date (run `date +%Y-%m-%d`)
+When user says to apply:
+1. Load `foundations.md` + type-specific patterns
+2. Apply fixes per priority order
+3. Update `updatedAt` frontmatter
 
-## Long-Running Audits (Multiple Pages)
+## GSC-Backed Audits
 
-For auditing many pages, use scratchpad tracking:
+| Tool | Enhancement |
+|------|-------------|
+| `gsc_query({ type: 'page-detail', pageUrl })` | Actual keywords vs target keyword |
+| `gsc_query({ type: 'analysis', preset: 'decay' })` | Pages losing rankings (audit first) |
+| `gsc_query({ type: 'analysis', preset: 'striking-distance' })` | Pages close to page 1 |
 
-### 1. Create Scratchpad
+## Multi-Page Audits
 
-Write `.claude/scratchpad.md`:
+For many pages, track progress in `.claude/scratchpad.md`:
 
 ```md
 ## Goal
 Audit all pages in /docs/guide/
 
 ## Pages
-- [ ] /docs/guide/installation.md
-- [ ] /docs/guide/configuration.md
-- [ ] /docs/guide/deployment.md
-
-## Current
-Working on: installation.md
-
-## Status
-In progress
+- [x] installation.md (3 issues fixed)
+- [ ] configuration.md (in progress)
+- [ ] deployment.md
 ```
-
-### 2. Update As You Work
-
-Mark pages complete, track blockers:
-
-```md
-## Pages
-- [x] /docs/guide/installation.md (3 issues fixed)
-- [ ] /docs/guide/configuration.md (in progress)
-- [ ] /docs/guide/deployment.md
-
-## Blocked
-configuration.md: Need user input on deprecated API section
-```
-
-### 3. Mark Done
-
-When all pages complete:
-
-```md
-## Status
-DONE - Audited 3 pages, fixed 8 issues total
-```
-
-Stop hooks check for `DONE` to know when to stop iterating.
-
-## GSC-Backed Audits
-
-When Google Search Console is connected, supplement audits with real data:
-
-| Tool | Audit Enhancement |
-|------|-------------------|
-| `gsc_query({ type: 'page-detail', pageUrl })` | Check actual keywords a page ranks for vs target keyword |
-| `gsc_query({ type: 'analysis', preset: 'decay' })` | Identify pages losing rankings (prioritize for audit) |
-| `gsc_query({ type: 'analysis', preset: 'striking-distance' })` | Find pages close to page 1 that need small improvements |
-
-Use GSC data to prioritize which pages to audit first - declining pages need attention most.
-
-## Error Recovery
-
-| Failure | Fallback |
-|---------|----------|
-| WebFetch fails on external link | Mark as "unverified" instead of "broken", note in audit |
-| MCP tools unavailable | Skip automated checks, rely on manual reference-based auditing |
-| site-pages.md outdated | Suggest re-running `site-setup` to refresh before continuing |
-| Too many pages to audit | Use scratchpad pattern, prioritize by traffic (GSC) or recency |
-
-## Success Criteria
-
-Audit passes when ALL are true:
-
-| Check | How to Verify |
-|-------|---------------|
-| Zero banned words | Grep content against foundations.md banned list |
-| All internal links resolve | Each link path exists in site-pages.md |
-| All external links live | WebFetch returns 200 (sample 3-5 if many) |
-| Accessible link text | No standalone "click here", "learn more", "here" |
-| Alt text on images | All images have descriptive alt (not "image of...") |
-| Code blocks have language | Every ``` has lang specified |
-| H2s under 60 chars | Check heading lengths |
-| No skipped heading levels | H2 → H3 → H4, never H2 → H4 |
-| No orphan pages | Page has 2+ incoming links from site-pages.md |
-| relatedPages populated | Frontmatter has 2-3 related pages |
-| Dates present | createdAt and updatedAt in frontmatter |
-
-For specific audit types, only relevant criteria apply.
-
-## Next Steps (Cross-Skill Handoff)
-
-After audit, suggest relevant follow-up:
-
-| Situation | Suggest |
-|-----------|---------|
-| Many issues found | "Apply fixes now, or save audit to `.claude/context/content-audit.md`?" |
-| SEO issues found | "Run `research` skill to find better target keywords?" |
-| Missing content gaps | "Use `content-writing` skill to create missing pages?" |
-| Conversion issues | "Run `research` with market type to validate positioning?" |
-| Style inconsistent | "Re-run `site-setup` to refresh writing-style.md?" |

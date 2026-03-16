@@ -1,147 +1,83 @@
 ---
 name: Content Writing
-description: This skill should be used when the user asks to "write docs", "write documentation", "API reference", "blog post", "tutorial", "guide", "how-to article", "landing page", "homepage copy", "product page", "sales page", "pricing page", "comparison post", "X vs Y", "alternatives to", or create written content for a website. Not for research-only tasks or content audits. For best results, include target keyword, audience level, and reference existing files when asking.
-version: 0.12.1
+description: Write docs, blog posts, tutorials, landing pages, comparison posts, sales pages, or any website content. Specify content type, target keyword, and audience level for best results.
+argument-hint: "[type] [topic/keyword]"
+version: 0.13.0
 ---
 
 # Content Writing
 
-Unified content creation skill. Detects content type and loads appropriate patterns.
+Write SEO-optimized content. Detects content type from arguments and loads appropriate patterns.
 
-## Artifacts
+**Arguments:** `$ARGUMENTS`
 
-**Reads:**
-- `.claude/context/site-config.md` - Site URL, name, industry
-- `.claude/context/site-pages.md` - Available pages for internal linking
-- `.claude/context/writing-style.md` - Per-category voice, structure, terminology
+## 1. Detect Content Type
 
-**Requires:** Run `site-setup` first if site-config.md is missing.
+| Type | Triggers | Reference |
+|------|----------|-----------|
+| `docs` | "docs", "API reference", "composable", "config" | `${CLAUDE_SKILL_DIR}/references/types/docs.md` |
+| `educational` | "blog", "tutorial", "guide", "how to", "article" | `${CLAUDE_SKILL_DIR}/references/types/educational.md` |
+| `landing` | "landing page", "homepage", "marketing" | `${CLAUDE_SKILL_DIR}/references/types/landing.md` |
+| `comparison` | "vs", "alternatives to", "compared to" | `${CLAUDE_SKILL_DIR}/references/types/comparison.md` |
+| `sales` | "sales page", "pricing page" | `${CLAUDE_SKILL_DIR}/references/types/sales.md` |
 
-## Workflow
+**Always read:** `${CLAUDE_SKILL_DIR}/references/foundations.md`
+**For markdown content:** `${CLAUDE_SKILL_DIR}/../.shared/mdc-guidelines.md`
+**For landing/sales/comparison:** `${CLAUDE_SKILL_DIR}/../.shared/persuasion.md`
 
-### 1. Detect Content Type & Load References
+If type unclear from arguments, ask which type.
 
-| Type | Triggers | Load |
-|------|----------|------|
-| `docs` | "write docs", "API reference" | `references/types/docs.md` |
-| `educational` | "blog post", "tutorial", "guide" | `references/types/educational.md` |
-| `landing` | "landing page", "marketing copy" | `references/types/landing.md` |
-| `comparison` | "X vs Y", "alternatives to" | `references/types/comparison.md` |
-| `sales` | "sales page", "pricing page" | `references/types/sales.md` |
+## 2. Load Context
 
-**Always load:** `references/foundations.md`, `../.shared/accessibility.md`
-**For .md files:** `../.shared/mdc-guidelines.md`
-**For landing/sales/comparison:** `../.shared/persuasion.md`
+Read these if they exist (skip silently if missing):
+- `.claude/context/site-config.md` — audience, personality, banned phrases
+- `.claude/context/site-pages.md` — internal linking targets
+- `.claude/context/writing-style.md` — per-category voice patterns
 
-If unclear, ask user which type.
+If `site-config.md` missing and user hasn't set up yet, suggest running `site-setup` first. Don't block — write with sensible defaults.
 
-### 2. Check Context
+## 3. Match Style
 
-```
-Read: .claude/context/site-config.md
-Read: .claude/context/site-pages.md
-Read: .claude/context/writing-style.md
-```
-
-If site-config.md missing, prompt user to run `site-setup` first.
-
-### 3. Match Category Style
-
-| Content Type | Category in writing-style.md |
-|--------------|------------------------------|
+| Content Type | Style Category |
+|--------------|----------------|
 | docs | `categories.docs` |
 | educational | `categories.learn` |
-| landing | `categories.landing` |
-| sales | `categories.landing` |
+| landing/sales | `categories.landing` |
 | comparison | `categories.learn` (analytical voice) |
 
-Apply: voice, structure, terminology, code style from category.
+Apply voice, structure, terminology from matched category.
 
-### 4. Write Content
+## 4. Write
 
-**Target length by type:**
+**Target length:**
 
-| Type | Words | Notes |
-|------|-------|-------|
-| docs | 300-800 | Concise, scannable |
-| educational | 1000-2000 | Room for examples |
-| landing | 500-1000 | Punchy, benefit-focused |
-| comparison | 1500-2500 | Thorough analysis |
-| sales | 800-1500 | Persuasive depth |
+| Type | Words |
+|------|-------|
+| docs | 300-800 |
+| educational | 1000-2000 |
+| landing | 500-1000 |
+| comparison | 1500-2500 |
+| sales | 800-1500 |
 
-Apply from site-config.md:
-- **audience** - Adjust jargon level
-- **level** - Beginner = more explanation
-- **personality** - Professional vs friendly
-- **banned_phrases** - Never use these
+**From site-config:** Adjust jargon for audience level, apply personality, avoid banned_phrases.
 
-### 5. Self-Audit Loop (TDD-Style)
+## 5. Validate Before Delivery
 
-Before marking content complete, validate and iterate:
+Check all of these — fix any failures before delivering:
 
-```
-1. Check banned words → fix any found
-2. Verify all internal links exist in site-pages.md → fix broken
-3. Confirm code blocks have language tags → add if missing
-4. Check H2s under 60 chars → shorten if needed
-5. Verify relatedPages has 2-3 valid paths → add if missing
-6. Check link text accessibility → no "click here", "learn more" standalone
-7. Verify frontmatter has createdAt and updatedAt (run `date +%Y-%m-%d`)
-```
-
-**Loop until all pass.** Don't deliver content with known issues.
-
-### 6. Quality Checklist
-
-Final verification (all must be true):
-
-| Check | Pass Criteria |
-|-------|---------------|
-| Banned words | Zero matches from foundations.md list |
-| Site phrases | Zero matches from site-config.md banned_phrases |
-| Terminology | Uses writing-style.md preferred terms |
-| Code placement | Code within first 3 scrolls (if technical) |
-| Internal links | First mention of features linked |
-| Related pages | relatedPages frontmatter has 2-3 valid paths |
-| Dates | createdAt and updatedAt set in frontmatter |
-| Accessibility | Link text is descriptive, images have alt text |
-| Length | Within target word count for content type |
+1. Zero banned words/phrases from `foundations.md`
+2. Internal links exist in `site-pages.md` (mark gaps with `[LINK: topic]`)
+3. Code blocks have language tags
+4. H2s under 60 chars
+5. `relatedPages` frontmatter has 2-3 valid paths
+6. Accessible link text (no "click here", "learn more" standalone)
+7. `createdAt` and `updatedAt` set (run `date +%Y-%m-%d`)
 
 ## Error Recovery
 
-| Failure | Fallback |
-|---------|----------|
-| site-config.md missing | Prompt to run `site-setup` first |
-| site-pages.md missing | Write content without internal links, note gaps with `[LINK: topic]` |
+| Failure | Action |
+|---------|--------|
+| site-config.md missing | Write with defaults, note it |
+| site-pages.md missing | Use `[LINK: topic]` placeholders |
 | writing-style.md missing | Use type-specific reference defaults |
-| WebSearch fails for stats | Mark with `[STAT NEEDED: topic]`, continue writing |
-| Internal link target not in site-pages.md | Mark with `[LINK: topic]`, verify later |
-
-## Next Steps (Cross-Skill Handoff)
-
-After writing content, suggest relevant follow-up:
-
-| Situation | Suggest |
-|-----------|---------|
-| Content written | "Run `content-audit` to check for issues?" |
-| Technical docs with flows | "Generate architecture diagram with `diagram` skill?" |
-| New landing/sales page | "Research keywords with `research` skill first?" |
-| Multiple pages planned | "Set up content calendar in `.claude/plans/`?" |
-
-## Visual References
-
-For landing pages and sales content, accept visual inputs:
-
-### Competitor Screenshots
-```
-User provides: Screenshot of competitor's pricing page
-Use for: Layout inspiration, feature comparison, positioning gaps
-```
-
-### Design Mockups
-```
-User provides: Figma export or wireframe
-Use for: Match structure, extract copy requirements, identify sections
-```
-
-When visual provided, describe what you see and confirm interpretation before writing.
+| Stats unverifiable | Mark `[STAT NEEDED: topic]` |

@@ -20,7 +20,10 @@ Some skills use site-specific tools (`get_sitemap_urls`, `analyze_page`).
 ### site-setup
 Initialize site context for all writing skills. Extracts site config, fetches pages, analyzes existing content for style patterns.
 
-**Triggers:** "setup site", "configure site", "initialize project"
+```
+/nuxtseo-content:site-setup
+/nuxtseo-content:site-setup https://mysite.com
+```
 
 **Generates:**
 - `.claude/context/site-config.md` — URL, name, industry, audience, competitors
@@ -28,72 +31,75 @@ Initialize site context for all writing skills. Extracts site config, fetches pa
 - `.claude/context/writing-style.md` — Per-category voice, structure, terminology
 
 ### content-writing
-Unified content creation. Detects content type and loads appropriate patterns.
+Unified content creation. Detects content type from arguments and loads appropriate patterns.
 
-**Triggers:** "write docs", "write article", "landing page", "comparison post", "blog post", "tutorial"
+```
+/nuxtseo-content:content-writing docs for the sitemap module
+/nuxtseo-content:content-writing blog post about dynamic OG images
+/nuxtseo-content:content-writing landing page for my SEO tool
+/nuxtseo-content:content-writing nuxt vs next comparison
+/nuxtseo-content:content-writing pricing page for pro tier
+```
 
-**Content Types:**
-| Type | Trigger |
-|------|---------|
-| docs | "write docs", "API reference" |
-| educational | "write article", "blog post", "tutorial" |
-| landing | "landing page", "hero section" |
-| comparison | "X vs Y", "alternatives to" |
+| Type | Triggers |
+|------|----------|
+| docs | "docs", "API reference", "composable" |
+| educational | "blog", "tutorial", "guide", "article" |
+| landing | "landing page", "homepage", "marketing" |
+| comparison | "vs", "alternatives to" |
 | sales | "sales page", "pricing page" |
 
 ### research
-Unified research for keyword discovery, market validation, and competitive analysis.
+Keyword discovery, market validation, and competitive analysis. Runs in isolated context (`context: fork`) to keep large MCP results out of main conversation.
 
-**Triggers:** "keyword research", "market research", "competitor analysis", "validate product idea"
+```
+/nuxtseo-content:research keywords for meta tags in nuxt
+/nuxtseo-content:research demand for a vue component library
+/nuxtseo-content:research competitors of nuxtseo.com
+```
 
-**Research Types:**
-| Type | Trigger |
-|------|---------|
-| content | "what to write", "content gaps", "topic ideas" |
-| market | "is there demand", "validate idea", "should I build" |
-| competitor | "competitor analysis", "who ranks for" |
+| Type | Triggers |
+|------|----------|
+| content | "keywords", "what to write", "content gaps" |
+| market | "demand", "validate idea", "should I build" |
+| competitor | "competitors", "who ranks for" |
 
 ### content-audit
-Content review and improvement. Detects content type and applies appropriate audit patterns.
+Content review and improvement with 8 audit types.
 
-**Triggers:** "audit content", "fix links", "check SEO", "improve content", "test sales page"
-
-**Audit Types:**
-| Type | Trigger |
-|------|---------|
-| style | "check voice", "tone consistency" |
-| linking | "fix links", "internal linking" |
-| seo | "check SEO", "keyword optimization" |
-| geo | "AI optimization", "ChatGPT visibility" |
-| conversion | "test sales page", "objection handling" |
-
-## Usage
-
-```bash
-# First time setup
-"setup site"
-
-# Research before writing
-"research keywords for meta tags in nuxt"
-
-# Validate a product idea
-"research demand for a vue component library"
-
-# Write documentation
-"write docs for the sitemap module"
-
-# Write educational content
-"write an article about dynamic OG images"
-
-# Write comparison content
-"write nuxt vs next comparison"
-
-# Write landing page copy
-"write hero section for my SEO tool"
-
-# Audit existing content
-"audit /docs/getting-started for SEO"
 ```
+/nuxtseo-content:content-audit style content/docs/auth.md
+/nuxtseo-content:content-audit seo content/learn/meta-tags.md
+/nuxtseo-content:content-audit content/docs/getting-started.md
+```
+
+| Type | Triggers |
+|------|----------|
+| style | "check voice", "tone", "terminology" |
+| accessibility | "a11y", "alt text", "link text" |
+| linking | "fix links", "broken links" |
+| seo | "check SEO", "meta tags" |
+| geo | "AI optimization", "GEO" |
+| conversion | "test sales page", "objections" |
+
+### diagram (auto-invoked)
+Visual explanations for technical content. Not in the `/` menu — Claude invokes it when content benefits from a diagram.
+
+Supports Mermaid (inline markdown) and D2 (styled SVGs with design tokens).
+
+## Hooks
+
+### SEO Write Guard (PreToolUse/Write)
+Deterministic regex-based validation. Blocks writes to `content/**/*.md` if content contains:
+- Banned words/phrases from foundations.md
+- Em dashes, JavaScript code blocks, missing language tags
+- Inaccessible link text ("click here", "learn more")
+- Banned endings ("Happy coding!", "In conclusion...")
+
+Instant — no LLM call, just regex matching.
+
+### Site Config Check (SessionStart)
+Checks for `content/` directory and `.claude/context/site-config.md`. Reports status on session start.
 
 ## License
 
