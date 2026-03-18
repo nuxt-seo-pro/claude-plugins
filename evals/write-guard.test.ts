@@ -2,7 +2,8 @@ import { execSync } from 'node:child_process'
 import { join } from 'node:path'
 import { describe, expect, it } from 'vitest'
 
-const HOOK_PATH = join(import.meta.dirname, '../nuxtseo-content/hooks/write-guard.mjs')
+const PLUGIN_ROOT = join(import.meta.dirname, '../nuxtseo-content')
+const HOOK_PATH = join(PLUGIN_ROOT, 'hooks/write-guard.mjs')
 
 function runGuard(filePath: string, content: string): { exitCode: number, output: string } {
   const input = JSON.stringify({
@@ -15,6 +16,7 @@ function runGuard(filePath: string, content: string): { exitCode: number, output
       encoding: 'utf-8',
       timeout: 5000,
       input,
+      env: { ...process.env, CLAUDE_PLUGIN_ROOT: PLUGIN_ROOT },
     })
     return { exitCode: 0, output: output.trim() }
   }

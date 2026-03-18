@@ -10,10 +10,13 @@
  */
 
 import { readFileSync } from 'node:fs'
-import { dirname, join } from 'node:path'
-import { fileURLToPath } from 'node:url'
+import { join } from 'node:path'
 
-const __dirname = dirname(fileURLToPath(import.meta.url))
+const pluginRoot = process.env.CLAUDE_PLUGIN_ROOT
+if (!pluginRoot) {
+  // Not running inside Claude Code plugin context — allow write
+  process.exit(0)
+}
 
 // Read hook input from stdin
 let input = ''
@@ -32,7 +35,7 @@ if (!filePath.includes('content/') || !filePath.endsWith('.md')) {
 }
 
 // Load banned words from foundations.md (single source of truth)
-const foundationsPath = join(__dirname, '../skills/content-writing/references/foundations.md')
+const foundationsPath = join(pluginRoot, 'skills/content-writing/references/foundations.md')
 const foundations = readFileSync(foundationsPath, 'utf-8')
 
 const bannedWordsMatch = foundations.match(/\*\*Words:\*\*\s*(.+)/)
