@@ -1,6 +1,6 @@
 ---
-name: Content Audit
-description: Audit content quality — check writing style, broken links, SEO, accessibility, code examples, AI search optimization, or conversion. Specify audit type and file paths for focused results.
+name: content-audit
+description: Audit content quality: writing style, broken links, SEO, accessibility, code examples, AI search optimization, or conversion. Specify audit type and file paths for focused results.
 argument-hint: "[audit-type] [file-path]"
 version: 0.14.3
 ---
