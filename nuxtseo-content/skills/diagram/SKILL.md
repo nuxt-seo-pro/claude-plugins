@@ -2,7 +2,7 @@
 name: diagram
 description: Create flowcharts, architecture diagrams, sequence diagrams, or decision trees for technical content. Supports Mermaid (inline markdown) and D2 (styled SVGs with design tokens).
 user-invocable: false
-version: 0.14.3
+version: 0.14.4
 ---
 
 # Diagram

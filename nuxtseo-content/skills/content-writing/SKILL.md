@@ -2,7 +2,7 @@
 name: content-writing
 description: Write docs, blog posts, tutorials, landing pages, comparison posts, sales pages, or any website content. Specify content type, target keyword, and audience level for best results.
 argument-hint: "[type] [topic/keyword]"
-version: 0.14.3
+version: 0.14.4
 ---
 
 # Content Writing

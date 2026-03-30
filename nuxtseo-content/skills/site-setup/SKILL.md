@@ -2,7 +2,7 @@
 name: site-setup
 description: Initialize site context for content writing. Creates site-config.md, site-pages.md, and writing-style.md. Run once per project before using other skills.
 argument-hint: "[site-url]"
-version: 0.14.3
+version: 0.14.4
 ---
 
 # Site Setup

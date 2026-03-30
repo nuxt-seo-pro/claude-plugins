@@ -2,7 +2,7 @@
 name: research
 description: Keyword research, market research, competitor analysis, content gap discovery, demand validation, traffic estimates, or any pre-writing research task.
 argument-hint: "[type] [topic/keyword/domain]"
-version: 0.14.3
+version: 0.14.4
 context: fork
 ---
 
